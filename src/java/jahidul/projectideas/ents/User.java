@@ -31,6 +31,67 @@ public class User implements Serializable {
         this.id = id;
     }
     
+    private String username;
+
+    /**
+     * Get the value of username
+     *
+     * @return the value of username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Set the value of username
+     *
+     * @param username new value of username
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    private String password;
+
+    /**
+     * Get the value of password
+     *
+     * @return the value of password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @param password new value of password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    private String type;
+
+    /**
+     * Get the value of type
+     *
+     * @return the value of type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Set the value of type
+     *
+     * @param type new value of type
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+
     @Override
     public int hashCode() {
         int hash = 0;
