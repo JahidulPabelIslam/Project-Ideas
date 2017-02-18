@@ -5,7 +5,7 @@
  */
 package jahidul.projectideas.pers;
 
-import jahidul.projectideas.ents.User;
+import jahidul.projectideas.ents.Person;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author up733474
  */
 @Stateless
-public class UserFacade extends AbstractFacade<User> {
+public class PersonFacade extends AbstractFacade<Person> {
 
     @PersistenceContext(unitName = "Project-IdeasPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class UserFacade extends AbstractFacade<User> {
         return em;
     }
 
-    public UserFacade() {
-        super(User.class);
+    public PersonFacade() {
+        super(Person.class);
     }
     
 }

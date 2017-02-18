@@ -14,12 +14,12 @@ import javax.faces.bean.RequestScoped;
  */
 @Named(value = "userCtrl")
 @RequestScoped
-public class UserCtrl {
+public class PersonCtrl {
 
     /**
      * Creates a new instance of UserCtrl
      */
-    public UserCtrl() {
+    public PersonCtrl() {
     }
     
 }

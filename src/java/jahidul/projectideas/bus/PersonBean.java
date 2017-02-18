@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
  * @author up733474
  */
 @Stateless
-public class UserBean {
+public class PersonBean {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
