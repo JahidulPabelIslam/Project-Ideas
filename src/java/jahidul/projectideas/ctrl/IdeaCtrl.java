@@ -6,7 +6,7 @@
 package jahidul.projectideas.ctrl;
 
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
