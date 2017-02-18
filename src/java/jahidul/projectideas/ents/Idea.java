@@ -6,10 +6,13 @@
 package jahidul.projectideas.ents;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -26,9 +29,193 @@ public class Idea implements Serializable {
     public Long getId() {
         return id;
     }
-
+    
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    private String title;
+
+    /**
+     * Get the value of title
+     *
+     * @return the value of title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Set the value of title
+     *
+     * @param title new value of title
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String aimsObjectives;
+
+    /**
+     * Get the value of aimsObjectives
+     *
+     * @return the value of aimsObjectives
+     */
+    public String getAimsObjectives() {
+        return aimsObjectives;
+    }
+
+    /**
+     * Set the value of aimsObjectives
+     *
+     * @param aimsObjectives new value of aimsObjectives
+     */
+    public void setAimsObjectives(String aimsObjectives) {
+        this.aimsObjectives = aimsObjectives;
+    }
+
+        private String question;
+
+    /**
+     * Get the value of question
+     *
+     * @return the value of question
+     */
+    public String getQuestion() {
+        return question;
+    }
+
+    /**
+     * Set the value of question
+     *
+     * @param question new value of question
+     */
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    private String deliverables;
+
+    /**
+     * Get the value of deliverables
+     *
+     * @return the value of deliverables
+     */
+    public String getDeliverables() {
+        return deliverables;
+    }
+
+    /**
+     * Set the value of deliverables
+     *
+     * @param deliverables new value of deliverables
+     */
+    public void setDeliverables(String deliverables) {
+        this.deliverables = deliverables;
+    }
+
+    private String status;
+
+    /**
+     * Get the value of status
+     *
+     * @return the value of status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @param status new value of status
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateUpdated;
+
+    /**
+     * Get the value of date
+     *
+     * @return the value of date
+     */
+    public Date getDateUpdated() {
+        return dateUpdated;
+    }
+
+    /**
+     * Set the value of date
+     *
+     * @param dateUpdated new value of date
+     */
+    public void setDateUpdated(Date dateUpdated) {
+        this.dateUpdated = dateUpdated;
+    }
+
+    @ManyToOne
+    private Student appliedStudent;
+    
+     /**
+     * Get the value of appliedStudent
+     *
+     * @return the value of appliedStudent
+     */
+    public Student getAppliedStudent() {
+        return appliedStudent;
+    }
+
+    /**
+     * Set the value of appliedStudent
+     *
+     * @param appliedStudent new value of appliedStudent
+     */
+    public void setAppliedStudent(Student appliedStudent) {
+        this.appliedStudent = appliedStudent;
+    }
+    
+    @ManyToOne
+    private Student submitterStudent;
+
+    /**
+     * Get the value of submitterStudent
+     *
+     * @return the value of submitterStudent
+     */
+    public Student getSubmitterStudent() {
+        return submitterStudent;
+    }
+
+    /**
+     * Set the value of submitterStudent
+     *
+     * @param submitterStudent new value of submitterStudent
+     */
+    public void setSubmitterStudent(Student submitterStudent) {
+        this.submitterStudent = submitterStudent;
+    }
+       
+    @ManyToOne
+    private Organisation submitterOrganisation;
+
+    /**
+     * Get the value of organisation
+     *
+     * @return the value of organisation
+     */
+    public Organisation getSubmitterOrganisation() {
+        return submitterOrganisation;
+    }
+
+    /**
+     * Set the value of organisation
+     *
+     * @param submitterOrganisation new value of organisation
+     */
+    public void setSubmitterOrganisation(Organisation submitterOrganisation) {
+        this.submitterOrganisation = submitterOrganisation;
     }
 
     @Override
