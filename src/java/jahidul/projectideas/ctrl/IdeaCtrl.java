@@ -64,7 +64,11 @@ public class IdeaCtrl {
     
     public String addIdea() {
         ideaBean.addIdea(idea);
-        ideasList = ideaBean.findAllIdeas();
-        return "index";
+        return "ViewIdea";
+    }
+    
+    public String viewIdea(Idea idea) {
+        this.idea = idea;
+        return "ViewIdea";
     }
 }

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Ideas</title>
+    </h:head>
+    <h:body>
+
+        <h:panelGrid columns="2" border="1" cellpadding="5">
+
+            <h:outputLabel value="Reference number:" />
+            <h:outputLabel value="#{ideaCtrl.idea.id}" />
+
+            <h:outputLabel value="Project title:" />
+            <h:outputLabel value="#{ideaCtrl.idea.title}" />
+
+            <h:outputLabel value="Aims and Objectives:" />
+            <h:outputLabel value="#{ideaCtrl.idea.aimsObjectives}" />
+
+            <h:outputLabel value="Academic question to be answered:" />
+            <h:outputLabel value="#{ideaCtrl.idea.question}" />
+
+            <h:outputLabel value="Anticipated deliverables:" />
+            <h:outputLabel value="#{ideaCtrl.idea.deliverables}" />
+
+            <h:outputLabel value="Status:" />
+            <h:outputLabel value="#{ideaCtrl.idea.status}" />
+
+            <h:outputLabel value="Student whose undertaking project:" />
+            <h:outputLabel value="#{ideaCtrl.idea.appliedStudent}" />
+            
+            <h:outputLabel value="Student who submitted:" />
+            <h:outputLabel value="#{ideaCtrl.idea.submitterStudent}" />
+            
+            <h:outputLabel value="Organisation who submitted:" />
+            <h:outputLabel value="#{ideaCtrl.idea.submitterOrganisation}" />
+
+            <h:outputLabel value="Date submitted/last updated:" />
+            <h:outputLabel value="#{ideaCtrl.idea.dateUpdated}" />
+        </h:panelGrid>
+    </h:body>
+</html>
+
