@@ -7,6 +7,9 @@ package jahidul.projectideas.ctrl;
 
 import jahidul.projectideas.bus.IdeaBean;
 import jahidul.projectideas.ents.Idea;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -28,6 +31,12 @@ public class IdeaCtrl {
     @EJB
     private IdeaBean ideaBean;
     protected Idea idea = new Idea();
+    protected List<Idea> ideasList = new ArrayList<Idea>();
+    
+    @PostConstruct
+    public void init() {
+        ideasList = ideaBean.findAllIdeas();
+    }
 
     public IdeaBean getIdeaBean() {
         return ideaBean;
@@ -44,9 +53,18 @@ public class IdeaCtrl {
     public void setIdea(Idea idea) {
         this.idea = idea;
     }
+
+    public List<Idea> getIdeasList() {
+        return ideasList;
+    }
+
+    public void setIdeasList(List<Idea> ideasList) {
+        this.ideasList = ideasList;
+    }
     
     public String addIdea() {
         ideaBean.addIdea(idea);
+        ideasList = ideaBean.findAllIdeas();
         return "index";
     }
 }

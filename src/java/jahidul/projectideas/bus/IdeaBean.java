@@ -7,6 +7,7 @@ package jahidul.projectideas.bus;
 
 import jahidul.projectideas.ents.Idea;
 import jahidul.projectideas.pers.IdeaFacade;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -19,6 +20,10 @@ public class IdeaBean {
 
     @EJB
     private IdeaFacade ideaFacade;
+    
+    public List<Idea> findAllIdeas() {
+        return ideaFacade.findAll();
+    }
 
     public void addIdea(Idea i) {
         ideaFacade.create(i);

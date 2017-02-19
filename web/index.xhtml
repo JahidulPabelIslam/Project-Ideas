@@ -1,12 +1,46 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Ideas</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:dataTable value="#{ideaCtrl.ideasList}" var="idea"
+                     border="1">
+            <f:facet name="header">
+                <h:outputText value="Ideas" />
+            </f:facet>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#" />
+                </f:facet>
+                <h:outputText value="#{idea.id}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Title" />
+                </f:facet>
+                <h:outputText value="#{idea.title}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Status" />
+                </f:facet>
+                <h:outputText value="#{idea.status}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Actions" />
+                </f:facet>
+                <h:form>
+                    <h:commandButton id="view" value="View" action="#{ideaBean.viewIdea(idea)}" />
+                    <h:commandButton id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(idea)}" />
+                    <h:commandButton id="delete" value="Delete" action="#{ideaBean.deleteIdea(idea)}" />
+                </h:form>
+            </h:column>
+        </h:dataTable>
     </h:body>
 </html>
 
