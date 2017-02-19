@@ -5,14 +5,17 @@
  */
 package jahidul.projectideas.ctrl;
 
-import javax.inject.Named;
+import jahidul.projectideas.bus.IdeaBean;
+import jahidul.projectideas.ents.Idea;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author up733474
  */
-@Named(value = "ideaBean")
+@ManagedBean
 @RequestScoped
 public class IdeaCtrl {
 
@@ -22,4 +25,28 @@ public class IdeaCtrl {
     public IdeaCtrl() {
     }
     
+    @EJB
+    private IdeaBean ideaBean;
+    protected Idea idea = new Idea();
+
+    public IdeaBean getIdeaBean() {
+        return ideaBean;
+    }
+
+    public void setIdeaBean(IdeaBean ideaBean) {
+        this.ideaBean = ideaBean;
+    }
+
+    public Idea getIdea() {
+        return idea;
+    }
+
+    public void setIdea(Idea idea) {
+        this.idea = idea;
+    }
+    
+    public String addIdea() {
+        ideaBean.addIdea(idea);
+        return "index";
+    }
 }

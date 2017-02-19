@@ -5,6 +5,9 @@
  */
 package jahidul.projectideas.bus;
 
+import jahidul.projectideas.ents.Idea;
+import jahidul.projectideas.pers.IdeaFacade;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -14,6 +17,10 @@ import javax.ejb.Stateless;
 @Stateless
 public class IdeaBean {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @EJB
+    private IdeaFacade ideaFacade;
+
+    public void addIdea(Idea i) {
+        ideaFacade.create(i);
+    }
 }

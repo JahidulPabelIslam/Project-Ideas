@@ -29,11 +29,11 @@ public class Idea implements Serializable {
     public Long getId() {
         return id;
     }
-    
+
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     private String title;
 
     /**
@@ -74,7 +74,7 @@ public class Idea implements Serializable {
         this.aimsObjectives = aimsObjectives;
     }
 
-        private String question;
+    private String question;
 
     /**
      * Get the value of question
@@ -133,7 +133,7 @@ public class Idea implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateUpdated;
 
@@ -157,8 +157,8 @@ public class Idea implements Serializable {
 
     @ManyToOne
     private Student appliedStudent;
-    
-     /**
+
+    /**
      * Get the value of appliedStudent
      *
      * @return the value of appliedStudent
@@ -175,7 +175,7 @@ public class Idea implements Serializable {
     public void setAppliedStudent(Student appliedStudent) {
         this.appliedStudent = appliedStudent;
     }
-    
+
     @ManyToOne
     private Student submitterStudent;
 
@@ -196,7 +196,7 @@ public class Idea implements Serializable {
     public void setSubmitterStudent(Student submitterStudent) {
         this.submitterStudent = submitterStudent;
     }
-       
+
     @ManyToOne
     private Organisation submitterOrganisation;
 
@@ -242,5 +242,5 @@ public class Idea implements Serializable {
     public String toString() {
         return "jahidul.projectideas.ents.Idea[ id=" + id + " ]";
     }
-    
+
 }
