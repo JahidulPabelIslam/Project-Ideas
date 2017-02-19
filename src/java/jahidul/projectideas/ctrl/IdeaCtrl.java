@@ -71,4 +71,10 @@ public class IdeaCtrl {
         this.idea = idea;
         return "ViewIdea";
     }
+    
+    public String deleteIdea(Idea idea) {
+        ideaBean.deleteIdea(idea);
+        ideasList = ideaBean.findAllIdeas();
+        return "index";
+    }
 }

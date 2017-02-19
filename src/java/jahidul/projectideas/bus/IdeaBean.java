@@ -28,4 +28,8 @@ public class IdeaBean {
     public void addIdea(Idea i) {
         ideaFacade.create(i);
     }
+    
+    public void deleteIdea(Idea i) {
+        ideaFacade.remove(i);
+    }
 }
