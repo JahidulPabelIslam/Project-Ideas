@@ -29,6 +29,10 @@ public class IdeaBean {
         ideaFacade.create(i);
     }
     
+    public void editIdea(Idea i) {
+        ideaFacade.edit(i);
+    }
+    
     public void deleteIdea(Idea i) {
         ideaFacade.remove(i);
     }

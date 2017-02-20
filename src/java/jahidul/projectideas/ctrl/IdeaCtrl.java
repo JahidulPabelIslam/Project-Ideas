@@ -64,11 +64,22 @@ public class IdeaCtrl {
     
     public String addIdea() {
         ideaBean.addIdea(idea);
+        idea = new Idea();
         return "ViewIdea";
     }
     
     public String viewIdea(Idea idea) {
         this.idea = idea;
+        return "ViewIdea";
+    }
+    
+    public String setUpEditIdea(Idea idea) {
+        this.idea = idea;
+        return "EditIdea";
+    }
+    
+    public String editIdea() {
+        ideaBean.editIdea(idea);
         return "ViewIdea";
     }
     

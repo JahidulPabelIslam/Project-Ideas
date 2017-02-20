@@ -30,22 +30,21 @@
 
             <h:outputLabel value="Student whose undertaking project:" />
             <h:outputLabel value="#{ideaCtrl.idea.appliedStudent}" />
-            
+
             <h:outputLabel value="Student who submitted:" />
             <h:outputLabel value="#{ideaCtrl.idea.submitterStudent}" />
-            
+
             <h:outputLabel value="Organisation who submitted:" />
             <h:outputLabel value="#{ideaCtrl.idea.submitterOrganisation}" />
 
             <h:outputLabel value="Date submitted/last updated:" />
             <h:outputLabel value="#{ideaCtrl.idea.dateUpdated}" />
-            
+
             <h:outputLabel value="Actions:" />
             <h:form>
-                    <h:commandButton id="view" value="View" action="#{ideaCtrl.viewIdea(idea)}" />
-                    <h:commandButton id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(idea)}" />
-                    <h:commandButton id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
-                </h:form>
+                <h:commandButton id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(ideaCtrl.idea)}" />
+                <h:commandButton id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(ideaCtrl.idea)}" />
+            </h:form>
         </h:panelGrid>
     </h:body>
 </html>
