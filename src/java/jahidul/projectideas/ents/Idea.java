@@ -156,14 +156,14 @@ public class Idea implements Serializable {
     }
 
     @ManyToOne
-    private Student appliedStudent;
+    private Person appliedStudent;
 
     /**
      * Get the value of appliedStudent
      *
      * @return the value of appliedStudent
      */
-    public Student getAppliedStudent() {
+    public Person getAppliedStudent() {
         return appliedStudent;
     }
 
@@ -172,19 +172,19 @@ public class Idea implements Serializable {
      *
      * @param appliedStudent new value of appliedStudent
      */
-    public void setAppliedStudent(Student appliedStudent) {
+    public void setAppliedStudent(Person appliedStudent) {
         this.appliedStudent = appliedStudent;
     }
 
     @ManyToOne
-    private Student submitterStudent;
+    private Person submitterStudent;
 
     /**
      * Get the value of submitterStudent
      *
      * @return the value of submitterStudent
      */
-    public Student getSubmitterStudent() {
+    public Person getSubmitterStudent() {
         return submitterStudent;
     }
 
@@ -193,19 +193,19 @@ public class Idea implements Serializable {
      *
      * @param submitterStudent new value of submitterStudent
      */
-    public void setSubmitterStudent(Student submitterStudent) {
+    public void setSubmitterStudent(Person submitterStudent) {
         this.submitterStudent = submitterStudent;
     }
 
     @ManyToOne
-    private Organisation submitterOrganisation;
+    private Person submitterOrganisation;
 
     /**
      * Get the value of organisation
      *
      * @return the value of organisation
      */
-    public Organisation getSubmitterOrganisation() {
+    public Person getSubmitterOrganisation() {
         return submitterOrganisation;
     }
 
@@ -214,7 +214,7 @@ public class Idea implements Serializable {
      *
      * @param submitterOrganisation new value of organisation
      */
-    public void setSubmitterOrganisation(Organisation submitterOrganisation) {
+    public void setSubmitterOrganisation(Person submitterOrganisation) {
         this.submitterOrganisation = submitterOrganisation;
     }
 
