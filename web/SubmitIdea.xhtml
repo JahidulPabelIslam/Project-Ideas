@@ -50,7 +50,7 @@
                 <h:message />
 
                 <h:outputLabel rendered="#{personCtrl.theUser.type == 'Student'}" value="Apply for Idea:" />
-                <h:selectBooleanCheckbox rendered="#{personCtrl.theUser.type == 'Student'}" id="apply" />
+                <h:selectBooleanCheckbox rendered="#{personCtrl.theUser.type == 'Student'}" id="apply" value="#{ideaCtrl.apply}" />
                 <h:outputLabel rendered="#{personCtrl.theUser.type == 'Student'}" for="apply" />
 
                 <h:outputLabel rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" value="Applied Student:" for="appliedStudent"/>

@@ -34,6 +34,7 @@ public class IdeaCtrl {
 
     protected Idea idea = new Idea();
     protected List<Idea> ideasList = new ArrayList<Idea>();
+    protected boolean apply = false;
 
     @PostConstruct
     public void init() {
@@ -64,7 +65,18 @@ public class IdeaCtrl {
         this.ideasList = ideasList;
     }
 
+    public boolean isApply() {
+        return apply;
+    }
+
+    public void setApply(boolean apply) {
+        this.apply = apply;
+    }
+    
     public String addIdea(Person p) {
+        if (apply) {
+            idea.setAppliedStudent(p);
+        }
         ideaBean.addIdea(idea, p);
         return "Idea";
     }
