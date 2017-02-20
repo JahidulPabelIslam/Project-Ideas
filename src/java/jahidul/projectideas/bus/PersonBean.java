@@ -29,4 +29,8 @@ public class PersonBean {
     public void addPerson(Person p) {
         personFacade.create(p);
     }
+    
+    public List findPersonByUsernameAndPassword(String username, String password) {
+        return personFacade.findPersonByUsernameAndPassword(username, password);
+    }
 }

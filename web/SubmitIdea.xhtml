@@ -49,18 +49,18 @@
                 <h:outputLabel value="#{ideaCtrl.idea.dateUpdated}" />
                 <h:message />
 
-                <h:outputLabel rendered="#{personCtrl.person.type == 'Student'}" value="Apply for Idea:" />
-                <h:selectBooleanCheckbox rendered="#{personCtrl.person.type == 'Student'}" id="apply" />
-                <h:outputLabel rendered="#{personCtrl.person.type == 'Student'}" for="apply" />
+                <h:outputLabel rendered="#{personCtrl.theUser.type == 'Student'}" value="Apply for Idea:" />
+                <h:selectBooleanCheckbox rendered="#{personCtrl.theUser.type == 'Student'}" id="apply" />
+                <h:outputLabel rendered="#{personCtrl.theUser.type == 'Student'}" for="apply" />
 
-                <h:outputLabel rendered="#{personCtrl.person.type == 'Organisation' or personCtrl.person.type == 'Staff'}" value="Applied Student:" for="appliedStudent"/>
-                <h:inputText rendered="#{personCtrl.person.type == 'Organisation' or personCtrl.person.type == 'Staff'}" id="appliedStudent" label="appliedStudent"
+                <h:outputLabel rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" value="Applied Student:" for="appliedStudent"/>
+                <h:inputText rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" id="appliedStudent" label="appliedStudent"
                              value="#{ideaCtrl.idea.appliedStudent}" />
-                <h:message rendered="#{personCtrl.person.type == 'Organisation' or personCtrl.person.type == 'Staff'}" for="appliedStudent" />
+                <h:message rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" for="appliedStudent" />
 
-                <h:commandButton rendered="#{ideaCtrl.idea.id == null}" id="add" value="Add" action="#{ideaCtrl.addIdea(personCtrl.person)}" />
-                <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff')}" id="edit" value="Edit" action="#{ideaCtrl.editIdea()}" />
-                <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff')}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(ideaCtrl.idea)}" />
+                <h:commandButton rendered="#{ideaCtrl.idea.id == null}" id="add" value="Add" action="#{ideaCtrl.addIdea(personCtrl.theUser)}" />
+                <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{ideaCtrl.editIdea()}" />
+                <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.person or personCtrl.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(ideaCtrl.idea)}" />
             </h:panelGrid>
         </h:form>
     </h:body>

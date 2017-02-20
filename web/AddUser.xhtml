@@ -59,34 +59,31 @@
                              value="#{personCtrl.person.surname}"/>
                 <h:message for="surname" />
                 
-                
-                
-                
-                <h:outputLabel value="studentID" for="studentID"/>
-                <h:inputText id="studentID" label="studentID"
+                <h:outputLabel rendered="#{personCtrl.person.type == 'Student'}" value="studentID" for="studentID"/>
+                <h:inputText rendered="#{personCtrl.person.type == 'Student'}" id="studentID" label="studentID"
                              required="true"
                              value="#{personCtrl.person.studentID}" />
-                <h:message for="studentID" />
+                <h:message rendered="#{personCtrl.person.type == 'Student'}" for="studentID" />
 
-                <h:outputLabel value="organisationName" for="organisationName"/>
-                <h:inputText id="organisationName" label="organisationName"
+                <h:outputLabel rendered="#{personCtrl.person.type == 'Organisation'}" value="organisationName" for="organisationName"/>
+                <h:inputText rendered="#{personCtrl.person.type == 'Organisation'}" id="organisationName" label="organisationName"
                              required="true"
                              value="#{personCtrl.person.organisationName}"/>
-                <h:message for="organisationName" />
+                <h:message rendered="#{personCtrl.person.type == 'Organisation'}" for="organisationName" />
                 
-                <h:outputLabel value="organisationOutline" for="organisationOutline"/>
-                <h:inputText id="organisationOutline" label="organisationOutline"
+                <h:outputLabel rendered="#{personCtrl.person.type == 'Organisation'}" value="organisationOutline" for="organisationOutline"/>
+                <h:inputText rendered="#{personCtrl.person.type == 'Organisation'}" id="organisationOutline" label="organisationOutline"
                              required="true"
                              value="#{personCtrl.person.organisationOutline}" />
-                <h:message for="organisationOutline" />
+                <h:message rendered="#{personCtrl.person.type == 'Organisation'}" for="organisationOutline" />
 
-                <h:outputLabel value="organisationAddress" for="organisationAddress"/>
-                <h:inputText id="organisationAddress" label="organisationAddress"
+                <h:outputLabel rendered="#{personCtrl.person.type == 'Organisation'}" value="organisationAddress" for="organisationAddress"/>
+                <h:inputText rendered="#{personCtrl.person.type == 'Organisation'}" id="organisationAddress" label="organisationAddress"
                              required="true"
                              value="#{personCtrl.person.organisationAddress}"/>
-                <h:message for="organisationAddress" />
+                <h:message rendered="#{personCtrl.person.type == 'Organisation'}" for="organisationAddress" />
                 
-                <h:commandButton id="logIn" value="Log In" action="#{personCtrl.logIn()}" />
+                <h:commandButton id="logIn" value="Log In" action="#{personCtrl.addUser()}" />
             </h:panelGrid>
         </h:form>
     </h:body>

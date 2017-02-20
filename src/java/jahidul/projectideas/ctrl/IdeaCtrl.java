@@ -28,13 +28,13 @@ public class IdeaCtrl {
      */
     public IdeaCtrl() {
     }
-    
+
     @EJB
     private IdeaBean ideaBean;
-    
+
     protected Idea idea = new Idea();
     protected List<Idea> ideasList = new ArrayList<Idea>();
-    
+
     @PostConstruct
     public void init() {
         ideasList = ideaBean.findAllIdeas();
@@ -63,27 +63,27 @@ public class IdeaCtrl {
     public void setIdeasList(List<Idea> ideasList) {
         this.ideasList = ideasList;
     }
-    
+
     public String addIdea(Person p) {
         ideaBean.addIdea(idea, p);
-        return "ViewIdea";
+        return "Idea";
     }
-    
+
     public String viewIdea(Idea idea) {
         this.idea = idea;
-        return "ViewIdea";
+        return "Idea";
     }
-    
+
     public String setUpEditIdea(Idea idea) {
         this.idea = idea;
         return "SubmitIdea";
     }
-    
+
     public String editIdea() {
         ideaBean.editIdea(idea);
-        return "ViewIdea";
+        return "Idea";
     }
-    
+
     public String deleteIdea(Idea idea) {
         ideaBean.deleteIdea(idea);
         ideasList = ideaBean.findAllIdeas();

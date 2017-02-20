@@ -6,9 +6,11 @@
 package jahidul.projectideas.pers;
 
 import jahidul.projectideas.ents.Person;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,5 +30,11 @@ public class PersonFacade extends AbstractFacade<Person> {
     public PersonFacade() {
         super(Person.class);
     }
-    
+
+    public List findPersonByUsernameAndPassword(String username, String password) {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.username = :username AND p.password = :password", Person.class);
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+        return query.getResultList();
+    }
 }
