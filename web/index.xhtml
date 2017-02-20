@@ -7,7 +7,7 @@
         <title>Ideas</title>
     </h:head>
     <h:body>
-         <h:panelGrid columns="2" border="1" cellpadding="5">
+        <h:panelGrid columns="2" border="1" cellpadding="5">
 
             <h:outputLabel value="Reference number:" />
             <h:outputLabel value="#{personCtrl.person.id}" />
@@ -18,7 +18,7 @@
             <h:outputLabel value="Aims and Objectives:" />
             <h:outputLabel value="#{personCtrl.person.password}" />
         </h:panelGrid>
-        
+
         <h:form>
             <h:commandLink value="Add Idea" action="SubmitIdea" />
             <h:commandLink value="Add User" action="AddUser" />
@@ -52,8 +52,8 @@
                 </f:facet>
                 <h:form>
                     <h:commandButton id="view" value="View" action="#{ideaCtrl.viewIdea(idea)}" />
-                    <h:commandButton id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(idea)}" />
-                    <h:commandButton id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
+                    <h:commandButton rendered="#{idea.id != null and (idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff')}" id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(idea)}" />
+                <h:commandButton rendered="#{idea.id != null and (idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff')}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
                 </h:form>
             </h:column>
         </h:dataTable>

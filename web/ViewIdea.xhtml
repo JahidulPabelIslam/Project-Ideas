@@ -39,8 +39,8 @@
 
             <h:outputLabel value="Actions:" />
             <h:form>
-                <h:commandButton id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(ideaCtrl.idea)}" />
-                <h:commandButton id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(ideaCtrl.idea)}" />
+                <h:commandButton rendered="#{ideaCtrl.idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff'}" id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(ideaCtrl.idea)}" />
+                <h:commandButton rendered="#{ideaCtrl.idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff'}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(ideaCtrl.idea)}" />
             </h:form>
         </h:panelGrid>
     </h:body>
