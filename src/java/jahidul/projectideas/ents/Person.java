@@ -270,6 +270,7 @@ public class Person implements Serializable {
     public void setOrganisationAddress(String organisationAddress) {
         this.organisationAddress = organisationAddress;
     }
+    
 
     @Override
     public int hashCode() {
@@ -293,7 +294,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "jahidul.projectideas.ents.User[ id=" + id + " ]";
+        return "Person[ id=" + id + " ]";
     }
 
 }

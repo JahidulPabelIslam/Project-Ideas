@@ -9,20 +9,23 @@
     <h:body>
         <h:panelGrid columns="2" border="1" cellpadding="5">
 
-            <h:outputLabel value="Reference number:" />
-            <h:outputLabel value="#{personCtrl.person.id}" />
+            <h:outputLabel value="User ID:" />
+            <h:outputLabel value="#{personCtrl.theUser.id}" />
 
-            <h:outputLabel value="Project title:" />
-            <h:outputLabel value="#{personCtrl.person.username}" />
+            <h:outputLabel value="Username:" />
+            <h:outputLabel value="#{personCtrl.theUser.username}" />
 
-            <h:outputLabel value="Aims and Objectives:" />
-            <h:outputLabel value="#{personCtrl.person.password}" />
+            <h:outputLabel value="Password:" />
+            <h:outputLabel value="#{personCtrl.theUser.password}" />
         </h:panelGrid>
 
         <h:form>
-            <h:commandLink rendered="#{personCtrl.person.id != null}" value="Add Idea" action="SubmitIdea" />
-            <h:commandLink rendered="#{personCtrl.person.type == 'Staff'}" value="Add User" action="AddUser" />
+            <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Log In" action="LogIn" />
+            <h:commandButton rendered="#{personCtrl.theUser.id != null}" value="Log Out" action="#{personCtrl.logOut()}" />
+            <h:commandLink rendered="#{personCtrl.theUser.id != null}" value="Add Idea" action="SubmitIdea" />
+            <h:commandLink rendered="#{personCtrl.theUser.type == 'Staff'}" value="Add User" action="AddUser" />
         </h:form>
+        
         <h:dataTable value="#{ideaCtrl.ideasList}" var="idea"
                      border="1">
             <f:facet name="header">
@@ -52,8 +55,8 @@
                 </f:facet>
                 <h:form>
                     <h:commandButton id="view" value="View" action="#{ideaCtrl.viewIdea(idea)}" />
-                    <h:commandButton rendered="#{idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff'}" id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(idea)}" />
-                <h:commandButton rendered="#{idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff'}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
+                    <h:commandButton rendered="#{idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(idea)}" />
+                <h:commandButton rendered="#{idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
                 </h:form>
             </h:column>
         </h:dataTable>
