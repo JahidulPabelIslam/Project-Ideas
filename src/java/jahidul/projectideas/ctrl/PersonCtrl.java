@@ -9,6 +9,7 @@ import jahidul.projectideas.bus.PersonBean;
 import jahidul.projectideas.ents.Person;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -32,6 +33,12 @@ public class PersonCtrl {
     protected Person person = new Person();
     protected Person theUser = new Person();
     protected List<Person> personsList = new ArrayList<Person>();
+    
+    @PostConstruct
+    public void init() {
+        personsList = personBean.findAllPersons();
+        theUser = personsList.get(1);
+    }
 
     public PersonBean getPersonBean() {
         return personBean;
@@ -84,6 +91,41 @@ public class PersonCtrl {
     public String addUser() {
         personBean.addPerson(person);
         person = new Person();
+        return "User";
+    }
+    
+    public String setUpEditPerson(Person person) {
+        this.person = person;
+        return "AddUser";
+    }
+    
+    public String updatePerson(Person person) {
+        this.person = personBean.updatePerson(person);
+        return "User";
+    }
+    
+    public String viewPerson(Person person) {
+        this.person = person;
+        return "User";
+    }
+    
+    public String deletePerson(Person person) {
+        this.person = person;
+        personBean.deletePerson(person);
+        return "Users";
+    }
+    
+    public String approveOrganisation(Person person) {
+        this.person = person;
+        this.person.setType("Organisation");
+        this.person = personBean.updatePerson(person);
+        return "User";
+    }
+    
+    public String unauthoriseOrganisation(Person person) {
+        this.person = person;
+        this.person.setType("Unauthorised Organisation");
+        this.person = personBean.updatePerson(person);
         return "User";
     }
 }

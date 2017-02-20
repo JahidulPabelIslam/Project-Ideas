@@ -30,6 +30,14 @@ public class PersonBean {
         personFacade.create(p);
     }
     
+    public Person updatePerson(Person p) {
+        return personFacade.edit(p);
+    }
+    
+    public void deletePerson(Person p) {
+        personFacade.remove(p);
+    }
+    
     public List findPersonByUsernameAndPassword(String username, String password) {
         return personFacade.findPersonByUsernameAndPassword(username, password);
     }

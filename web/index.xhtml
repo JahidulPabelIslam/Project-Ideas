@@ -24,6 +24,7 @@
             <h:commandButton rendered="#{personCtrl.theUser.id != null}" value="Log Out" action="#{personCtrl.logOut()}" />
             <h:commandLink rendered="#{personCtrl.theUser.id != null}" value="Add Idea" action="SubmitIdea" />
             <h:commandLink rendered="#{personCtrl.theUser.type == 'Staff'}" value="Add User" action="AddUser" />
+            <h:commandLink value="Users" action="Users" />
         </h:form>
         
         <h:dataTable value="#{ideaCtrl.ideasList}" var="idea"

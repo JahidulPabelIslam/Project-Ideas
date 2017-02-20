@@ -219,6 +219,6 @@ public class Idea implements Serializable {
 
     @Override
     public String toString() {
-        return "Idea[ id=" + id + " ]";
+        return "jahidul.projectideas.ents.Idea[ id=" + id + " ]";
     }
 }

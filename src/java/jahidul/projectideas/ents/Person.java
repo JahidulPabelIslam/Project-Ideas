@@ -294,7 +294,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Person[ id=" + id + " ]";
+        return "jahidul.projectideas.ents.User[ id=" + id + " ]";
     }
 
 }

@@ -1,11 +1,51 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>User Details</title>
+        <title>Ideas</title>
     </h:head>
     <h:body>
-        A User Details.
+
+        <h:panelGrid columns="2" border="1" cellpadding="5">
+
+            <h:outputLabel value="Username:" />
+            <h:outputLabel value="#{personCtrl.person.username}" />
+
+            <h:outputLabel value="Password:" />
+            <h:outputLabel value="#{personCtrl.person.password}" />
+
+            <h:outputLabel value="User Type:" />
+            <h:outputLabel value="#{personCtrl.person.type}" />
+
+            <h:outputLabel value="Email:" />
+            <h:outputLabel value="#{personCtrl.person.email}" />
+
+            <h:outputLabel value="Phone Number:" />
+            <h:outputLabel value="#{personCtrl.person.phoneNumber}" />
+
+            <h:outputLabel value="Name:" />
+            <h:outputLabel value="#{personCtrl.person.firstName} #{personCtrl.person.middleName} #{personCtrl.person.surname}" />
+
+            <h:outputLabel value="Student ID:" />
+            <h:outputLabel value="#{personCtrl.person.studentID}" />
+
+            <h:outputLabel value="Organisation Name:" />
+            <h:outputLabel value="#{personCtrl.person.organisationName}" />
+            
+            <h:outputLabel value="Organisation Outline:" />
+            <h:outputLabel value="#{personCtrl.person.organisationOutline}" />
+
+            <h:outputLabel value="Organisation Address:" />
+            <h:outputLabel value="#{personCtrl.person.organisationAddress}" />
+
+            <h:outputLabel value="Actions:" />
+            <h:form>
+                <h:commandButton rendered="#{personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{personCtrl.setUpEditPerson(personCtrl.person)}" />
+                <h:commandButton rendered="#{personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{personCtrl.deletePerson(personCtrl.person)}" />
+            </h:form>
+        </h:panelGrid>
     </h:body>
 </html>
+
