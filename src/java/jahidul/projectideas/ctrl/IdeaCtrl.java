@@ -79,8 +79,8 @@ public class IdeaCtrl {
         return "SubmitIdea";
     }
 
-    public String editIdea() {
-        ideaBean.editIdea(idea);
+    public String editIdea(Idea idea) {
+        this.idea = ideaBean.editIdea(idea);
         return "Idea";
     }
 

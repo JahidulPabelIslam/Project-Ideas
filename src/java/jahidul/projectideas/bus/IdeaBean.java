@@ -8,6 +8,7 @@ package jahidul.projectideas.bus;
 import jahidul.projectideas.ents.Idea;
 import jahidul.projectideas.ents.Person;
 import jahidul.projectideas.pers.IdeaFacade;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -28,11 +29,15 @@ public class IdeaBean {
 
     public void addIdea(Idea i, Person p) {
         i.setSubmitter(p);
+        Date date = new Date();
+        i.setDateUpdated(date);
         ideaFacade.create(i);
     }
     
-    public void editIdea(Idea i) {
-        ideaFacade.edit(i);
+    public Idea editIdea(Idea i) {
+        Date date = new Date();
+        i.setDateUpdated(date);
+        return ideaFacade.edit(i);
     }
     
     public void deleteIdea(Idea i) {
