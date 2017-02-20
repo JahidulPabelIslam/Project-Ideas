@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Edit Idea</title>
+        <title>Submit/Edit Idea</title>
     </h:head>
     <h:body>
         <h:form>
@@ -38,35 +38,34 @@
                              required="true"
                              value="#{ideaCtrl.idea.deliverables}"/>
                 <h:message for="deliverables" />
-                
+
                 <h:outputLabel value="Status:" for="status"/>
                 <h:inputText id="status" label="status"
                              required="true"
                              value="#{ideaCtrl.idea.status}" />
                 <h:message for="status" />
-                
+
                 <h:outputLabel value="Date Submitted/Updated:" />
                 <h:outputLabel value="#{ideaCtrl.idea.dateUpdated}" />
                 <h:message />
-                
-                <h:outputLabel value="Applied Student:" for="appliedStudent"/>
-                <h:inputText id="appliedStudent" label="appliedStudent"
-                             value="#{ideaCtrl.idea.appliedStudent}" />
-                <h:message for="appliedStudent" />
 
-                <h:outputLabel value="Submitter Student" for="submitterStudent"/>
-                <h:inputText id="submitterStudent" label="submitterStudent"
-                             value="#{ideaCtrl.idea.submitterStudent}"/>
-                <h:message for="submitterStudent" />
-                
-                <h:outputLabel value="Submitter Organisation" for="submitterOrganisation"/>
-                <h:inputText id="submitterOrganisation" label="submitterOrganisation"
-                             value="#{ideaCtrl.idea.submitterOrganisation}" />
-                <h:message for="submitterOrganisation" />
+                <h:selectBooleanCheckbox id="apply" />
+                <h:outputLabel for="apply" />
 
+                <!--                <h:outputLabel value="Applied Student:" for="appliedStudent"/>
+                                <h:inputText id="appliedStudent" label="appliedStudent"
+                                             value="#{ideaCtrl.idea.appliedStudent}" />
+                                <h:message for="appliedStudent" />
+                
+                                <h:outputLabel value="Submitter" for="submitter"/>
+                                <h:inputText id="submitter" label="submitter"
+                                             value="#{ideaCtrl.idea.submitter}"/>
+                                <h:message for="submitter" />-->
+                
+                <h:commandButton id="add" value="Add" action="#{ideaCtrl.addIdea(personCtrl.person)}" />
                 <h:commandButton id="edit" value="Edit" action="#{ideaCtrl.editIdea()}" />
+                <h:commandButton id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(ideaCtrl.idea)}" />
             </h:panelGrid>
         </h:form>
     </h:body>
 </html>
-

@@ -7,8 +7,21 @@
         <title>Ideas</title>
     </h:head>
     <h:body>
+         <h:panelGrid columns="2" border="1" cellpadding="5">
+
+            <h:outputLabel value="Reference number:" />
+            <h:outputLabel value="#{personCtrl.person.id}" />
+
+            <h:outputLabel value="Project title:" />
+            <h:outputLabel value="#{personCtrl.person.username}" />
+
+            <h:outputLabel value="Aims and Objectives:" />
+            <h:outputLabel value="#{personCtrl.person.password}" />
+        </h:panelGrid>
+        
         <h:form>
-            <h:commandLink value="Add Idea" action="AddIdea" />
+            <h:commandLink value="Add Idea" action="SubmitIdea" />
+            <h:commandLink value="Add User" action="AddUser" />
         </h:form>
         <h:dataTable value="#{ideaCtrl.ideasList}" var="idea"
                      border="1">

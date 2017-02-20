@@ -177,45 +177,24 @@ public class Idea implements Serializable {
     }
 
     @ManyToOne
-    private Person submitterStudent;
+    private Person submitter;
 
     /**
      * Get the value of submitterStudent
      *
      * @return the value of submitterStudent
      */
-    public Person getSubmitterStudent() {
-        return submitterStudent;
+    public Person getSubmitter() {
+        return submitter;
     }
 
     /**
      * Set the value of submitterStudent
      *
-     * @param submitterStudent new value of submitterStudent
+     * @param submitter new value of submitterStudent
      */
-    public void setSubmitterStudent(Person submitterStudent) {
-        this.submitterStudent = submitterStudent;
-    }
-
-    @ManyToOne
-    private Person submitterOrganisation;
-
-    /**
-     * Get the value of organisation
-     *
-     * @return the value of organisation
-     */
-    public Person getSubmitterOrganisation() {
-        return submitterOrganisation;
-    }
-
-    /**
-     * Set the value of organisation
-     *
-     * @param submitterOrganisation new value of organisation
-     */
-    public void setSubmitterOrganisation(Person submitterOrganisation) {
-        this.submitterOrganisation = submitterOrganisation;
+    public void setSubmitter(Person submitter) {
+        this.submitter = submitter;
     }
 
     @Override

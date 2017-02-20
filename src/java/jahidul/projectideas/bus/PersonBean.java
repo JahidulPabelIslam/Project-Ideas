@@ -5,6 +5,11 @@
  */
 package jahidul.projectideas.bus;
 
+import jahidul.projectideas.ents.Idea;
+import jahidul.projectideas.ents.Person;
+import jahidul.projectideas.pers.PersonFacade;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -14,6 +19,14 @@ import javax.ejb.Stateless;
 @Stateless
 public class PersonBean {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @EJB
+    private PersonFacade personFacade;
+    
+    public List<Person> findAllPersons() {
+        return personFacade.findAll();
+    }
+
+    public void addPerson(Person p) {
+        personFacade.create(p);
+    }
 }

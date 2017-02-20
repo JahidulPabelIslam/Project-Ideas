@@ -6,6 +6,7 @@
 package jahidul.projectideas.bus;
 
 import jahidul.projectideas.ents.Idea;
+import jahidul.projectideas.ents.Person;
 import jahidul.projectideas.pers.IdeaFacade;
 import java.util.List;
 import javax.ejb.EJB;
@@ -25,7 +26,8 @@ public class IdeaBean {
         return ideaFacade.findAll();
     }
 
-    public void addIdea(Idea i) {
+    public void addIdea(Idea i, Person p) {
+        i.setSubmitter(p);
         ideaFacade.create(i);
     }
     

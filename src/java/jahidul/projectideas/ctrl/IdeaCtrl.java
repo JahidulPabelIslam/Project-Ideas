@@ -7,6 +7,7 @@ package jahidul.projectideas.ctrl;
 
 import jahidul.projectideas.bus.IdeaBean;
 import jahidul.projectideas.ents.Idea;
+import jahidul.projectideas.ents.Person;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -30,6 +31,7 @@ public class IdeaCtrl {
     
     @EJB
     private IdeaBean ideaBean;
+    
     protected Idea idea = new Idea();
     protected List<Idea> ideasList = new ArrayList<Idea>();
     
@@ -62,9 +64,8 @@ public class IdeaCtrl {
         this.ideasList = ideasList;
     }
     
-    public String addIdea() {
-        ideaBean.addIdea(idea);
-        idea = new Idea();
+    public String addIdea(Person p) {
+        ideaBean.addIdea(idea, p);
         return "ViewIdea";
     }
     
@@ -75,7 +76,7 @@ public class IdeaCtrl {
     
     public String setUpEditIdea(Idea idea) {
         this.idea = idea;
-        return "EditIdea";
+        return "SubmitIdea";
     }
     
     public String editIdea() {

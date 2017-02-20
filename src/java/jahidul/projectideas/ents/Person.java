@@ -26,11 +26,11 @@ public class Person implements Serializable {
     public Long getId() {
         return id;
     }
-    
+
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     private String username;
 
     /**
@@ -70,7 +70,7 @@ public class Person implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     private String type;
 
     /**
@@ -91,6 +91,185 @@ public class Person implements Serializable {
         this.type = type;
     }
 
+    private String email;
+
+    /**
+     * Get the value of email
+     *
+     * @return the value of email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @param email new value of email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String phoneNumber;
+
+    /**
+     * Get the value of phoneNumber
+     *
+     * @return the value of phoneNumber
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * Set the value of phoneNumber
+     *
+     * @param phoneNumber new value of phoneNumber
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    private String firstName;
+
+    /**
+     * Get the value of firstName
+     *
+     * @return the value of firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * Set the value of firstName
+     *
+     * @param firstName new value of firstName
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    private String middleName;
+
+    /**
+     * Get the value of middleName
+     *
+     * @return the value of middleName
+     */
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    /**
+     * Set the value of middleName
+     *
+     * @param middleName new value of middleName
+     */
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    private String surname;
+
+    /**
+     * Get the value of surname
+     *
+     * @return the value of surname
+     */
+    public String getSurname() {
+        return surname;
+    }
+
+    /**
+     * Set the value of surname
+     *
+     * @param surname new value of surname
+     */
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    private int studentID;
+
+    /**
+     * Get the value of studentID
+     *
+     * @return the value of studentID
+     */
+    public int getStudentID() {
+        return studentID;
+    }
+
+    /**
+     * Set the value of studentID
+     *
+     * @param studentID new value of studentID
+     */
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
+
+    private String organisationName;
+
+    /**
+     * Get the value of organisationName
+     *
+     * @return the value of organisationName
+     */
+    public String getOrganisationName() {
+        return organisationName;
+    }
+
+    /**
+     * Set the value of organisationName
+     *
+     * @param organisationName new value of organisationName
+     */
+    public void setOrganisationName(String organisationName) {
+        this.organisationName = organisationName;
+    }
+
+    private String organisationOutline;
+
+    /**
+     * Get the value of organisationOutline
+     *
+     * @return the value of organisationOutline
+     */
+    public String getOrganisationOutline() {
+        return organisationOutline;
+    }
+
+    /**
+     * Set the value of organisationOutline
+     *
+     * @param organisationOutline new value of organisationOutline
+     */
+    public void setOrganisationOutline(String organisationOutline) {
+        this.organisationOutline = organisationOutline;
+    }
+
+    private String organisationAddress;
+
+    /**
+     * Get the value of organisationAddress
+     *
+     * @return the value of organisationAddress
+     */
+    public String getOrganisationAddress() {
+        return organisationAddress;
+    }
+
+    /**
+     * Set the value of organisationAddress
+     *
+     * @param organisationAddress new value of organisationAddress
+     */
+    public void setOrganisationAddress(String organisationAddress) {
+        this.organisationAddress = organisationAddress;
+    }
 
     @Override
     public int hashCode() {
@@ -116,5 +295,5 @@ public class Person implements Serializable {
     public String toString() {
         return "jahidul.projectideas.ents.User[ id=" + id + " ]";
     }
-    
+
 }
