@@ -20,8 +20,8 @@
         </h:panelGrid>
 
         <h:form>
-            <h:commandLink value="Add Idea" action="SubmitIdea" />
-            <h:commandLink value="Add User" action="AddUser" />
+            <h:commandLink rendered="#{personCtrl.person.id != null}" value="Add Idea" action="SubmitIdea" />
+            <h:commandLink rendered="#{personCtrl.person.type == 'Staff'}" value="Add User" action="AddUser" />
         </h:form>
         <h:dataTable value="#{ideaCtrl.ideasList}" var="idea"
                      border="1">
@@ -52,8 +52,8 @@
                 </f:facet>
                 <h:form>
                     <h:commandButton id="view" value="View" action="#{ideaCtrl.viewIdea(idea)}" />
-                    <h:commandButton rendered="#{idea.id != null and (idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff')}" id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(idea)}" />
-                <h:commandButton rendered="#{idea.id != null and (idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff')}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
+                    <h:commandButton rendered="#{idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff'}" id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(idea)}" />
+                <h:commandButton rendered="#{idea.submitter == personCtrl.person or personCtrl.person.type == 'Staff'}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
                 </h:form>
             </h:column>
         </h:dataTable>
