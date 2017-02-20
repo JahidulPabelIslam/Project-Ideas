@@ -38,7 +38,7 @@ public class PersonBean {
         personFacade.remove(p);
     }
     
-    public List findPersonByUsernameAndPassword(String username, String password) {
-        return personFacade.findPersonByUsernameAndPassword(username, password);
+    public List logIn(String username, String password) {
+        return personFacade.logIn(username, password);
     }
 }

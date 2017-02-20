@@ -37,7 +37,7 @@ public class PersonCtrl {
     @PostConstruct
     public void init() {
         personsList = personBean.findAllPersons();
-        theUser = personsList.get(1);
+        //theUser = personsList.get(1);
     }
 
     public PersonBean getPersonBean() {
@@ -75,11 +75,13 @@ public class PersonCtrl {
     private List<Person> results;
 
     public String logIn() {
-        results = personBean.findPersonByUsernameAndPassword(theUser.getUsername(), theUser.getPassword());
+        results = personBean.logIn(theUser.getUsername(), theUser.getPassword());
         if (!results.isEmpty()) {
             theUser = results.get(0);
             return "index";
         }
+        
+        theUser = new Person();
         return "LogIn";
     }
 
@@ -100,6 +102,7 @@ public class PersonCtrl {
     }
     
     public String updatePerson(Person person) {
+        this.person = person;
         this.person = personBean.updatePerson(person);
         return "User";
     }
@@ -112,6 +115,7 @@ public class PersonCtrl {
     public String deletePerson(Person person) {
         this.person = person;
         personBean.deletePerson(person);
+        personsList = personBean.findAllPersons();
         return "Users";
     }
     
@@ -122,9 +126,9 @@ public class PersonCtrl {
         return "User";
     }
     
-    public String unauthoriseOrganisation(Person person) {
+    public String unapproveOrganisation(Person person) {
         this.person = person;
-        this.person.setType("Unauthorised Organisation");
+        this.person.setType("Unapproved Organisation");
         this.person = personBean.updatePerson(person);
         return "User";
     }

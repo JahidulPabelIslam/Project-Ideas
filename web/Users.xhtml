@@ -36,8 +36,8 @@
                 </f:facet>
                 <h:form>
                     <h:commandButton id="view" value="View" action="#{personCtrl.viewPerson(person)}" />
-                    <h:commandButton rendered="#{personCtrl.theUser.type == 'Staff' and person.type == 'Unauthorised Organisation'}" id="approveOrganisation" value="Approve Organisation" action="#{personCtrl.approveOrganisation(person)}" />
-                    <h:commandButton rendered="#{personCtrl.theUser.type == 'Staff' and person.type == 'Organisation'}" id="unauthoriseOrganisation" value="Unauthorise Organisation" action="#{personCtrl.unauthoriseOrganisation(person)}" />
+                    <h:commandButton rendered="#{personCtrl.theUser.type == 'Staff' and person.type == 'Unapproved Organisation'}" id="approveOrganisation" value="Approve Organisation" action="#{personCtrl.approveOrganisation(person)}" />
+                    <h:commandButton rendered="#{personCtrl.theUser.type == 'Staff' and person.type == 'Organisation'}" id="unauthoriseOrganisation" value="Unapprove Organisation" action="#{personCtrl.unapproveOrganisation(person)}" />
                     <h:commandButton rendered="#{person == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{personCtrl.setUpEditPerson(person)}" />
                     <h:commandButton rendered="#{person == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{personCtrl.deletePerson(person)}" />
                 </h:form>
