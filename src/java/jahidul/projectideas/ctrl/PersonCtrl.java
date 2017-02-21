@@ -57,7 +57,7 @@ public class PersonCtrl {
     @PostConstruct
     public void init() {
         personsList = personBean.findAllPersons();
-        theUser = personsList.get(0);
+        theUser = personsList.get(1);
         person.setType("Unapproved Organisation");
     }
 
@@ -242,5 +242,25 @@ public class PersonCtrl {
         this.person.setType("Unapproved Organisation");
         this.person = personBean.updatePerson(person);
         return "User";
+    }
+  
+    public void findAllPersons() {
+        personsList = personBean.findAllPersons();
+    }
+    
+    public void findStudents() {
+        personsList = personBean.findStudents();
+    }
+    
+    public void findStaff() {
+        personsList = personBean.findStaff();
+    }
+    
+    public void findOrganisations() {
+        personsList = personBean.findOrganisations();
+    }
+    
+    public void findUnapprovedOrganisations() {
+        personsList = personBean.findUnapprovedOrganisations();
     }
 }

@@ -5,7 +5,6 @@
  */
 package jahidul.projectideas.bus;
 
-import jahidul.projectideas.ents.Idea;
 import jahidul.projectideas.ents.Person;
 import jahidul.projectideas.pers.PersonFacade;
 import java.util.List;
@@ -63,5 +62,21 @@ public class PersonBean {
      */
     public List logIn(String username, String password) {
         return personFacade.logIn(username, password);
+    }
+    
+    public List<Person> findStudents() {
+        return personFacade.findStudents();
+    }
+    
+    public List<Person> findStaff() {
+        return personFacade.findStaff();
+    }
+    
+    public List<Person> findOrganisations() {
+        return personFacade.findOrganisations();
+    }
+    
+    public List<Person> findUnapprovedOrganisations() {
+        return personFacade.findUnapprovedOrganisations();
     }
 }

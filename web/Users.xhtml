@@ -14,17 +14,17 @@
         <ui:define name="content">
 
             <h:form>
-                <h:commandButton id="All" value="All" action="#{personCtrl.viewAll()}" />
-                <h:commandButton id="Student" value="Students" action="#{personCtrl.viewStudents()}" />
-                <h:commandButton id="Staff" value="Staff" action="#{personCtrl.viewStaff()}" />
-                <h:commandButton id="Organisations" value="Organisations" action="#{personCtrl.viewOrganisations()}" />
-                <h:commandButton id="UnapprovedOrganisations" value="Unapproved Organisations" action="#{personCtrl.viewUnapprovedOrganisations()}" />
+                <h:commandButton id="All" value="All" action="#{personCtrl.findAllPersons()}"> <f:ajax render="users" /> </h:commandButton>
+                <h:commandButton id="Student" value="Students" action="#{personCtrl.findStudents()}"> <f:ajax render="users" /> </h:commandButton>
+                <h:commandButton id="Staff" value="Staff" action="#{personCtrl.findStaff()}"> <f:ajax render="users" /> </h:commandButton>
+                <h:commandButton id="Organisations" value="Organisations" action="#{personCtrl.findOrganisations()}"> <f:ajax render="users" /> </h:commandButton>
+                <h:commandButton id="UnapprovedOrganisations" value="Unapproved Organisations" action="#{personCtrl.findUnapprovedOrganisations()}"> <f:ajax render="users" /> </h:commandButton>
             </h:form>
             <h:form>
                 <h:inputText id="search" label="search"
                              value="#{personCtrl.search}" />
             </h:form>
-            <h:dataTable value="#{personCtrl.personsList}" var="person"
+            <h:dataTable id="users" value="#{personCtrl.personsList}" var="person"
                          border="1">
                 <f:facet name="header">
                     <h:outputText value="Ideas" />

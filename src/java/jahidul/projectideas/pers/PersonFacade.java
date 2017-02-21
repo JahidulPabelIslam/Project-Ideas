@@ -51,4 +51,23 @@ public class PersonFacade extends AbstractFacade<Person> {
         return query.getResultList();
     }
     
+    public List findStudents() {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student'", Person.class);
+        return query.getResultList();
+    }
+    
+    public List findStaff() {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff'", Person.class);
+        return query.getResultList();
+    }
+    
+    public List findOrganisations() {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation'", Person.class);
+        return query.getResultList();
+    }
+    
+    public List findUnapprovedOrganisations() {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation'", Person.class);
+        return query.getResultList();
+    }
 }
