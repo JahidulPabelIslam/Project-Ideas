@@ -28,9 +28,9 @@ public class PersonCtrl {
     @EJB
     private PersonBean personBean;
 
-    protected Person person = new Person();
+    protected Person person;
 
-    protected Person theUser = new Person();
+    protected Person theUser;
 
     protected List<Person> personsList = new ArrayList<Person>();
 
@@ -166,7 +166,7 @@ public class PersonCtrl {
     public String prepareCreate() {
         person = new Person();
         person.setType("Unapproved Organisation");
-        return "SubmitIdea";
+        return "AddUser";
     }
     
 }

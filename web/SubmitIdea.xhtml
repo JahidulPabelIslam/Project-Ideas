@@ -40,7 +40,7 @@
                                  required="true"
                                  value="#{ideaCtrl.idea.deliverables}"/>
                     <h:message for="deliverables" />
-                    
+
                     <h:outputLabel rendered="#{personCtrl.theUser.type == 'Staff'}" value="Status:" for="status"/>
                     <h:selectOneMenu rendered="#{personCtrl.theUser.type == 'Staff'}" id="status" label="status" required="true" value="#{ideaCtrl.idea.status}">
                         <f:selectItem itemValue="Provisional" itemLabel="Provisional" />
@@ -52,10 +52,10 @@
                     <h:selectBooleanCheckbox rendered="#{personCtrl.theUser.type == 'Student'}" id="apply" value="#{ideaCtrl.apply}" />
                     <h:outputLabel rendered="#{personCtrl.theUser.type == 'Student'}" for="apply" />
 
-                    <h:outputLabel rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" value="Applied Student:" for="appliedStudent"/>
+<!--                    <h:outputLabel rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" value="Applied Student:" for="appliedStudent"/>
                     <h:inputText rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" id="appliedStudent" label="appliedStudent"
                                  value="#{ideaCtrl.idea.appliedStudent}" />
-                    <h:message rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" for="appliedStudent" />
+                    <h:message rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" for="appliedStudent" />-->
 
                     <h:commandButton rendered="#{ideaCtrl.idea.id == null}" id="add" value="Add" action="#{ideaCtrl.addIdea(personCtrl.theUser)}" />
                     <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{ideaCtrl.editIdea()}" />

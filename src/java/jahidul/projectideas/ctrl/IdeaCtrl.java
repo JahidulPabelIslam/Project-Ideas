@@ -126,4 +126,8 @@ public class IdeaCtrl {
         ideasList = ideaBean.findProvisionalIdeas();
     }
     
+    public String prepareCreate() {
+        idea = new Idea();
+        return "SubmitIdea";
+    }
 }
