@@ -24,6 +24,7 @@
                 <h:message for="password" />
                 
                 <h:commandButton id="logIn" value="Log In" action="#{personCtrl.logIn()}" />
+                <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Sign Up" action="AddUser" />
             </h:panelGrid>
         </h:form>
     </h:body>
