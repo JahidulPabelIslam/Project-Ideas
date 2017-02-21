@@ -26,7 +26,15 @@
             <h:commandLink rendered="#{personCtrl.theUser.type == 'Staff'}" value="Add User" action="AddUser" />
             <h:commandLink value="Users" action="Users" />
         </h:form>
-        
+        <h:form>
+            <h:commandButton id="All" value="All" action="#{ideaCtrl.viewAllIdeas()}" />
+            <h:commandButton id="ABU" value="Approved But Unallocated" action="#{ideaCtrl.viewABUIdeas()}" />
+            <h:commandButton id="Provisional" value="Provisional" action="#{ideaCtrl.viewProvisionalIdeas()}" />
+        </h:form>
+        <h:form>
+            <h:inputText id="search" label="search"
+                         value="#{ideaCtrl.search}" />
+        </h:form>
         <h:dataTable value="#{ideaCtrl.ideasList}" var="idea"
                      border="1">
             <f:facet name="header">
@@ -57,7 +65,7 @@
                 <h:form>
                     <h:commandButton id="view" value="View" action="#{ideaCtrl.viewIdea(idea)}" />
                     <h:commandButton rendered="#{idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(idea)}" />
-                <h:commandButton rendered="#{idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
+                    <h:commandButton rendered="#{idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
                 </h:form>
             </h:column>
         </h:dataTable>

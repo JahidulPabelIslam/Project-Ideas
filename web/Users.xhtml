@@ -7,6 +7,24 @@
         <title>List of Users</title>
     </h:head>
     <h:body>
+        <h:form>
+            <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Log In" action="LogIn" />
+            <h:commandButton rendered="#{personCtrl.theUser.id != null}" value="Log Out" action="#{personCtrl.logOut()}" />
+            <h:commandLink rendered="#{personCtrl.theUser.id != null}" value="Add Idea" action="SubmitIdea" />
+            <h:commandLink rendered="#{personCtrl.theUser.type == 'Staff'}" value="Add User" action="AddUser" />
+            <h:commandLink value="Users" action="Users" />
+        </h:form>
+        <h:form>
+            <h:commandButton id="All" value="All" action="#{personCtrl.viewAll()}" />
+            <h:commandButton id="Student" value="Students" action="#{personCtrl.viewStudents()}" />
+            <h:commandButton id="Staff" value="Staff" action="#{personCtrl.viewStaff()}" />
+            <h:commandButton id="Organisations" value="Organisations" action="#{personCtrl.viewOrganisations()}" />
+            <h:commandButton id="UnapprovedOrganisations" value="Unapproved Organisations" action="#{personCtrl.viewUnapprovedOrganisations()}" />
+        </h:form>
+        <h:form>
+            <h:inputText id="search" label="search"
+                         value="#{personCtrl.search}" />
+        </h:form>
         <h:dataTable value="#{personCtrl.personsList}" var="person"
                      border="1">
             <f:facet name="header">

@@ -24,7 +24,7 @@ import javax.inject.Named;
 public class IdeaCtrl {
 
     /**
-     * Creates a new instance of IdeaBean
+     * Creates a new instance of IdeaCtrl
      */
     public IdeaCtrl() {
     }
@@ -35,6 +35,7 @@ public class IdeaCtrl {
     protected Idea idea = new Idea();
     protected List<Idea> ideasList = new ArrayList<Idea>();
     protected boolean apply = false;
+    protected String search;
 
     @PostConstruct
     public void init() {
@@ -71,6 +72,14 @@ public class IdeaCtrl {
 
     public void setApply(boolean apply) {
         this.apply = apply;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
     
     public String addIdea(Person p) {

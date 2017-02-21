@@ -33,11 +33,13 @@ public class PersonCtrl {
     protected Person person = new Person();
     protected Person theUser = new Person();
     protected List<Person> personsList = new ArrayList<Person>();
+    protected String search;
     
     @PostConstruct
     public void init() {
         personsList = personBean.findAllPersons();
-        theUser = personsList.get(0);
+        theUser = personsList.get(1);
+        person.setType("Unapproved Organisation");
     }
 
     public PersonBean getPersonBean() {
@@ -70,6 +72,14 @@ public class PersonCtrl {
 
     public void setPersonsList(List<Person> personsList) {
         this.personsList = personsList;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 
     private List<Person> results;
