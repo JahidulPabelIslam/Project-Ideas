@@ -10,7 +10,7 @@
     <h:body>
          <h:form>
              <h:commandLink value="BSc Project Ideas" action="index" />
-            <h:commandLink rendered="#{personCtrl.theUser.id != null}" value="Add Idea" action="SubmitIdea" />
+            <h:commandButton rendered="#{personCtrl.theUser.id != null}" value="Add Idea" action="#{personCtrl.prepareCreate()}" />
             <h:commandLink rendered="#{personCtrl.theUser.type == 'Staff'}" value="Add User" action="AddUser" />
             <h:commandLink value="Users" action="Users" />
             <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Log In" action="LogIn" />
