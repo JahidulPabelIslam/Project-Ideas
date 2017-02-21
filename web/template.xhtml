@@ -8,11 +8,11 @@
     </h:head>
     <h:body>
          <h:form>
-            <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Log In" action="LogIn" />
-            <h:commandButton rendered="#{personCtrl.theUser.id != null}" value="Log Out" action="#{personCtrl.logOut()}" />
             <h:commandLink rendered="#{personCtrl.theUser.id != null}" value="Add Idea" action="SubmitIdea" />
             <h:commandLink rendered="#{personCtrl.theUser.type == 'Staff'}" value="Add User" action="AddUser" />
             <h:commandLink value="Users" action="Users" />
+            <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Log In" action="LogIn" />
+            <h:commandButton rendered="#{personCtrl.theUser.id != null}" value="Log Out" action="#{personCtrl.logOut()}" />
         </h:form>
          <ui:insert name="content">Main Content</ui:insert>
     </h:body>
