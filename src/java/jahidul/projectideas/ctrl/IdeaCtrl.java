@@ -97,10 +97,13 @@ public class IdeaCtrl {
 
     public String setUpEditIdea(Idea idea) {
         this.idea = idea;
+        if (this.idea.getAppliedStudent() != null) {
+            apply = true;
+        }
         return "SubmitIdea";
     }
 
-    public String editIdea(Idea idea) {
+    public String editIdea() {
         this.idea = ideaBean.editIdea(idea);
         return "Idea";
     }

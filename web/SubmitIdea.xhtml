@@ -55,7 +55,7 @@
                 <h:message rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" for="appliedStudent" />
 
                 <h:commandButton rendered="#{ideaCtrl.idea.id == null}" id="add" value="Add" action="#{ideaCtrl.addIdea(personCtrl.theUser)}" />
-                <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{ideaCtrl.editIdea(ideaCtrl.idea)}" />
+                <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{ideaCtrl.editIdea()}" />
                 <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.person or personCtrl.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(ideaCtrl.idea)}" />
             </h:panelGrid>
         </h:form>
