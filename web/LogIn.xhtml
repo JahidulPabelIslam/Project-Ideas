@@ -3,35 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>Log In</title>
-    </h:head>
-    <h:body>
-        <ui:composition template="template.xhtml">
 
-            <ui:define name="content">
-                <h:form>
+    <ui:composition template="template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Log In"></h:outputText>
+        </ui:define>
+        
+        <ui:define name="content">
+            <h:form>
 
-                    <h:panelGrid columns="3"
-                                 columnClasses="rightalign,leftalign,leftalign">
+                <h:panelGrid columns="3"
+                             columnClasses="rightalign,leftalign,leftalign">
 
-                        <h:outputLabel value="Username:" for="username"/>
-                        <h:inputText id="username" label="username"
-                                     required="true"
-                                     value="#{personCtrl.theUser.username}" />
-                        <h:message for="username" />
+                    <h:outputLabel value="Username:" for="username"/>
+                    <h:inputText id="username" label="username"
+                                 required="true"
+                                 value="#{personCtrl.theUser.username}" />
+                    <h:message for="username" />
 
-                        <h:outputLabel value="Password:" for="password"/>
-                        <h:inputText id="password" label="password"
-                                     required="true"
-                                     value="#{personCtrl.theUser.password}"/>
-                        <h:message for="password" />
+                    <h:outputLabel value="Password:" for="password"/>
+                    <h:inputText id="password" label="password"
+                                 required="true"
+                                 value="#{personCtrl.theUser.password}"/>
+                    <h:message for="password" />
 
-                        <h:commandButton id="logIn" value="Log In" action="#{personCtrl.logIn()}" />
-                        <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Sign Up" action="AddUser" />
-                    </h:panelGrid>
-                </h:form>
-            </ui:define>
-        </ui:composition>
-    </h:body>
+                    <h:commandButton id="logIn" value="Log In" action="#{personCtrl.logIn()}" />
+                    <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Sign Up" action="AddUser" />
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
 </html>

@@ -3,67 +3,67 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>Submit/Edit Idea</title>
-    </h:head>
-    <h:body>
-        <ui:composition template="template.xhtml">
 
-            <ui:define name="content">
-                <h:form>
+    <ui:composition template="template.xhtml">
 
-                    <h:panelGrid columns="3"
-                                 columnClasses="rightalign,leftalign,leftalign">
+        <ui:define name="title">
+            <h:outputText value="Submit/Edit Idea"></h:outputText>
+        </ui:define>
 
-                        <h:outputLabel value="Reference number:" />
-                        <h:outputLabel value="#{ideaCtrl.idea.id}" />
-                        <h:outputLabel/>
+        <ui:define name="content">
+            <h:form>
 
-                        <h:outputLabel value="Title:" for="title"/>
-                        <h:inputText id="title" label="Title"
-                                     required="true"
-                                     value="#{ideaCtrl.idea.title}" />
-                        <h:message for="title" />
+                <h:panelGrid columns="3"
+                             columnClasses="rightalign,leftalign,leftalign">
 
-                        <h:outputLabel value="Aim and Objectives:" for="aimsObjectives"/>
-                        <h:inputText id="aimsObjectives" label="aimsObjectives"
-                                     required="true"
-                                     value="#{ideaCtrl.idea.aimsObjectives}"/>
-                        <h:message for="aimsObjectives" />
+                    <h:outputLabel value="Reference number:" />
+                    <h:outputLabel value="#{ideaCtrl.idea.id}" />
+                    <h:outputLabel/>
 
-                        <h:outputLabel value="Project Question:" for="question"/>
-                        <h:inputText id="question" label="question"
-                                     required="true"
-                                     value="#{ideaCtrl.idea.question}" />
-                        <h:message for="question" />
+                    <h:outputLabel value="Title:" for="title"/>
+                    <h:inputText id="title" label="Title"
+                                 required="true"
+                                 value="#{ideaCtrl.idea.title}" />
+                    <h:message for="title" />
 
-                        <h:outputLabel value="Deliverables:" for="deliverables"/>
-                        <h:inputText id="deliverables" label="deliverables"
-                                     required="true"
-                                     value="#{ideaCtrl.idea.deliverables}"/>
-                        <h:message for="deliverables" />
+                    <h:outputLabel value="Aim and Objectives:" for="aimsObjectives"/>
+                    <h:inputText id="aimsObjectives" label="aimsObjectives"
+                                 required="true"
+                                 value="#{ideaCtrl.idea.aimsObjectives}"/>
+                    <h:message for="aimsObjectives" />
 
-                        <h:outputLabel value="Status:" for="status"/>
-                        <h:inputText id="status" label="status"
-                                     required="true"
-                                     value="#{ideaCtrl.idea.status}" />
-                        <h:message for="status" />
+                    <h:outputLabel value="Project Question:" for="question"/>
+                    <h:inputText id="question" label="question"
+                                 required="true"
+                                 value="#{ideaCtrl.idea.question}" />
+                    <h:message for="question" />
 
-                        <h:outputLabel rendered="#{personCtrl.theUser.type == 'Student'}" value="Apply for Idea:" />
-                        <h:selectBooleanCheckbox rendered="#{personCtrl.theUser.type == 'Student'}" id="apply" value="#{ideaCtrl.apply}" />
-                        <h:outputLabel rendered="#{personCtrl.theUser.type == 'Student'}" for="apply" />
+                    <h:outputLabel value="Deliverables:" for="deliverables"/>
+                    <h:inputText id="deliverables" label="deliverables"
+                                 required="true"
+                                 value="#{ideaCtrl.idea.deliverables}"/>
+                    <h:message for="deliverables" />
 
-                        <h:outputLabel rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" value="Applied Student:" for="appliedStudent"/>
-                        <h:inputText rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" id="appliedStudent" label="appliedStudent"
-                                     value="#{ideaCtrl.idea.appliedStudent}" />
-                        <h:message rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" for="appliedStudent" />
+                    <h:outputLabel value="Status:" for="status"/>
+                    <h:inputText id="status" label="status"
+                                 required="true"
+                                 value="#{ideaCtrl.idea.status}" />
+                    <h:message for="status" />
 
-                        <h:commandButton rendered="#{ideaCtrl.idea.id == null}" id="add" value="Add" action="#{ideaCtrl.addIdea(personCtrl.theUser)}" />
-                        <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{ideaCtrl.editIdea()}" />
-                        <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.person or personCtrl.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(ideaCtrl.idea)}" />
-                    </h:panelGrid>
-                </h:form>
-            </ui:define>
-        </ui:composition>
-    </h:body>
+                    <h:outputLabel rendered="#{personCtrl.theUser.type == 'Student'}" value="Apply for Idea:" />
+                    <h:selectBooleanCheckbox rendered="#{personCtrl.theUser.type == 'Student'}" id="apply" value="#{ideaCtrl.apply}" />
+                    <h:outputLabel rendered="#{personCtrl.theUser.type == 'Student'}" for="apply" />
+
+                    <h:outputLabel rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" value="Applied Student:" for="appliedStudent"/>
+                    <h:inputText rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" id="appliedStudent" label="appliedStudent"
+                                 value="#{ideaCtrl.idea.appliedStudent}" />
+                    <h:message rendered="#{personCtrl.theUser.type == 'Organisation' or personCtrl.theUser.type == 'Staff'}" for="appliedStudent" />
+
+                    <h:commandButton rendered="#{ideaCtrl.idea.id == null}" id="add" value="Add" action="#{ideaCtrl.addIdea(personCtrl.theUser)}" />
+                    <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{ideaCtrl.editIdea()}" />
+                    <h:commandButton rendered="#{ideaCtrl.idea.id != null and (ideaCtrl.idea.submitter == personCtrl.person or personCtrl.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(ideaCtrl.idea)}" />
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 </html>
