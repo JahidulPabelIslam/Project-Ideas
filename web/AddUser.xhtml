@@ -17,14 +17,14 @@
                 <h:panelGrid columns="3"
                              columnClasses="rightalign,leftalign,leftalign">
 
-                    <h:outputLabel rendered="#{personCtrl.person.type == 'Staff'}" value="Type:" for="type"/>
-                    <h:selectOneMenu rendered="#{personCtrl.person.type == 'Staff'}" id="type" label="type" required="true" value="#{personCtrl.person.type}">
+                    <h:outputLabel rendered="#{personCtrl.theUser.type == 'Staff'}" value="Type:" for="type"/>
+                    <h:selectOneMenu rendered="#{personCtrl.theUser.type == 'Staff'}" id="type" label="type" required="true" value="#{personCtrl.person.type}">
                         <f:selectItem itemValue="Staff" itemLabel="Staff" />
                         <f:selectItem itemValue="Student" itemLabel="Student" />
                         <f:selectItem itemValue="Organisation" itemLabel="Organisation" />
                         <f:ajax render="options" />
                     </h:selectOneMenu>
-                    <h:message rendered="#{personCtrl.person.type == 'Staff'}" for="type" />
+                    <h:message rendered="#{personCtrl.theUser.type == 'Staff'}" for="type" />
 
                     <h:outputLabel value="Username:" for="username"/>
                     <h:inputText id="username" label="username"
@@ -99,7 +99,7 @@
                     </h:panelGroup>
 
                     <h:commandButton rendered="#{personCtrl.person.id == null and (personCtrl.theUser == null or personCtrl.theUser.type == 'Staff')}" id="add" value="Add" action="#{personCtrl.addUser()}" />
-                    <h:commandButton rendered="#{personCtrl.person.id != null and (personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{personCtrl.editPerson(personCtrl.person)}" />
+                    <h:commandButton rendered="#{personCtrl.person.id != null and (personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{personCtrl.updatePerson(personCtrl.person)}" />
                     <h:commandButton rendered="#{personCtrl.person.id != null and (personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personCtrl.deletePerson(personCtrl.person)}" />
                     <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Log In" action="LogIn" />
                 </h:panelGrid>

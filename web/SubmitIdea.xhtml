@@ -43,8 +43,8 @@
                     
                     <h:outputLabel rendered="#{personCtrl.theUser.type == 'Staff'}" value="Status:" for="status"/>
                     <h:selectOneMenu rendered="#{personCtrl.theUser.type == 'Staff'}" id="status" label="status" required="true" value="#{ideaCtrl.idea.status}">
-                        <f:selectItem itemValue="Staff" itemLabel="Provisional" />
-                        <f:selectItem itemValue="Student" itemLabel="Approved" />
+                        <f:selectItem itemValue="Provisional" itemLabel="Provisional" />
+                        <f:selectItem itemValue="Approved" itemLabel="Approved" />
                     </h:selectOneMenu>
                     <h:message rendered="#{personCtrl.theUser.type == 'Staff'}" for="status" />
 
