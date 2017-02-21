@@ -22,22 +22,45 @@ public class PersonBean {
     @EJB
     private PersonFacade personFacade;
     
+    /**
+     *
+     * @return
+     */
     public List<Person> findAllPersons() {
         return personFacade.findAll();
     }
 
+    /**
+     *
+     * @param p
+     */
     public void addPerson(Person p) {
         personFacade.create(p);
     }
     
+    /**
+     *
+     * @param p
+     * @return
+     */
     public Person updatePerson(Person p) {
         return personFacade.edit(p);
     }
     
+    /**
+     *
+     * @param p
+     */
     public void deletePerson(Person p) {
         personFacade.remove(p);
     }
     
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public List logIn(String username, String password) {
         return personFacade.logIn(username, password);
     }
