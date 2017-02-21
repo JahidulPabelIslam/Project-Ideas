@@ -98,7 +98,9 @@
                         </h:panelGrid>
                     </h:panelGroup>
 
-                    <h:commandButton id="logIn" value="Create" action="#{personCtrl.addUser()}" />
+                    <h:commandButton rendered="#{personCtrl.person.id == null and (personCtrl.theUser == null or personCtrl.theUser.type == 'Staff')}" id="add" value="Add" action="#{personCtrl.addUser()}" />
+                    <h:commandButton rendered="#{personCtrl.person.id != null and (personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{personCtrl.editPerson(personCtrl.person)}" />
+                    <h:commandButton rendered="#{personCtrl.person.id != null and (personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personCtrl.deletePerson(personCtrl.person)}" />
                     <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Log In" action="LogIn" />
                 </h:panelGrid>
             </h:form>
