@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Log In</title>
     </h:head>
@@ -22,11 +23,13 @@
                              required="true"
                              value="#{personCtrl.person.password}"/>
                 <h:message for="password" />
-                
+
                 <h:outputLabel value="type" for="type"/>
-                <h:inputText id="type" label="type"
-                             required="true"
-                             value="#{personCtrl.person.type}" />
+                <h:selectOneMenu id="type" label="type" required="true" value="#{personCtrl.person.type}">
+                    <f:selectItem itemValue="Student" itemLabel="Student" />
+                    <f:selectItem itemValue="Staff" itemLabel="Staff" />
+                    <f:selectItem itemValue="Organisation" itemLabel="Organisation" />
+                </h:selectOneMenu>
                 <h:message for="type" />
 
                 <h:outputLabel value="email" for="email"/>
@@ -34,7 +37,7 @@
                              required="true"
                              value="#{personCtrl.person.email}"/>
                 <h:message for="email" />
-                
+
                 <h:outputLabel value="phoneNumber" for="phoneNumber"/>
                 <h:inputText id="phoneNumber" label="phoneNumber"
                              required="true"
@@ -46,7 +49,7 @@
                              required="true"
                              value="#{personCtrl.person.firstName}"/>
                 <h:message for="firstName" />
-                
+
                 <h:outputLabel value="middleName" for="middleName"/>
                 <h:inputText id="middleName" label="middleName"
                              required="true"
@@ -58,7 +61,7 @@
                              required="true"
                              value="#{personCtrl.person.surname}"/>
                 <h:message for="surname" />
-                
+
                 <h:outputLabel rendered="#{personCtrl.person.type == 'Student'}" value="studentID" for="studentID"/>
                 <h:inputText rendered="#{personCtrl.person.type == 'Student'}" id="studentID" label="studentID"
                              required="true"
@@ -70,7 +73,7 @@
                              required="true"
                              value="#{personCtrl.person.organisationName}"/>
                 <h:message rendered="#{personCtrl.person.type == 'Organisation'}" for="organisationName" />
-                
+
                 <h:outputLabel rendered="#{personCtrl.person.type == 'Organisation'}" value="organisationOutline" for="organisationOutline"/>
                 <h:inputText rendered="#{personCtrl.person.type == 'Organisation'}" id="organisationOutline" label="organisationOutline"
                              required="true"
@@ -82,7 +85,7 @@
                              required="true"
                              value="#{personCtrl.person.organisationAddress}"/>
                 <h:message rendered="#{personCtrl.person.type == 'Organisation'}" for="organisationAddress" />
-                
+
                 <h:commandButton id="logIn" value="Log In" action="#{personCtrl.addUser()}" />
             </h:panelGrid>
         </h:form>
