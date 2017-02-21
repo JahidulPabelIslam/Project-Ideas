@@ -22,43 +22,33 @@ public class IdeaBean {
 
     @EJB
     private IdeaFacade ideaFacade;
-    
-    /**
-     *
-     * @return
-     */
+
     public List<Idea> findAllIdeas() {
         return ideaFacade.findAll();
     }
-
-    /**
-     *
-     * @param i
-     * @param p
-     */
+    
     public void addIdea(Idea i, Person p) {
         i.setSubmitter(p);
         Date date = new Date();
         i.setDateUpdated(date);
         ideaFacade.create(i);
     }
-    
-    /**
-     *
-     * @param i
-     * @return
-     */
+
     public Idea editIdea(Idea i) {
         Date date = new Date();
         i.setDateUpdated(date);
         return ideaFacade.edit(i);
     }
-    
-    /**
-     *
-     * @param i
-     */
+
     public void deleteIdea(Idea i) {
         ideaFacade.remove(i);
+    }
+    
+    public List<Idea> findApprovedButUnallocatedIdeas() {
+        return ideaFacade.findApprovedButUnallocatedIdeas();
+    }
+    
+    public List<Idea> findProvisionalIdeas() {
+        return ideaFacade.findProvisionalIdeas();
     }
 }

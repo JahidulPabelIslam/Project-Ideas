@@ -22,20 +22,22 @@ public class IdeaFacade extends AbstractFacade<Idea> {
     @PersistenceContext(unitName = "Project-IdeasPU")
     private EntityManager em;
 
-    /**
-     *
-     * @return
-     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
-    /**
-     *
-     */
     public IdeaFacade() {
         super(Idea.class);
     }
+    
+    public List findProvisionalIdeas() {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Provisional'", Idea.class);
+        return query.getResultList();
+    }
 
+    public List findApprovedButUnallocatedIdeas() {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.appliedStudent IS NULL", Idea.class);
+        return query.getResultList();
+    }
 }

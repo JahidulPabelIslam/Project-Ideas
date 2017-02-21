@@ -24,15 +24,15 @@
                 <h:outputLabel value="#{personCtrl.theUser.password}" />
             </h:panelGrid>
             <h:form>
-                <h:commandButton id="All" value="All" action="#{ideaCtrl.viewAllIdeas()}" />
-                <h:commandButton id="ABU" value="Approved But Unallocated" action="#{ideaCtrl.viewABUIdeas()}" />
-                <h:commandButton id="Provisional" value="Provisional" action="#{ideaCtrl.viewProvisionalIdeas()}" />
+                <h:commandButton id="All" value="All" action="#{ideaCtrl.findAllIdeas()}" > <f:ajax render="ideas" /> </h:commandButton>
+                <h:commandButton id="ABU" value="Approved But Unallocated" action="#{ideaCtrl.findApprovedButUnallocatedIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
+                <h:commandButton id="Provisional" value="Provisional" action="#{ideaCtrl.findProvisionalIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
             </h:form>
             <h:form>
                 <h:inputText id="search" label="search"
                              value="#{ideaCtrl.search}" />
             </h:form>
-            <h:dataTable value="#{ideaCtrl.ideasList}" var="idea"
+            <h:dataTable id="ideas" value="#{ideaCtrl.ideasList}" var="idea"
                          border="1">
                 <f:facet name="header">
                     <h:outputText value="Ideas" />
