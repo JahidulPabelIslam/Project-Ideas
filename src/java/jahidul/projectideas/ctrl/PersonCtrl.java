@@ -28,9 +28,9 @@ public class PersonCtrl {
     @EJB
     private PersonBean personBean;
 
-    protected Person person;
+    protected Person person = new Person();;
 
-    protected Person theUser;
+    protected Person theUser = new Person();;
 
     protected List<Person> personsList = new ArrayList<Person>();
 
