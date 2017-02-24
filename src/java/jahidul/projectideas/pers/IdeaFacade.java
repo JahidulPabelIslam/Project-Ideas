@@ -40,4 +40,10 @@ public class IdeaFacade extends AbstractFacade<Idea> {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.appliedStudent IS NULL", Idea.class);
         return query.getResultList();
     }
+    
+    public List findIdeasByText(String search) {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE lower(i.title) LIKE lower(:search)", Idea.class);
+        query.setParameter("search", "%"+search+"%");
+        return query.getResultList();
+    }
 }

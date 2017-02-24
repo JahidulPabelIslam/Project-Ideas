@@ -51,4 +51,8 @@ public class IdeaService {
     public List<Idea> findProvisionalIdeas() {
         return ideaFacade.findProvisionalIdeas();
     }
+    
+    public List<Idea> findIdeasByText(String search) {
+        return ideaFacade.findIdeasByText(search);
+    }
 }

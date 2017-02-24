@@ -131,4 +131,8 @@ public class IdeaBean implements Serializable {
         idea = new Idea();
         return "SubmitIdea";
     }
+    
+    public void findIdeasByText() {
+        ideasList = ideaService.findIdeasByText(search);
+    }
 }

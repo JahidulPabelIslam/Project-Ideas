@@ -29,8 +29,9 @@
                 <h:commandButton id="Provisional" value="Provisional" action="#{ideaBean.findProvisionalIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
             </h:form>
             <h:form>
-                <h:inputText id="search" label="search"
-                             value="#{ideaBean.search}" />
+                <h:inputText id="search" label="search" value="#{ideaBean.search}">
+                    <f:ajax event="keyup" listener="#{ideaBean.findIdeasByText()}" render="ideas" />
+                </h:inputText> 
             </h:form>
             <h:dataTable id="ideas" value="#{ideaBean.ideasList}" var="idea"
                          border="1">
