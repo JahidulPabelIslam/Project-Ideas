@@ -7,11 +7,12 @@ package jahidul.projectideas.ctrl;
 
 import jahidul.projectideas.bus.PersonService;
 import jahidul.projectideas.ents.Person;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -19,8 +20,8 @@ import javax.inject.Named;
  * @author up733474
  */
 @Named(value = "personBean")
-@RequestScoped
-public class PersonBean {
+@SessionScoped
+public class PersonBean implements Serializable {
 
     public PersonBean() {
     }
@@ -28,14 +29,14 @@ public class PersonBean {
     @EJB
     private PersonService personService;
 
-    protected Person person = new Person();;
+    protected Person person = new Person();
 
-    protected Person theUser = new Person();;
+    protected Person theUser = new Person();
 
     protected List<Person> personsList = new ArrayList<Person>();
 
     protected String search;
-    
+
     @PostConstruct
     public void init() {
         personsList = personService.findAllPersons();
@@ -90,7 +91,7 @@ public class PersonBean {
             theUser = results.get(0);
             return "index";
         }
-        
+
         theUser = new Person();
         return "LogIn";
     }
@@ -105,64 +106,64 @@ public class PersonBean {
         person = new Person();
         return "User";
     }
-    
+
     public String setUpEditPerson(Person person) {
         this.person = person;
         return "AddUser";
     }
-    
+
     public String updatePerson(Person person) {
         this.person = person;
         this.person = personService.updatePerson(person);
         return "User";
     }
-    
+
     public String viewPerson(Person person) {
         this.person = person;
         return "User";
     }
-    
+
     public String deletePerson(Person person) {
         this.person = person;
         personService.deletePerson(person);
         personsList = personService.findAllPersons();
         return "Users";
     }
-    
+
     public String approveOrganisation(Person person) {
         this.person = person;
         this.person.setType("Organisation");
         this.person = personService.updatePerson(person);
         return "User";
     }
-    
+
     public String unapproveOrganisation(Person person) {
         this.person = person;
         this.person.setType("Unapproved Organisation");
         this.person = personService.updatePerson(person);
         return "User";
     }
-  
+
     public void findAllPersons() {
         personsList = personService.findAllPersons();
     }
-    
+
     public void findStudents() {
         personsList = personService.findStudents();
     }
-    
+
     public void findStaff() {
         personsList = personService.findStaff();
     }
-    
+
     public void findOrganisations() {
         personsList = personService.findOrganisations();
     }
-    
+
     public void findUnapprovedOrganisations() {
         personsList = personService.findUnapprovedOrganisations();
     }
-    
+
     public String prepareCreate() {
         person = new Person();
         person.setType("Unapproved Organisation");

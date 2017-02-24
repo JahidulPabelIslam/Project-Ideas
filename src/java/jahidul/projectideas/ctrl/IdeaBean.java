@@ -8,11 +8,12 @@ package jahidul.projectideas.ctrl;
 import jahidul.projectideas.bus.IdeaService;
 import jahidul.projectideas.ents.Idea;
 import jahidul.projectideas.ents.Person;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -20,8 +21,8 @@ import javax.inject.Named;
  * @author up733474
  */
 @Named(value = "ideaBean")
-@RequestScoped
-public class IdeaBean {
+@SessionScoped
+public class IdeaBean implements Serializable {
 
     public IdeaBean() {
     }
