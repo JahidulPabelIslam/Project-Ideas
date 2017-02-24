@@ -16,39 +16,39 @@
             <h:panelGrid columns="2" border="1" cellpadding="5">
 
                 <h:outputLabel value="Username:" />
-                <h:outputLabel value="#{personCtrl.person.username}" />
+                <h:outputLabel value="#{personBean.person.username}" />
 
                 <h:outputLabel value="Password:" />
-                <h:outputLabel value="#{personCtrl.person.password}" />
+                <h:outputLabel value="#{personBean.person.password}" />
 
                 <h:outputLabel value="User Type:" />
-                <h:outputLabel value="#{personCtrl.person.type}" />
+                <h:outputLabel value="#{personBean.person.type}" />
 
                 <h:outputLabel value="Email:" />
-                <h:outputLabel value="#{personCtrl.person.email}" />
+                <h:outputLabel value="#{personBean.person.email}" />
 
                 <h:outputLabel value="Phone Number:" />
-                <h:outputLabel value="#{personCtrl.person.phoneNumber}" />
+                <h:outputLabel value="#{personBean.person.phoneNumber}" />
 
                 <h:outputLabel value="Name:" />
-                <h:outputLabel value="#{personCtrl.person.firstName} #{personCtrl.person.middleName} #{personCtrl.person.surname}" />
+                <h:outputLabel value="#{personBean.person.firstName} #{personBean.person.middleName} #{personBean.person.surname}" />
 
                 <h:outputLabel value="Student ID:" />
-                <h:outputLabel value="#{personCtrl.person.studentID}" />
+                <h:outputLabel value="#{personBean.person.studentID}" />
 
                 <h:outputLabel value="Organisation Name:" />
-                <h:outputLabel value="#{personCtrl.person.organisationName}" />
+                <h:outputLabel value="#{personBean.person.organisationName}" />
 
                 <h:outputLabel value="Organisation Outline:" />
-                <h:outputLabel value="#{personCtrl.person.organisationOutline}" />
+                <h:outputLabel value="#{personBean.person.organisationOutline}" />
 
                 <h:outputLabel value="Organisation Address:" />
-                <h:outputLabel value="#{personCtrl.person.organisationAddress}" />
+                <h:outputLabel value="#{personBean.person.organisationAddress}" />
 
                 <h:outputLabel value="Actions:" />
                 <h:form>
-                    <h:commandButton rendered="#{personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{personCtrl.setUpEditPerson(personCtrl.person)}" />
-                    <h:commandButton rendered="#{personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{personCtrl.deletePerson(personCtrl.person)}" />
+                    <h:commandButton rendered="#{personBean.person == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{personBean.setUpEditPerson(personBean.person)}" />
+                    <h:commandButton rendered="#{personBean.person == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" />
                 </h:form>
             </h:panelGrid>
         </ui:define>

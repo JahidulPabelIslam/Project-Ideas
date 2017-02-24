@@ -5,7 +5,7 @@
  */
 package jahidul.projectideas.ctrl;
 
-import jahidul.projectideas.bus.IdeaBean;
+import jahidul.projectideas.bus.IdeaService;
 import jahidul.projectideas.ents.Idea;
 import jahidul.projectideas.ents.Person;
 import java.util.ArrayList;
@@ -19,15 +19,15 @@ import javax.inject.Named;
  *
  * @author up733474
  */
-@Named(value = "ideaCtrl")
+@Named(value = "ideaBean")
 @RequestScoped
-public class IdeaCtrl {
+public class IdeaBean {
 
-    public IdeaCtrl() {
+    public IdeaBean() {
     }
 
     @EJB
-    private IdeaBean ideaBean;
+    private IdeaService ideaService;
 
     protected Idea idea = new Idea();
 
@@ -39,15 +39,15 @@ public class IdeaCtrl {
 
     @PostConstruct
     public void init() {
-        ideasList = ideaBean.findAllIdeas();
+        ideasList = ideaService.findAllIdeas();
     }
     
-    public IdeaBean getIdeaBean() {
-        return ideaBean;
+    public IdeaService getIdeaBean() {
+        return ideaService;
     }
 
-    public void setIdeaBean(IdeaBean ideaBean) {
-        this.ideaBean = ideaBean;
+    public void setIdeaBean(IdeaService ideaService) {
+        this.ideaService = ideaService;
     }
 
     public Idea getIdea() {
@@ -86,7 +86,7 @@ public class IdeaCtrl {
         if (apply) {
             idea.setAppliedStudent(p);
         }
-        ideaBean.addIdea(idea, p);
+        ideaService.addIdea(idea, p);
         return "Idea.xhtml";
     }
 
@@ -104,26 +104,26 @@ public class IdeaCtrl {
     }
 
     public String editIdea() {
-        this.idea = ideaBean.editIdea(idea);
+        this.idea = ideaService.editIdea(idea);
         return "Idea.xhtml";
     }
 
     public String deleteIdea(Idea idea) {
-        ideaBean.deleteIdea(idea);
-        ideasList = ideaBean.findAllIdeas();
+        ideaService.deleteIdea(idea);
+        ideasList = ideaService.findAllIdeas();
         return "index.xhtml";
     }
     
     public void findAllIdeas() {
-        ideasList = ideaBean.findAllIdeas();
+        ideasList = ideaService.findAllIdeas();
     }
     
     public void findApprovedButUnallocatedIdeas() {
-        ideasList = ideaBean.findApprovedButUnallocatedIdeas();
+        ideasList = ideaService.findApprovedButUnallocatedIdeas();
     }
     
     public void findProvisionalIdeas() {
-        ideasList = ideaBean.findProvisionalIdeas();
+        ideasList = ideaService.findProvisionalIdeas();
     }
     
     public String prepareCreate() {

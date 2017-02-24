@@ -14,17 +14,17 @@
         <ui:define name="content">
 
             <h:form>
-                <h:commandButton id="All" value="All" action="#{personCtrl.findAllPersons()}"> <f:ajax render="users" /> </h:commandButton>
-                <h:commandButton id="Student" value="Students" action="#{personCtrl.findStudents()}"> <f:ajax render="users" /> </h:commandButton>
-                <h:commandButton id="Staff" value="Staff" action="#{personCtrl.findStaff()}"> <f:ajax render="users" /> </h:commandButton>
-                <h:commandButton id="Organisations" value="Organisations" action="#{personCtrl.findOrganisations()}"> <f:ajax render="users" /> </h:commandButton>
-                <h:commandButton id="UnapprovedOrganisations" value="Unapproved Organisations" action="#{personCtrl.findUnapprovedOrganisations()}"> <f:ajax render="users" /> </h:commandButton>
+                <h:commandButton id="All" value="All" action="#{personBean.findAllPersons()}"> <f:ajax render="users" /> </h:commandButton>
+                <h:commandButton id="Student" value="Students" action="#{personBean.findStudents()}"> <f:ajax render="users" /> </h:commandButton>
+                <h:commandButton id="Staff" value="Staff" action="#{personBean.findStaff()}"> <f:ajax render="users" /> </h:commandButton>
+                <h:commandButton id="Organisations" value="Organisations" action="#{personBean.findOrganisations()}"> <f:ajax render="users" /> </h:commandButton>
+                <h:commandButton id="UnapprovedOrganisations" value="Unapproved Organisations" action="#{personBean.findUnapprovedOrganisations()}"> <f:ajax render="users" /> </h:commandButton>
             </h:form>
             <h:form>
                 <h:inputText id="search" label="search"
-                             value="#{personCtrl.search}" />
+                             value="#{personBean.search}" />
             </h:form>
-            <h:dataTable id="users" value="#{personCtrl.personsList}" var="person"
+            <h:dataTable id="users" value="#{personBean.personsList}" var="person"
                          border="1">
                 <f:facet name="header">
                     <h:outputText value="Ideas" />
@@ -52,11 +52,11 @@
                         <h:outputText value="Actions" />
                     </f:facet>
                     <h:form>
-                        <h:commandButton id="view" value="View" action="#{personCtrl.viewPerson(person)}" />
-                        <h:commandButton rendered="#{personCtrl.theUser.type == 'Staff' and person.type == 'Unapproved Organisation'}" id="approveOrganisation" value="Approve Organisation" action="#{personCtrl.approveOrganisation(person)}" />
-                        <h:commandButton rendered="#{personCtrl.theUser.type == 'Staff' and person.type == 'Organisation'}" id="unauthoriseOrganisation" value="Unapprove Organisation" action="#{personCtrl.unapproveOrganisation(person)}" />
-                        <h:commandButton rendered="#{person == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{personCtrl.setUpEditPerson(person)}" />
-                        <h:commandButton rendered="#{person == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{personCtrl.deletePerson(person)}" />
+                        <h:commandButton id="view" value="View" action="#{personBean.viewPerson(person)}" />
+                        <h:commandButton rendered="#{personBean.theUser.type == 'Staff' and person.type == 'Unapproved Organisation'}" id="approveOrganisation" value="Approve Organisation" action="#{personBean.approveOrganisation(person)}" />
+                        <h:commandButton rendered="#{personBean.theUser.type == 'Staff' and person.type == 'Organisation'}" id="unauthoriseOrganisation" value="Unapprove Organisation" action="#{personBean.unapproveOrganisation(person)}" />
+                        <h:commandButton rendered="#{person == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{personBean.setUpEditPerson(person)}" />
+                        <h:commandButton rendered="#{person == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{personBean.deletePerson(person)}" />
                     </h:form>
                 </h:column>
             </h:dataTable>

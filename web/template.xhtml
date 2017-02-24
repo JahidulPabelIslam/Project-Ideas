@@ -10,11 +10,11 @@
     <h:body>
          <h:form>
              <h:commandLink value="BSc Project Ideas" action="index" />
-            <h:commandButton rendered="#{personCtrl.theUser.id != null}" value="Add Idea" action="#{ideaCtrl.prepareCreate()}" />
-            <h:commandButton rendered="#{personCtrl.theUser.type == 'Staff'}" value="Add User" action="#{personCtrl.prepareCreate()}" />
+            <h:commandButton rendered="#{personBean.theUser.id != null}" value="Add Idea" action="#{ideaBean.prepareCreate()}" />
+            <h:commandButton rendered="#{personBean.theUser.type == 'Staff'}" value="Add User" action="#{personBean.prepareCreate()}" />
             <h:commandLink value="Users" action="Users" />
-            <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Log In" action="LogIn" />
-            <h:commandButton rendered="#{personCtrl.theUser.id != null}" value="Log Out" action="#{personCtrl.logOut()}" />
+            <h:commandLink rendered="#{personBean.theUser.id == null}" value="Log In" action="LogIn" />
+            <h:commandButton rendered="#{personBean.theUser.id != null}" value="Log Out" action="#{personBean.logOut()}" />
         </h:form>
          <ui:insert name="content">Main Content</ui:insert>
     </h:body>

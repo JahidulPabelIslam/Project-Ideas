@@ -17,91 +17,92 @@
                 <h:panelGrid columns="3"
                              columnClasses="rightalign,leftalign,leftalign">
 
-                    <h:outputLabel rendered="#{personCtrl.theUser.type == 'Staff'}" value="Type:" for="type"/>
-                    <h:selectOneMenu rendered="#{personCtrl.theUser.type == 'Staff'}" id="type" label="type" required="true" value="#{personCtrl.person.type}">
+                    <h:outputLabel rendered="#{personBean.theUser.type == 'Staff'}" value="Type:" for="type"/>
+                    <h:selectOneMenu rendered="#{personBean.theUser.type == 'Staff'}" id="type" label="type" required="true" value="#{personBean.person.type}">
                         <f:selectItem itemValue="Staff" itemLabel="Staff" />
                         <f:selectItem itemValue="Student" itemLabel="Student" />
                         <f:selectItem itemValue="Organisation" itemLabel="Organisation" />
+                        <f:selectItem itemValue="Unapproved Organisation" itemLabel="Unapproved Organisation" />
                         <f:ajax render="options" />
                     </h:selectOneMenu>
-                    <h:message rendered="#{personCtrl.theUser.type == 'Staff'}" for="type" />
+                    <h:message rendered="#{personBean.theUser.type == 'Staff'}" for="type" />
 
                     <h:outputLabel value="Username:" for="username"/>
                     <h:inputText id="username" label="username"
                                  required="true"
-                                 value="#{personCtrl.person.username}" />
+                                 value="#{personBean.person.username}" />
                     <h:message for="username" />
 
                     <h:outputLabel value="Password:" for="password"/>
                     <h:inputText id="password" label="password"
                                  required="true"
-                                 value="#{personCtrl.person.password}"/>
+                                 value="#{personBean.person.password}"/>
                     <h:message for="password" />
 
                     <h:outputLabel value="Email Address" for="email"/>
                     <h:inputText id="email" label="email"
                                  required="true"
-                                 value="#{personCtrl.person.email}"/>
+                                 value="#{personBean.person.email}"/>
                     <h:message for="email" />
 
                     <h:outputLabel value="Phone Number:" for="phoneNumber"/>
                     <h:inputText id="phoneNumber" label="phoneNumber"
                                  required="true"
-                                 value="#{personCtrl.person.phoneNumber}" />
+                                 value="#{personBean.person.phoneNumber}" />
                     <h:message for="phoneNumber" />
 
                     <h:outputLabel value="First Name:" for="firstName"/>
                     <h:inputText id="firstName" label="firstName"
                                  required="true"
-                                 value="#{personCtrl.person.firstName}"/>
+                                 value="#{personBean.person.firstName}"/>
                     <h:message for="firstName" />
 
                     <h:outputLabel value="Middle Name:" for="middleName"/>
                     <h:inputText id="middleName" label="middleName"
                                  required="true"
-                                 value="#{personCtrl.person.middleName}" />
+                                 value="#{personBean.person.middleName}" />
                     <h:message for="middleName" />
 
                     <h:outputLabel value="Surname:" for="surname"/>
                     <h:inputText id="surname" label="surname"
                                  required="true"
-                                 value="#{personCtrl.person.surname}"/>
+                                 value="#{personBean.person.surname}"/>
                     <h:message for="surname" />
 
                     <h:panelGroup id="options">
-                        <h:panelGrid columns="3" rendered="#{personCtrl.person.type == 'Student'}">
+                        <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Student'}">
                             <h:outputLabel value="Student ID:" for="studentID"/>
                             <h:inputText id="studentID" label="studentID"
                                          required="true"
-                                         value="#{personCtrl.person.studentID}" />
+                                         value="#{personBean.person.studentID}" />
                             <h:message for="studentID" />
                         </h:panelGrid >
 
-                        <h:panelGrid columns="3" rendered="#{personCtrl.person.type == 'Organisation' or personCtrl.person.type == 'Unapproved Organisation'}">
+                        <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}">
                             <h:outputLabel value="Organisation Name:" for="organisationName"/>
                             <h:inputText id="organisationName" label="organisationName"
                                          required="true"
-                                         value="#{personCtrl.person.organisationName}"/>
+                                         value="#{personBean.person.organisationName}"/>
                             <h:message for="organisationName" />
 
                             <h:outputLabel value="Outline of the Organisation:" for="organisationOutline"/>
                             <h:inputText  id="organisationOutline" label="organisationOutline"
                                           required="true"
-                                          value="#{personCtrl.person.organisationOutline}" />
+                                          value="#{personBean.person.organisationOutline}" />
                             <h:message for="organisationOutline" />
 
                             <h:outputLabel value="Address of the Organisation:" for="organisationAddress"/>
                             <h:inputText id="organisationAddress" label="organisationAddress"
                                          required="true"
-                                         value="#{personCtrl.person.organisationAddress}"/>
+                                         value="#{personBean.person.organisationAddress}"/>
                             <h:message for="organisationAddress" />
                         </h:panelGrid>
                     </h:panelGroup>
 
-                    <h:commandButton rendered="#{personCtrl.person.id == null and (personCtrl.theUser == null or personCtrl.theUser.type == 'Staff')}" id="add" value="Add" action="#{personCtrl.addUser()}" />
-                    <h:commandButton rendered="#{personCtrl.person.id != null and (personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{personCtrl.updatePerson(personCtrl.person)}" />
-                    <h:commandButton rendered="#{personCtrl.person.id != null and (personCtrl.person == personCtrl.theUser or personCtrl.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personCtrl.deletePerson(personCtrl.person)}" />
-                    <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Log In" action="LogIn" />
+                    <h:commandButton rendered="#{personBean.person.id == null and (personBean.theUser == null or personBean.theUser.type == 'Staff')}" id="add" value="Add" action="#{personBean.addUser()}" />
+                    <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{personBean.updatePerson(personBean.person)}" />
+                    <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" />
+                    <h:commandLink rendered="#{personBean.theUser.id == null}" value="Log In" action="LogIn" />
                 </h:panelGrid>
             </h:form>
         </ui:define>

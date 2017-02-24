@@ -15,24 +15,24 @@
             <h:panelGrid columns="2" border="1" cellpadding="5">
 
                 <h:outputLabel value="User ID:" />
-                <h:outputLabel value="#{personCtrl.theUser.id}" />
+                <h:outputLabel value="#{personBean.theUser.id}" />
 
                 <h:outputLabel value="Username:" />
-                <h:outputLabel value="#{personCtrl.theUser.username}" />
+                <h:outputLabel value="#{personBean.theUser.username}" />
 
                 <h:outputLabel value="Password:" />
-                <h:outputLabel value="#{personCtrl.theUser.password}" />
+                <h:outputLabel value="#{personBean.theUser.password}" />
             </h:panelGrid>
             <h:form>
-                <h:commandButton id="All" value="All" action="#{ideaCtrl.findAllIdeas()}" > <f:ajax render="ideas" /> </h:commandButton>
-                <h:commandButton id="ABU" value="Approved But Unallocated" action="#{ideaCtrl.findApprovedButUnallocatedIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
-                <h:commandButton id="Provisional" value="Provisional" action="#{ideaCtrl.findProvisionalIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
+                <h:commandButton id="All" value="All" action="#{ideaBean.findAllIdeas()}" > <f:ajax render="ideas" /> </h:commandButton>
+                <h:commandButton id="ABU" value="Approved But Unallocated" action="#{ideaBean.findApprovedButUnallocatedIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
+                <h:commandButton id="Provisional" value="Provisional" action="#{ideaBean.findProvisionalIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
             </h:form>
             <h:form>
                 <h:inputText id="search" label="search"
-                             value="#{ideaCtrl.search}" />
+                             value="#{ideaBean.search}" />
             </h:form>
-            <h:dataTable id="ideas" value="#{ideaCtrl.ideasList}" var="idea"
+            <h:dataTable id="ideas" value="#{ideaBean.ideasList}" var="idea"
                          border="1">
                 <f:facet name="header">
                     <h:outputText value="Ideas" />
@@ -60,9 +60,9 @@
                         <h:outputText value="Actions" />
                     </f:facet>
                     <h:form>
-                        <h:commandButton id="view" value="View" action="#{ideaCtrl.viewIdea(idea)}" />
-                        <h:commandButton rendered="#{idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaCtrl.setUpEditIdea(idea)}" />
-                        <h:commandButton rendered="#{idea.submitter == personCtrl.theUser or personCtrl.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaCtrl.deleteIdea(idea)}" />
+                        <h:commandButton id="view" value="View" action="#{ideaBean.viewIdea(idea)}" />
+                        <h:commandButton rendered="#{idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(idea)}" />
+                        <h:commandButton rendered="#{idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(idea)}" />
                     </h:form>
                 </h:column>
             </h:dataTable>

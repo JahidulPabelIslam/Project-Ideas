@@ -18,7 +18,7 @@ import javax.ejb.Stateless;
  * @author up733474
  */
 @Stateless
-public class IdeaBean {
+public class IdeaService {
 
     @EJB
     private IdeaFacade ideaFacade;

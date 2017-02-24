@@ -18,17 +18,17 @@
                     <h:outputLabel value="Username:" for="username"/>
                     <h:inputText id="username" label="username"
                                  required="true"
-                                 value="#{personCtrl.theUser.username}" />
+                                 value="#{personBean.theUser.username}" />
                     <h:message for="username" />
 
                     <h:outputLabel value="Password:" for="password"/>
                     <h:inputText id="password" label="password"
                                  required="true"
-                                 value="#{personCtrl.theUser.password}"/>
+                                 value="#{personBean.theUser.password}"/>
                     <h:message for="password" />
 
-                    <h:commandButton id="logIn" value="Log In" action="#{personCtrl.logIn()}" />
-                    <h:commandLink rendered="#{personCtrl.theUser.id == null}" value="Sign Up" action="AddUser" />
+                    <h:commandButton id="logIn" value="Log In" action="#{personBean.logIn()}" />
+                    <h:commandLink rendered="#{personBean.theUser.id == null}" value="Sign Up" action="AddUser" />
                 </h:panelGrid>
             </h:form>
         </ui:define>

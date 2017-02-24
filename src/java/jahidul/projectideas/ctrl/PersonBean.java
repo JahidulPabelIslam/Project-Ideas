@@ -5,7 +5,7 @@
  */
 package jahidul.projectideas.ctrl;
 
-import jahidul.projectideas.bus.PersonBean;
+import jahidul.projectideas.bus.PersonService;
 import jahidul.projectideas.ents.Person;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +18,15 @@ import javax.inject.Named;
  *
  * @author up733474
  */
-@Named(value = "personCtrl")
+@Named(value = "personBean")
 @RequestScoped
-public class PersonCtrl {
+public class PersonBean {
 
-    public PersonCtrl() {
+    public PersonBean() {
     }
 
     @EJB
-    private PersonBean personBean;
+    private PersonService personService;
 
     protected Person person = new Person();;
 
@@ -38,16 +38,16 @@ public class PersonCtrl {
     
     @PostConstruct
     public void init() {
-        personsList = personBean.findAllPersons();
-        theUser = personsList.get(1);
+        personsList = personService.findAllPersons();
+        theUser = personsList.get(0);
     }
 
-    public PersonBean getPersonBean() {
-        return personBean;
+    public PersonService getPersonService() {
+        return personService;
     }
 
-    public void setPersonBean(PersonBean personBean) {
-        this.personBean = personBean;
+    public void setPersonService(PersonService personService) {
+        this.personService = personService;
     }
 
     public Person getPerson() {
@@ -85,7 +85,7 @@ public class PersonCtrl {
     private List<Person> results;
 
     public String logIn() {
-        results = personBean.logIn(theUser.getUsername(), theUser.getPassword());
+        results = personService.logIn(theUser.getUsername(), theUser.getPassword());
         if (!results.isEmpty()) {
             theUser = results.get(0);
             return "index";
@@ -101,7 +101,7 @@ public class PersonCtrl {
     }
 
     public String addUser() {
-        personBean.addPerson(person);
+        personService.addPerson(person);
         person = new Person();
         return "User";
     }
@@ -113,7 +113,7 @@ public class PersonCtrl {
     
     public String updatePerson(Person person) {
         this.person = person;
-        this.person = personBean.updatePerson(person);
+        this.person = personService.updatePerson(person);
         return "User";
     }
     
@@ -124,43 +124,43 @@ public class PersonCtrl {
     
     public String deletePerson(Person person) {
         this.person = person;
-        personBean.deletePerson(person);
-        personsList = personBean.findAllPersons();
+        personService.deletePerson(person);
+        personsList = personService.findAllPersons();
         return "Users";
     }
     
     public String approveOrganisation(Person person) {
         this.person = person;
         this.person.setType("Organisation");
-        this.person = personBean.updatePerson(person);
+        this.person = personService.updatePerson(person);
         return "User";
     }
     
     public String unapproveOrganisation(Person person) {
         this.person = person;
         this.person.setType("Unapproved Organisation");
-        this.person = personBean.updatePerson(person);
+        this.person = personService.updatePerson(person);
         return "User";
     }
   
     public void findAllPersons() {
-        personsList = personBean.findAllPersons();
+        personsList = personService.findAllPersons();
     }
     
     public void findStudents() {
-        personsList = personBean.findStudents();
+        personsList = personService.findStudents();
     }
     
     public void findStaff() {
-        personsList = personBean.findStaff();
+        personsList = personService.findStaff();
     }
     
     public void findOrganisations() {
-        personsList = personBean.findOrganisations();
+        personsList = personService.findOrganisations();
     }
     
     public void findUnapprovedOrganisations() {
-        personsList = personBean.findUnapprovedOrganisations();
+        personsList = personService.findUnapprovedOrganisations();
     }
     
     public String prepareCreate() {
@@ -168,5 +168,4 @@ public class PersonCtrl {
         person.setType("Unapproved Organisation");
         return "AddUser";
     }
-    
 }
