@@ -42,7 +42,7 @@ public class IdeaBean implements Serializable {
     public void init() {
         ideasList = ideaService.findAllIdeas();
     }
-    
+
     public IdeaService getIdeaBean() {
         return ideaService;
     }
@@ -88,6 +88,7 @@ public class IdeaBean implements Serializable {
             idea.setAppliedStudent(p);
         }
         ideaService.addIdea(idea, p);
+        ideasList = ideaService.findAllIdeas();
         return "Idea.xhtml";
     }
 
@@ -106,6 +107,7 @@ public class IdeaBean implements Serializable {
 
     public String editIdea() {
         this.idea = ideaService.editIdea(idea);
+        ideasList = ideaService.findAllIdeas();
         return "Idea.xhtml";
     }
 
@@ -114,24 +116,25 @@ public class IdeaBean implements Serializable {
         ideasList = ideaService.findAllIdeas();
         return "index.xhtml";
     }
-    
+
     public void findAllIdeas() {
         ideasList = ideaService.findAllIdeas();
     }
-    
+
     public void findApprovedButUnallocatedIdeas() {
         ideasList = ideaService.findApprovedButUnallocatedIdeas();
     }
-    
+
     public void findProvisionalIdeas() {
         ideasList = ideaService.findProvisionalIdeas();
     }
-    
+
     public String prepareCreate() {
         idea = new Idea();
+        idea.setStatus("Provisional");
         return "SubmitIdea";
     }
-    
+
     public void findIdeasByText() {
         ideasList = ideaService.findIdeasByText(search);
     }
