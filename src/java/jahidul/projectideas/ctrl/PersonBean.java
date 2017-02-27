@@ -40,7 +40,6 @@ public class PersonBean implements Serializable {
     @PostConstruct
     public void init() {
         personsList = personService.findAllPersons();
-        theUser = personsList.get(0);
     }
 
     public PersonService getPersonService() {
@@ -91,8 +90,6 @@ public class PersonBean implements Serializable {
             theUser = results.get(0);
             return "index";
         }
-
-        theUser = new Person();
         return "LogIn";
     }
 
