@@ -99,10 +99,10 @@
                         </h:panelGrid>
                     </h:panelGroup>
 
-                    <h:commandButton rendered="#{personBean.person.id == null and (personBean.theUser == null or personBean.theUser.type == 'Staff')}" id="add" value="Add" action="#{personBean.addUser()}" />
+                    <h:commandButton id="add" value="Add" action="#{personBean.addUser()}" />
                     <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{personBean.updatePerson(personBean.person)}" />
                     <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" />
-                    <h:commandLink rendered="#{personBean.theUser.id == null}" value="Log In" action="LogIn" />
+                    <h:commandLink rendered="#{personBean.theUser.id == null}" value="Already have a account? Log In" action="LogIn" />
                 </h:panelGrid>
             </h:form>
         </ui:define>
