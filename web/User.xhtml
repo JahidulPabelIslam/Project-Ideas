@@ -33,17 +33,17 @@
                 <h:outputLabel value="Name:" />
                 <h:outputLabel value="#{personBean.person.firstName} #{personBean.person.middleName} #{personBean.person.surname}" />
 
-                <h:outputLabel value="Student ID:" />
-                <h:outputLabel value="#{personBean.person.studentID}" />
+                <h:outputLabel rendered="#{personBean.person.type == 'Student'}" value="Student ID:" />
+                <h:outputLabel rendered="#{personBean.person.type == 'Student'}" value="#{personBean.person.studentID}" />
 
-                <h:outputLabel value="Organisation Name:" />
-                <h:outputLabel value="#{personBean.person.organisationName}" />
+                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}" value="Organisation Name:" />
+                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="#{personBean.person.organisationName}" />
 
-                <h:outputLabel value="Organisation Outline:" />
-                <h:outputLabel value="#{personBean.person.organisationOutline}" />
+                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="Organisation Outline:" />
+                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="#{personBean.person.organisationOutline}" />
 
-                <h:outputLabel value="Organisation Address:" />
-                <h:outputLabel value="#{personBean.person.organisationAddress}" />
+                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="Organisation Address:" />
+                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="#{personBean.person.organisationAddress}" />
 
                 <h:outputLabel value="Actions:" />
                 <h:form>
