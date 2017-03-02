@@ -12,27 +12,34 @@
         </ui:define>
 
         <ui:define name="content">
-            <h:form>
-                <h:commandButton id="All" value="All" action="#{ideaBean.findAllIdeas()}" > <f:ajax render="ideas" /> </h:commandButton>
-                <h:commandButton id="ABU" value="Approved But Unallocated" action="#{ideaBean.findApprovedButUnallocatedIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
-                <h:commandButton id="Provisional" value="Provisional" action="#{ideaBean.findProvisionalIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
+            <h:form class="form-horizontal">
+                
+                <div class="form-group">
+                    <h:outputLabel value="View:" for="filter" class="col-sm-2 control-label"/>
+                    <div class="col-sm-10">
+                        <h:selectOneMenu id="filter" label="filter" value="#{ideaBean.filter}" class="form-control" >
+                            <f:selectItem itemValue="All" itemLabel="All" />
+                            <f:selectItem itemValue="Approved But Unallocated" itemLabel="Approved But Unallocated" />
+                            <f:selectItem itemValue="Provisional" itemLabel="Provisional" />
+                            <f:ajax listener="#{ideaBean.getIdeas()}" render="ideas"/>
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <!--                <h:commandButton id="All" value="All" action="#{ideaBean.findAllIdeas()}" > <f:ajax render="ideas" /> </h:commandButton>
+                                <h:commandButton id="ABU" value="Approved But Unallocated" action="#{ideaBean.findApprovedButUnallocatedIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
+                                <h:commandButton id="Provisional" value="Provisional" action="#{ideaBean.findProvisionalIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>-->
+
+                <div class="form-group">
+                    <h:outputLabel value="Search:" for="search" class="col-sm-2 control-label"/>
+                    <div class="col-sm-10">
+                        <h:inputText id="search" label="search" value="#{ideaBean.search}" class="form-control">
+                            <f:ajax event="keyup" listener="#{ideaBean.findIdeasByText()}" render="ideas" />
+                        </h:inputText> 
+                    </div>
+                </div>
             </h:form>
-            <h:form>
-                <h:inputText id="search" label="search" value="#{ideaBean.search}">
-                    <f:ajax event="keyup" listener="#{ideaBean.findIdeasByText()}" render="ideas" />
-                </h:inputText> 
-            </h:form>
-            <h:dataTable id="ideas" value="#{ideaBean.ideasList}" var="idea"
-                         border="1">
-                <f:facet name="header">
-                    <h:outputText value="Ideas" />
-                </f:facet>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="#" />
-                    </f:facet>
-                    <h:outputText value="#{idea.id}" />
-                </h:column>
+
+            <h:dataTable id="ideas" value="#{ideaBean.ideasList}" var="idea" border="0" cellpadding="2" cellspacing="0">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Title" />
@@ -50,9 +57,9 @@
                         <h:outputText value="Actions" />
                     </f:facet>
                     <h:form>
-                        <h:commandButton id="view" value="View" action="#{ideaBean.viewIdea(idea)}" />
-                        <h:commandButton rendered="#{idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(idea)}" />
-                        <h:commandButton rendered="#{idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(idea)}" />
+                        <h:commandButton id="view" value="View" action="#{ideaBean.viewIdea(idea)}" class="btn btn-default" />
+                        <h:commandButton rendered="#{idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(idea)}" class="btn btn-primary"/>
+                        <h:commandButton rendered="#{idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(idea)}" class="btn btn-danger"/>
                     </h:form>
                 </h:column>
             </h:dataTable>

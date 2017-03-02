@@ -15,7 +15,7 @@
             <h:form>
 
                 <h:panelGrid columns="3"
-                             columnClasses="rightalign,leftalign,leftalign">
+                             columnClasses="rightalign,leftalign,leftalign" class="table table-striped">
 
                     <h:outputLabel rendered="#{personBean.theUser.type == 'Staff'}" value="Type:" for="type"/>
                     <h:selectOneMenu rendered="#{personBean.theUser.type == 'Staff'}" id="type" label="type" required="true" value="#{personBean.person.type}">
@@ -99,11 +99,14 @@
                         </h:panelGrid>
                     </h:panelGroup>
 
-                    <h:commandButton id="add" value="Add" action="#{personBean.addUser()}" />
-                    <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{personBean.updatePerson(personBean.person)}" />
-                    <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" />
-                    <h:commandLink rendered="#{personBean.theUser.id == null}" value="Already have a account? Log In" action="LogIn" />
+                    <h:commandButton id="add" value="Add" action="#{personBean.addUser()}" class="btn btn-success"/>
+                    <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{personBean.updatePerson(personBean.person)}" class="btn btn-primary"/>
+                    <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
+                    
                 </h:panelGrid>
+            </h:form>
+            <h:form>
+                <h:commandLink rendered="#{personBean.theUser.id == null}" value="Already have a account? Log In" action="LogIn" class="btn btn-success"/>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -12,7 +12,7 @@
         </ui:define>
 
         <ui:define name="content">
-            <h:panelGrid columns="2" border="1" cellpadding="5">
+            <h:panelGrid columns="2" class="table table-striped">
 
                 <h:outputLabel value="Reference number:" />
                 <h:outputLabel value="#{ideaBean.idea.id}" />
@@ -43,8 +43,8 @@
 
                 <h:outputLabel value="Actions:" />
                 <h:form>
-                    <h:commandButton rendered="#{ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(ideaBean.idea)}" />
-                    <h:commandButton rendered="#{ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" />
+                    <h:commandButton rendered="#{ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(ideaBean.idea)}" class="btn btn-primary" />
+                    <h:commandButton rendered="#{ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" class="btn btn-danger" />
                 </h:form>
             </h:panelGrid>
         </ui:define>

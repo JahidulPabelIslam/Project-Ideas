@@ -22,18 +22,18 @@
                     <h:message for="username" />
 
                     <h:outputLabel value="Password:" for="password"/>
-                    <h:inputText id="password" label="password"
+                    <h:inputSecret id="password" label="password"
                                  required="true"
                                  value="#{personBean.theUser.password}"/>
                     <h:message for="password" />
 
-                    <h:commandButton id="logIn" value="Log In" action="#{personBean.logIn()}" />
+                    <h:commandButton id="logIn" value="Log In" action="#{personBean.logIn()}" class="btn btn-success"/>
 
                 </h:panelGrid>
             </h:form>
 
             <h:form>
-                <h:commandButton rendered="#{personBean.theUser.id == null}" value="Haven't Got a Account? Sign Up" action="#{personBean.prepareCreate()}" />
+                <h:commandButton rendered="#{personBean.theUser.id == null}" value="Haven't Got a Account? Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -7,6 +7,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />	
         <h:outputStylesheet name="bootstrap/css/bootstrap.min.css" />
+        <h:outputStylesheet name="main.css" />
         <h:outputScript name="jquery-3.1.1.min.js" />
         <h:outputScript name="bootstrap/js/bootstrap.min.js" />
         <title><ui:insert name="title">Default Title</ui:insert> - MSc Project Ideas</title>
@@ -37,13 +38,10 @@
                 </div>
             </div>
         </h:form>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">                    
-                    <ui:insert name="content">Main Content</ui:insert>
-                </div>
+        <div class="container">
+            <div>                    
+                <ui:insert name="content">Main Content</ui:insert>
             </div>
         </div>
-
     </h:body>
 </html>

@@ -15,7 +15,7 @@
             <h:form>
 
                 <h:panelGrid columns="3"
-                             columnClasses="rightalign,leftalign,leftalign">
+                             columnClasses="rightalign,leftalign,leftalign" class="table table-striped">
 
                     <h:outputLabel value="Title:" for="title"/>
                     <h:inputText id="title" label="Title"
@@ -50,7 +50,7 @@
 
                     <h:outputLabel rendered="#{personBean.theUser.type == 'Student'}" value="Apply for Idea:" />
                     <h:selectBooleanCheckbox rendered="#{personBean.theUser.type == 'Student'}" id="apply" value="#{ideaBean.apply}" />
-                    <h:outputLabel rendered="#{personBean.theUser.type == 'Student'}" for="apply" />
+                    <h:message rendered="#{personBean.theUser.type == 'Student'}" for="apply" />
 
 <!--                    <h:outputLabel rendered="#{personBean.theUser.type == 'Organisation' or personBean.theUser.type == 'Staff'}" value="Applied Student:" for="appliedStudent"/>
                     <h:selectOneMenu rendered="#{personBean.theUser.type == 'Organisation' or personBean.theUser.type == 'Staff'}" value="#{ideaBean.idea.appliedStudent}" id="appliedStudent" label="appliedStudent">
@@ -58,9 +58,9 @@
                     </h:selectOneMenu>
                     <h:message rendered="#{personBean.theUser.type == 'Organisation' or personBean.theUser.type == 'Staff'}" for="appliedStudent" />-->
 
-                    <h:commandButton rendered="#{ideaBean.idea.id == null}" id="add" value="Add" action="#{ideaBean.addIdea(personBean.theUser)}" />
-                    <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Update" action="#{ideaBean.editIdea(ideaBean.idea)}" />
-                    <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.person or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" />
+                    <h:commandButton rendered="#{ideaBean.idea.id == null}" id="add" value="Add" action="#{ideaBean.addIdea(personBean.theUser)}" class="btn btn-success"/>
+                    <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Update" action="#{ideaBean.editIdea(ideaBean.idea)}" class="btn btn-primary" />
+                    <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.person or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" class="btn btn-danger"/>
                 </h:panelGrid>
                 <h:messages/>
             </h:form>
