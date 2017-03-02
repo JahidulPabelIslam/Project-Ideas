@@ -37,7 +37,7 @@ public class PersonService {
         personFacade.remove(p);
     }
 
-    public List logIn(String username, String password) {
+    public List<Person> logIn(String username, String password) {
         return personFacade.logIn(username, password);
     }
     

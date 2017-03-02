@@ -59,7 +59,7 @@
                     <h:message rendered="#{personBean.theUser.type == 'Organisation' or personBean.theUser.type == 'Staff'}" for="appliedStudent" />-->
 
                     <h:commandButton rendered="#{ideaBean.idea.id == null}" id="add" value="Add" action="#{ideaBean.addIdea(personBean.theUser)}" />
-                    <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Update" action="#{ideaBean.editIdea()}" />
+                    <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Update" action="#{ideaBean.editIdea(ideaBean.idea)}" />
                     <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.person or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" />
                 </h:panelGrid>
                 <h:messages/>

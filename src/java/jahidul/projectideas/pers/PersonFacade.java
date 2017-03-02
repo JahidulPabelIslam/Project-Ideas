@@ -22,51 +22,38 @@ public class PersonFacade extends AbstractFacade<Person> {
     @PersistenceContext(unitName = "Project-IdeasPU")
     private EntityManager em;
 
-    /**
-     *
-     * @return
-     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
-    /**
-     *
-     */
     public PersonFacade() {
         super(Person.class);
     }
 
-    /**
-     *
-     * @param username
-     * @param password
-     * @return
-     */
-    public List logIn(String username, String password) {
+    public List<Person> logIn(String username, String password) {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.username = :username AND p.password = :password AND NOT p.type = 'Unapproved Organisation'", Person.class);
         query.setParameter("username", username);
         query.setParameter("password", password);
         return query.getResultList();
     }
     
-    public List findStudents() {
+    public List<Person> findStudents() {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student'", Person.class);
         return query.getResultList();
     }
     
-    public List findStaff() {
+    public List<Person> findStaff() {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff'", Person.class);
         return query.getResultList();
     }
     
-    public List findOrganisations() {
+    public List<Person> findOrganisations() {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation'", Person.class);
         return query.getResultList();
     }
     
-    public List findUnapprovedOrganisations() {
+    public List<Person> findUnapprovedOrganisations() {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation'", Person.class);
         return query.getResultList();
     }

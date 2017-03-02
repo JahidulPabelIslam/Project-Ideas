@@ -105,7 +105,7 @@ public class IdeaBean implements Serializable {
         return "SubmitIdea.xhtml";
     }
 
-    public String editIdea() {
+    public String editIdea(Idea idea) {
         this.idea = ideaService.editIdea(idea);
         ideasList = ideaService.findAllIdeas();
         return "Idea.xhtml";

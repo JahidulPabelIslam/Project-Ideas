@@ -31,17 +31,17 @@ public class IdeaFacade extends AbstractFacade<Idea> {
         super(Idea.class);
     }
     
-    public List findProvisionalIdeas() {
+    public List<Idea> findProvisionalIdeas() {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Provisional'", Idea.class);
         return query.getResultList();
     }
 
-    public List findApprovedButUnallocatedIdeas() {
+    public List<Idea> findApprovedButUnallocatedIdeas() {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.appliedStudent IS NULL", Idea.class);
         return query.getResultList();
     }
     
-    public List findIdeasByText(String search) {
+    public List<Idea> findIdeasByText(String search) {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE lower(i.title) LIKE lower(:search)", Idea.class);
         query.setParameter("search", "%"+search+"%");
         return query.getResultList();
