@@ -53,12 +53,13 @@
                     <h:outputLabel rendered="#{personBean.theUser.type == 'Student'}" for="apply" />
 
 <!--                    <h:outputLabel rendered="#{personBean.theUser.type == 'Organisation' or personBean.theUser.type == 'Staff'}" value="Applied Student:" for="appliedStudent"/>
-                    <h:inputText rendered="#{personBean.theUser.type == 'Organisation' or personBean.theUser.type == 'Staff'}" id="appliedStudent" label="appliedStudent"
-                                 value="#{ideaBean.idea.appliedStudent}" />
+                    <h:selectOneMenu rendered="#{personBean.theUser.type == 'Organisation' or personBean.theUser.type == 'Staff'}" value="#{ideaBean.idea.appliedStudent}" id="appliedStudent" label="appliedStudent">
+                        <f:selectItems value="#{personBean.personsList}" />
+                    </h:selectOneMenu>
                     <h:message rendered="#{personBean.theUser.type == 'Organisation' or personBean.theUser.type == 'Staff'}" for="appliedStudent" />-->
 
                     <h:commandButton rendered="#{ideaBean.idea.id == null}" id="add" value="Add" action="#{ideaBean.addIdea(personBean.theUser)}" />
-                    <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Save" action="#{ideaBean.editIdea()}" />
+                    <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Update" action="#{ideaBean.editIdea()}" />
                     <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.idea.submitter == personBean.person or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" />
                 </h:panelGrid>
                 <h:messages/>
