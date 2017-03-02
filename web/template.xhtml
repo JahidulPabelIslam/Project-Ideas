@@ -5,13 +5,11 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />	
         <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+        <h:outputScript name="jquery-3.1.1.min.js" />
         <h:outputScript name="bootstrap/js/bootstrap.js" />
         <title><ui:insert name="title">Default Title</ui:insert> - MSc Project Ideas</title>
-        <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
-        <h:outputScript name="bootstrap/js/bootstrap.js" />
     </h:head>
     <h:body>
         <div class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -44,10 +42,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">                    
-                     <ui:insert name="content">Main Content</ui:insert>
+                    <ui:insert name="content">Main Content</ui:insert>
                 </div>
             </div>
         </div>
-       
+
     </h:body>
 </html>
