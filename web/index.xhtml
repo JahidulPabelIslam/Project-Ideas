@@ -12,17 +12,6 @@
         </ui:define>
 
         <ui:define name="content">
-            <h:panelGrid columns="2" border="1" cellpadding="5">
-
-                <h:outputLabel value="User ID:" />
-                <h:outputLabel value="#{personBean.theUser.id}" />
-
-                <h:outputLabel value="Username:" />
-                <h:outputLabel value="#{personBean.theUser.username}" />
-
-                <h:outputLabel value="Password:" />
-                <h:outputLabel value="#{personBean.theUser.password}" />
-            </h:panelGrid>
             <h:form>
                 <h:commandButton id="All" value="All" action="#{ideaBean.findAllIdeas()}" > <f:ajax render="ideas" /> </h:commandButton>
                 <h:commandButton id="ABU" value="Approved But Unallocated" action="#{ideaBean.findApprovedButUnallocatedIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>

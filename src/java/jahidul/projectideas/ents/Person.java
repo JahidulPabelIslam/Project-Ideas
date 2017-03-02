@@ -301,10 +301,10 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        if (this.type == "Staff" || this.type == "Student") {
-            return this.firstName + " " + this.middleName + " " + this.surname;
-        } else {
+        if (this.type == "Organisation" || this.type == "Unapproved Organisation") {
             return this.organisationName;
+        } else {
+            return this.firstName + " " + this.middleName + " " + this.surname;
         }
     }
 
