@@ -6,39 +6,37 @@
     <h:head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />	
-        <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+        <h:outputStylesheet name="bootstrap/css/bootstrap.min.css" />
         <h:outputScript name="jquery-3.1.1.min.js" />
-        <h:outputScript name="bootstrap/js/bootstrap.js" />
+        <h:outputScript name="bootstrap/js/bootstrap.min.js" />
         <title><ui:insert name="title">Default Title</ui:insert> - MSc Project Ideas</title>
     </h:head>
     <h:body>
-        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <h:form styleClass="form-inline">
-                        <h:commandLink action="/index?faces-redirect=true" value="MSc Ideas Search" class="navbar-brand" immediate="true"/>
-                    </h:form>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <h:form styleClass="form-inline">
-                            <h:commandButton rendered="#{personBean.theUser.id != null}" value="Add Idea" action="#{ideaBean.prepareCreate()}"  class="btn"/>
-                            <h:commandButton rendered="#{personBean.theUser.type == 'Staff'}" value="Add User" action="#{personBean.prepareCreate()}"  class="btn"/>
-                            <h:commandLink value="Users" action="Users" class="btn" />
-                            <h:commandLink rendered="#{personBean.theUser.id == null}" value="Log In" action="LogIn"  class="btn"/>
-                            <h:commandButton rendered="#{personBean.theUser.id != null}" value="Log Out" action="#{personBean.logOut()}"  class="btn"/>
-                        </h:form>
+        <h:form>
+            <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
 
-                    </ul>
+                        <h:commandLink value="BSc Project Ideas" action="index" class="navbar-brand"/>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:commandLink value="Users" action="Users"/></li>
+                            <li><h:commandLink rendered="#{personBean.theUser.id != null}" value="Add Idea" action="#{ideaBean.prepareCreate()}"/></li>
+                            <li><h:commandLink rendered="#{personBean.theUser.type == 'Staff'}" value="Add User" action="#{personBean.prepareCreate()}"/></li>
+                            <li><h:commandLink rendered="#{personBean.theUser.id == null}" value="Log In" action="LogIn"/></li>
+                            <li><h:commandLink rendered="#{personBean.theUser.id != null}" value="Log Out" action="#{personBean.logOut()}" /></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </h:form>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">                    
