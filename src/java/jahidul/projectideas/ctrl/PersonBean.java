@@ -90,6 +90,7 @@ public class PersonBean implements Serializable {
             theUser = results.get(0);
             return "index";
         }
+        theUser = new Person();
         return "LogIn";
     }
 
@@ -100,7 +101,6 @@ public class PersonBean implements Serializable {
 
     public String addUser() {
         personService.addPerson(person);
-        person = new Person();
         return "User";
     }
 
