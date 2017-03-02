@@ -27,7 +27,7 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><h:commandLink value="Users" action="Users"/></li>
+                            <li><h:commandLink value="Users" action="#{ideaBean.viewAllPersons()}"/></li>
                             <li><h:commandLink rendered="#{personBean.theUser.id != null}" value="Add Idea" action="#{ideaBean.prepareCreate()}"/></li>
                             <li><h:commandLink rendered="#{personBean.theUser.type == 'Staff'}" value="Add User" action="#{personBean.prepareCreate()}"/></li>
                             <li><h:commandLink rendered="#{personBean.theUser.id == null}" value="Log In" action="LogIn"/></li>
