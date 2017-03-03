@@ -127,18 +127,6 @@ public class IdeaBean implements Serializable {
         return "index.xhtml";
     }
 
-    public void findAllIdeas() {
-        ideasList = ideaService.findAllIdeas();
-    }
-
-    public void findApprovedButUnallocatedIdeas() {
-        ideasList = ideaService.findApprovedButUnallocatedIdeas();
-    }
-
-    public void findProvisionalIdeas() {
-        ideasList = ideaService.findProvisionalIdeas();
-    }
-
     public String prepareCreate() {
         idea = new Idea();
         idea.setStatus("Provisional");
@@ -150,12 +138,16 @@ public class IdeaBean implements Serializable {
     }
 
     public void getFilteredIdeas() {
-        if ("Approved But Unallocated".equals(filter)) {
-            ideasList = ideaService.findApprovedButUnallocatedIdeas();
-        } else if ("Provisional".equals(filter)) {
-            ideasList = ideaService.findProvisionalIdeas();
-        } else {
-            ideasList = ideaService.findAllIdeas();
+        if (null != filter) switch (filter) {
+            case "Approved But Unallocated":
+                ideasList = ideaService.findApprovedButUnallocatedIdeas();
+                break;
+            case "Provisional":
+                ideasList = ideaService.findProvisionalIdeas();
+                break;
+            default:
+                ideasList = ideaService.findAllIdeas();
+                break;
         }
     }
 
