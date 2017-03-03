@@ -279,6 +279,26 @@ public class Person implements Serializable {
         this.organisationAddress = organisationAddress;
     }
 
+    private String role;
+
+    /**
+     * Get the value of role
+     *
+     * @return the value of role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * Set the value of role
+     *
+     * @param role new value of role
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
