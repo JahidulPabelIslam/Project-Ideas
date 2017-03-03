@@ -59,7 +59,7 @@ public class PersonFacade extends AbstractFacade<Person> {
     }
     
     public List<Person> findPersonsByText(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.username = :search", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE lower(p.username) LIKE lower(:search)", Person.class);
         query.setParameter("search", search);
         return query.getResultList();
     }
