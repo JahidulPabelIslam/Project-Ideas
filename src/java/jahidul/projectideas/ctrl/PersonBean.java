@@ -155,22 +155,6 @@ public class PersonBean implements Serializable {
         personsList = personService.findAllPersons();
     }
 
-    public void findStudents() {
-        personsList = personService.findStudents();
-    }
-
-    public void findStaff() {
-        personsList = personService.findStaff();
-    }
-
-    public void findOrganisations() {
-        personsList = personService.findOrganisations();
-    }
-
-    public void findUnapprovedOrganisations() {
-        personsList = personService.findUnapprovedOrganisations();
-    }
-
     public String prepareCreate() {
         person = new Person();
         person.setType("Unapproved Organisation");
@@ -209,6 +193,3 @@ public class PersonBean implements Serializable {
     }
 
 }
-
-//ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//externalContext.getSessionMap().put("user", theUser);
