@@ -166,4 +166,13 @@ public class PersonBean implements Serializable {
         person.setType("Unapproved Organisation");
         return "AddUser";
     }
+    
+    public String viewAllPersons() {
+        personsList = personService.findAllPersons();
+        return "Users";
+    }
+    
+    public void findPersonsByText() {
+        personsList = personService.findPersonsByText(search);
+    }
 }

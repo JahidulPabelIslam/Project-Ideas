@@ -30,7 +30,7 @@
                     <div class="btn-group" role="group">
                         <h:commandButton id="Organisations" value="Organisations" action="#{personBean.findOrganisations()}" class="btn btn-default"> <f:ajax render="users" /> </h:commandButton>
                     </div>
-                    <div class="btn-group" role="group" rendered="#{personBean.theUser.type == 'Staff'}" >
+                    <div class="btn-group" role="group" >
                         <h:commandButton rendered="#{personBean.theUser.type == 'Staff'}" id="UnapprovedOrganisations" value="Unapproved Organisations" action="#{personBean.findUnapprovedOrganisations()}" class="btn btn-default"> <f:ajax render="users" /> </h:commandButton>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <h:outputLabel value="Search:" for="search" class="col-sm-2 control-label"/>
                     <div class="col-sm-10">
                         <h:inputText id="search" label="search"
-                                     value="#{personBean.search}" class="form-control"/>
+                                     value="#{personBean.search}" class="form-control"><f:ajax event="keyup" listener="#{personBean.findPersonsByText()}" render="users" /></h:inputText>
                     </div>
                 </div>
 

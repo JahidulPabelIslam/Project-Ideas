@@ -21,14 +21,11 @@
                             <f:selectItem itemValue="All" itemLabel="All" />
                             <f:selectItem itemValue="Approved But Unallocated" itemLabel="Approved But Unallocated" />
                             <f:selectItem itemValue="Provisional" itemLabel="Provisional" />
-                            <f:ajax listener="#{ideaBean.getIdeas()}" render="ideas"/>
+                            <f:ajax event="change" listener="#{ideaBean.getFilteredIdeas()}" render="ideas"/>
                         </h:selectOneMenu>
                     </div>
                 </div>
-                <!--                <h:commandButton id="All" value="All" action="#{ideaBean.findAllIdeas()}" > <f:ajax render="ideas" /> </h:commandButton>
-                                <h:commandButton id="ABU" value="Approved But Unallocated" action="#{ideaBean.findApprovedButUnallocatedIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>
-                                <h:commandButton id="Provisional" value="Provisional" action="#{ideaBean.findProvisionalIdeas()}"> <f:ajax render="ideas" /> </h:commandButton>-->
-
+               
                 <div class="form-group">
                     <h:outputLabel value="Search:" for="search" class="col-sm-2 control-label"/>
                     <div class="col-sm-10">

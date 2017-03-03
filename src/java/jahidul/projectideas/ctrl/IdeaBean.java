@@ -38,7 +38,7 @@ public class IdeaBean implements Serializable {
 
     protected String search;
 
-    protected String filter;
+    protected String filter = "All";
 
     @PostConstruct
     public void init() {
@@ -104,7 +104,7 @@ public class IdeaBean implements Serializable {
 
     public String viewIdea(Idea idea) {
         this.idea = idea;
-        return "Idea.xhtml";
+        return "Idea";
     }
 
     public String setUpEditIdea(Idea idea) {
@@ -149,19 +149,18 @@ public class IdeaBean implements Serializable {
         ideasList = ideaService.findIdeasByText(search);
     }
 
-    public String viewAllPersons() {
-        ideasList = ideaService.findAllIdeas();
-        return "Users";
-    }
-
-    public void getIdeas() {
-        if (filter == "Approved But Unallocated") {
+    public void getFilteredIdeas() {
+        if ("Approved But Unallocated".equals(filter)) {
             ideasList = ideaService.findApprovedButUnallocatedIdeas();
-        } else if (filter == "Provisional") {
+        } else if ("Provisional".equals(filter)) {
             ideasList = ideaService.findProvisionalIdeas();
         } else {
             ideasList = ideaService.findAllIdeas();
         }
     }
 
+    public String viewAllIdeas() {
+        ideasList = ideaService.findAllIdeas();
+        return "index";
+    }
 }

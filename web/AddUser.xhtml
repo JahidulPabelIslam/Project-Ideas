@@ -13,7 +13,6 @@
 
         <ui:define name="content">
             <h:form>
-
                 <h:panelGrid columns="3"
                              columnClasses="rightalign,leftalign,leftalign" class="table table-striped">
 
@@ -23,7 +22,7 @@
                         <f:selectItem itemValue="Student" itemLabel="Student" />
                         <f:selectItem itemValue="Organisation" itemLabel="Organisation" />
                         <f:selectItem itemValue="Unapproved Organisation" itemLabel="Unapproved Organisation" />
-                        <f:ajax render="options" />
+                        <f:ajax render="stuOptions orgOptions" />
                     </h:selectOneMenu>
                     <h:message rendered="#{personBean.theUser.type == 'Staff'}" for="type" />
 
@@ -59,7 +58,6 @@
 
                     <h:outputLabel value="Middle Name:" for="middleName"/>
                     <h:inputText id="middleName" label="middleName"
-                                 required="true"
                                  value="#{personBean.person.middleName}" />
                     <h:message for="middleName" />
 
@@ -68,45 +66,52 @@
                                  required="true"
                                  value="#{personBean.person.surname}"/>
                     <h:message for="surname" />
-
-                    <h:panelGroup id="options">
-                        <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Student'}">
-                            <h:outputLabel value="Student ID:" for="studentID"/>
-                            <h:inputText id="studentID" label="studentID"
-                                         required="true"
-                                         value="#{personBean.person.studentID}" />
-                            <h:message for="studentID" />
-                        </h:panelGrid >
-
-                        <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}">
-                            <h:outputLabel value="Organisation Name:" for="organisationName"/>
-                            <h:inputText id="organisationName" label="organisationName"
-                                         required="true"
-                                         value="#{personBean.person.organisationName}"/>
-                            <h:message for="organisationName" />
-
-                            <h:outputLabel value="Outline of the Organisation:" for="organisationOutline"/>
-                            <h:inputText  id="organisationOutline" label="organisationOutline"
-                                          required="true"
-                                          value="#{personBean.person.organisationOutline}" />
-                            <h:message for="organisationOutline" />
-
-                            <h:outputLabel value="Address of the Organisation:" for="organisationAddress"/>
-                            <h:inputText id="organisationAddress" label="organisationAddress"
-                                         required="true"
-                                         value="#{personBean.person.organisationAddress}"/>
-                            <h:message for="organisationAddress" />
-                        </h:panelGrid>
-                    </h:panelGroup>
-
-                    <h:commandButton id="add" value="Add" action="#{personBean.addUser()}" class="btn btn-success"/>
-                    <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Edit" action="#{personBean.updatePerson(personBean.person)}" class="btn btn-primary"/>
-                    <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
-                    
                 </h:panelGrid>
+                <h:panelGroup id="stuOptions" >
+
+                    <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Student'}"
+                                 columnClasses="rightalign,leftalign,leftalign" class="table table-striped">
+
+                        <h:outputLabel value="Student ID:" for="studentID"/>
+                        <h:inputText id="studentID" label="studentID"
+                                     required="true"
+                                     value="#{personBean.person.studentID}" />
+                        <h:message for="studentID" />
+
+                    </h:panelGrid>
+                </h:panelGroup>
+
+                <h:panelGroup id="orgOptions" >
+
+                    <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"
+                                 columnClasses="rightalign,leftalign,leftalign" class="table table-striped"> 
+
+                        <h:outputLabel value="Organisation Name:" for="organisationName"/>
+                        <h:inputText id="organisationName" label="organisationName"
+                                     required="true"
+                                     value="#{personBean.person.organisationName}"/>
+                        <h:message for="organisationName" />
+
+                        <h:outputLabel value="Outline of the Organisation:" for="organisationOutline"/>
+                        <h:inputText  id="organisationOutline" label="organisationOutline"
+                                      required="true"
+                                      value="#{personBean.person.organisationOutline}" />
+                        <h:message for="organisationOutline" />
+
+                        <h:outputLabel value="Address of the Organisation:" for="organisationAddress"/>
+                        <h:inputText id="organisationAddress" label="organisationAddress"
+                                     required="true"
+                                     value="#{personBean.person.organisationAddress}"/>
+                        <h:message for="organisationAddress" />
+                    </h:panelGrid>
+                </h:panelGroup>
+
+                <h:commandButton rendered="#{personBean.person.id == null}" id="add" value="Add" action="#{personBean.addUser()}" class="btn btn-success"/>
+                <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Update" action="#{personBean.updatePerson(personBean.person)}" class="btn btn-primary"/>
+                <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
             </h:form>
             <h:form>
-                <h:commandLink rendered="#{personBean.theUser.id == null}" value="Already have a account? Log In" action="LogIn" class="btn btn-success"/>
+                <h:commandLink rendered="#{personBean.theUser.id == null}" value="Already have a account? Log In" action="LogIn" class="btn btn-primary"/>
             </h:form>
         </ui:define>
     </ui:composition>

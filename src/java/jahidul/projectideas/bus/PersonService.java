@@ -56,4 +56,8 @@ public class PersonService {
     public List<Person> findUnapprovedOrganisations() {
         return personFacade.findUnapprovedOrganisations();
     }
+    
+    public List<Person> findPersonsByText(String search) {
+        return personFacade.findPersonsByText(search);
+    }
 }

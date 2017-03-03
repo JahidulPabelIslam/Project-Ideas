@@ -57,4 +57,10 @@ public class PersonFacade extends AbstractFacade<Person> {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation'", Person.class);
         return query.getResultList();
     }
+    
+    public List<Person> findPersonsByText(String search) {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.username = :search", Person.class);
+        query.setParameter("search", search);
+        return query.getResultList();
+    }
 }
