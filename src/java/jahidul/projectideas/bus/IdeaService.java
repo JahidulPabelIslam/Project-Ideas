@@ -52,7 +52,7 @@ public class IdeaService {
         return ideaFacade.findProvisionalIdeas();
     }
     
-    public List<Idea> findIdeasByText(String search) {
-        return ideaFacade.findIdeasByText(search);
+    public List<Idea> findIdeasBySearch(String search) {
+        return ideaFacade.findIdeasBySearch(search);
     }
 }

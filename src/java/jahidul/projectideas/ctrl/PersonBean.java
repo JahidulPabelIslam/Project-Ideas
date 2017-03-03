@@ -166,8 +166,12 @@ public class PersonBean implements Serializable {
         return "Users";
     }
 
-    public void findPersonsByText() {
-        personsList = personService.findPersonsByText(search);
+    public void findPersonsBySearch() {
+        if (!"".equals(search)) {
+            personsList = personService.findPersonsBySearch(search);
+        } else {
+            personsList = personService.findAllPersons();
+        }
     }
 
     public void getFilteredPersons() {

@@ -133,8 +133,13 @@ public class IdeaBean implements Serializable {
         return "SubmitIdea";
     }
 
-    public void findIdeasByText() {
-        ideasList = ideaService.findIdeasByText(search);
+    public void findIdeasBySearch() {
+        if (!"".equals(search)) {
+            ideasList = ideaService.findIdeasBySearch(search);
+        } else {
+            ideasList = ideaService.findAllIdeas();
+        }
+        
     }
 
     public void getFilteredIdeas() {

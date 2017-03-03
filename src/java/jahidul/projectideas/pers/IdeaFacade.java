@@ -41,9 +41,9 @@ public class IdeaFacade extends AbstractFacade<Idea> {
         return query.getResultList();
     }
     
-    public List<Idea> findIdeasByText(String search) {
+    public List<Idea> findIdeasBySearch(String search) {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE lower(i.title) LIKE lower(:search)", Idea.class);
-        query.setParameter("search", "%"+search+"%");
+        query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }
 }
