@@ -37,6 +37,8 @@ public class PersonBean implements Serializable {
 
     protected String search;
 
+    protected String filter;
+
     @PostConstruct
     public void init() {
         personsList = personService.findAllPersons();
@@ -80,6 +82,14 @@ public class PersonBean implements Serializable {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+    public void setFilter(String filter) {
+        this.filter = filter;
     }
 
     private List<Person> results;
@@ -166,13 +176,39 @@ public class PersonBean implements Serializable {
         person.setType("Unapproved Organisation");
         return "AddUser";
     }
-    
+
     public String viewAllPersons() {
         personsList = personService.findAllPersons();
         return "Users";
     }
-    
+
     public void findPersonsByText() {
         personsList = personService.findPersonsByText(search);
     }
+
+    public void getFilteredPersons() {
+        if (null != filter) {
+            switch (filter) {
+                case "Students":
+                    personsList = personService.findStudents();
+                    break;
+                case "Staff":
+                    personsList = personService.findStaff();
+                    break;
+                case "Organisations":
+                    personsList = personService.findOrganisations();
+                    break;
+                case "Unapproved Organisations":
+                    personsList = personService.findUnapprovedOrganisations();
+                    break;
+                default:
+                    personsList = personService.findAllPersons();
+                    break;
+            }
+        }
+    }
+
 }
+
+//ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//externalContext.getSessionMap().put("user", theUser);

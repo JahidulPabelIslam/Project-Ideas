@@ -14,24 +14,18 @@
         <ui:define name="content">
 
             <h:form class="form-horizontal">  
-                <h:outputLabel value="View:" for="filter" class="control-label"/>
-                
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
 
-                    <div class="btn-group" role="group">
-                        <h:commandButton id="All" value="All" action="#{personBean.findAllPersons()}" class="btn btn-default"> <f:ajax render="users" /> </h:commandButton>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <h:commandButton id="Student" value="Students" action="#{personBean.findStudents()}" class="btn btn-default"> <f:ajax render="users" /> </h:commandButton>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <h:commandButton id="Staff" value="Staff" action="#{personBean.findStaff()}" class="btn btn-default"> <f:ajax render="users" /> </h:commandButton>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <h:commandButton id="Organisations" value="Organisations" action="#{personBean.findOrganisations()}" class="btn btn-default"> <f:ajax render="users" /> </h:commandButton>
-                    </div>
-                    <div class="btn-group" role="group" >
-                        <h:commandButton rendered="#{personBean.theUser.type == 'Staff'}" id="UnapprovedOrganisations" value="Unapproved Organisations" action="#{personBean.findUnapprovedOrganisations()}" class="btn btn-default"> <f:ajax render="users" /> </h:commandButton>
+                <div class="form-group">
+                    <h:outputLabel value="View:" for="filter" class="col-sm-2 control-label"/>
+                    <div class="col-sm-10">
+                        <h:selectOneMenu id="filter" label="filter" value="#{personBean.filter}" class="form-control" >
+                            <f:selectItem itemValue="All" itemLabel="All" />
+                            <f:selectItem itemValue="Students" itemLabel="Students" />
+                            <f:selectItem itemValue="Staff" itemLabel="Staff" />
+                            <f:selectItem itemValue="Organisations" itemLabel="Organisations" />
+                            <f:selectItem rendered="#{personBean.theUser.type == 'Staff'}" itemValue="Unapproved Organisations" itemLabel="Unapproved Organisations" />
+                            <f:ajax event="change" listener="#{personBean.getFilteredPersons()}" render="users"/>
+                        </h:selectOneMenu>
                     </div>
                 </div>
 
@@ -42,8 +36,6 @@
                                      value="#{personBean.search}" class="form-control"><f:ajax event="keyup" listener="#{personBean.findPersonsByText()}" render="users" /></h:inputText>
                     </div>
                 </div>
-
-                
 
             </h:form>
             <h:dataTable id="users" value="#{personBean.personsList}" var="person" border="0" cellpadding="2" cellspacing="0">
