@@ -101,6 +101,7 @@ public class PersonBean implements Serializable {
             return "index";
         }
         theUser = new Person();
+        
         return "LogIn";
     }
 
@@ -163,6 +164,10 @@ public class PersonBean implements Serializable {
         search = "";
         return "Users";
     }
+    
+    public List<Person> getStudents() {
+        return personService.findStudents();
+    }
 
     public void updatePersonsList() {
         switch (filter) {
@@ -170,7 +175,7 @@ public class PersonBean implements Serializable {
                 if (!"".equals(search)) {
                     personsList = personService.findStudentsBySearch(search);
                 } else {
-                    personsList = personService.findStudents();
+                    personsList = getStudents();
                 }
                 break;
             case "Staff":

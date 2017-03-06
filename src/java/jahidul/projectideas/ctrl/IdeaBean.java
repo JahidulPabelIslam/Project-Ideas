@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.el.ELContext;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -36,10 +38,10 @@ public class IdeaBean implements Serializable {
 
     protected boolean apply = false;
 
-    protected String search;
+    protected String search = "";
 
     protected String filter = "All";
-
+    
     @PostConstruct
     public void init() {
         ideasList = ideaService.findAllIdeas();
@@ -130,6 +132,7 @@ public class IdeaBean implements Serializable {
     public String prepareCreate() {
         idea = new Idea();
         idea.setStatus("Provisional");
+        updatePersonsList();
         return "SubmitIdea";
     }
 
@@ -157,6 +160,12 @@ public class IdeaBean implements Serializable {
                 }
                 break;
         }
+    }
+    
+    public void updatePersonsList() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
+        personBean.personsList = personBean.getStudents();
     }
 
     public String viewAllIdeas() {
