@@ -30,7 +30,7 @@ public class IdeaFacade extends AbstractFacade<Idea> {
     public IdeaFacade() {
         super(Idea.class);
     }
-    
+
     public List<Idea> findProvisionalIdeas() {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Provisional'", Idea.class);
         return query.getResultList();
@@ -40,9 +40,21 @@ public class IdeaFacade extends AbstractFacade<Idea> {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.appliedStudent IS NULL", Idea.class);
         return query.getResultList();
     }
-    
+
     public List<Idea> findIdeasBySearch(String search) {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE lower(i.title) LIKE lower(:search)", Idea.class);
+        query.setParameter("search", "%" + search + "%");
+        return query.getResultList();
+    }
+
+    public List<Idea> findProvisionalIdeasBySearch(String search) {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Provisional' AND lower(i.title) LIKE lower(:search)", Idea.class);
+        query.setParameter("search", "%" + search + "%");
+        return query.getResultList();
+    }
+
+    public List<Idea> findApprovedButUnallocatedIdeasBySearch(String search) {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.appliedStudent IS NULL AND lower(i.title) LIKE lower(:search)", Idea.class);
         query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }

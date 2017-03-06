@@ -55,4 +55,12 @@ public class IdeaService {
     public List<Idea> findIdeasBySearch(String search) {
         return ideaFacade.findIdeasBySearch(search);
     }
+    
+    public List<Idea> findApprovedButUnallocatedIdeasBySearch(String search) {
+        return ideaFacade.findApprovedButUnallocatedIdeasBySearch(search);
+    }
+    
+    public List<Idea> findProvisionalIdeasBySearch(String search) {
+        return ideaFacade.findProvisionalIdeasBySearch(search);
+    }
 }

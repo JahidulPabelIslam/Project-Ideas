@@ -133,25 +133,28 @@ public class IdeaBean implements Serializable {
         return "SubmitIdea";
     }
 
-    public void findIdeasBySearch() {
-        if (!"".equals(search)) {
-            ideasList = ideaService.findIdeasBySearch(search);
-        } else {
-            ideasList = ideaService.findAllIdeas();
-        }
-        
-    }
-
-    public void getFilteredIdeas() {
-        if (null != filter) switch (filter) {
+    public void updateIdeasList() {
+        switch (filter) {
             case "Approved But Unallocated":
-                ideasList = ideaService.findApprovedButUnallocatedIdeas();
+                if (!"".equals(search)) {
+                    ideasList = ideaService.findApprovedButUnallocatedIdeasBySearch(search);
+                } else {
+                    ideasList = ideaService.findApprovedButUnallocatedIdeas();
+                }
                 break;
             case "Provisional":
-                ideasList = ideaService.findProvisionalIdeas();
+                if (!"".equals(search)) {
+                    ideasList = ideaService.findProvisionalIdeasBySearch(search);
+                } else {
+                    ideasList = ideaService.findProvisionalIdeas();
+                }
                 break;
             default:
-                ideasList = ideaService.findAllIdeas();
+                if (!"".equals(search)) {
+                    ideasList = ideaService.findIdeasBySearch(search);
+                } else {
+                    ideasList = ideaService.findAllIdeas();
+                }
                 break;
         }
     }
