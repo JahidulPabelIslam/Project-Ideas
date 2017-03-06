@@ -14,7 +14,7 @@
         <ui:define name="content">
             <h:form>
                 <h:panelGrid columns="3"
-                             columnClasses="rightalign,leftalign,leftalign" class="table table-striped">
+                             columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
                     <h:outputLabel rendered="#{personBean.theUser.type == 'Staff'}" value="Type:" for="type"/>
                     <h:selectOneMenu rendered="#{personBean.theUser.type == 'Staff'}" id="type" label="type" required="true" value="#{personBean.person.type}">
@@ -55,7 +55,7 @@
                 <h:panelGroup id="names" >
 
                     <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Staff' or personBean.person.type == 'Student'}"
-                                 columnClasses="rightalign,leftalign,leftalign" class="table">
+                                 columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
                         <h:outputLabel value="First Name:" for="firstName" />
                         <h:inputText id="firstName" label="firstName"
@@ -81,7 +81,7 @@
                 <h:panelGroup id="staffOptions" >
 
                     <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Staff'}"
-                                 columnClasses="rightalign,leftalign,leftalign" class="table">
+                                 columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
                         <h:outputLabel value="Role:" for="role"/>
                         <h:inputText id="role" label="role"
@@ -95,7 +95,7 @@
                 <h:panelGroup id="stuOptions" >
 
                     <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Student'}"
-                                 columnClasses="rightalign,leftalign,leftalign" class="table table-striped">
+                                 columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
                         <h:outputLabel value="Student ID:" for="studentID"/>
                         <h:inputText id="studentID" label="studentID"
@@ -109,7 +109,7 @@
                 <h:panelGroup id="orgOptions" >
 
                     <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"
-                                 columnClasses="rightalign,leftalign,leftalign" class="table table-striped"> 
+                                 columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered"> 
 
                         <h:outputLabel value="Organisation Name:" for="organisationName"/>
                         <h:inputText id="organisationName" label="organisationName"
@@ -152,8 +152,10 @@
                 <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Update" action="#{personBean.updatePerson(personBean.person)}" class="btn btn-primary"/>
                 <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
             </h:form>
+            
             <h:form>
-                <h:commandLink rendered="#{personBean.theUser.id == null}" value="Already have a account? Log In" action="LogIn" class="btn btn-primary"/>
+                <h:outputText value="Already have a account?" />
+                <h:commandLink rendered="#{personBean.theUser.id == null}" value="Log In" action="LogIn" class="btn btn-primary"/>
             </h:form>
         </ui:define>
     </ui:composition>
