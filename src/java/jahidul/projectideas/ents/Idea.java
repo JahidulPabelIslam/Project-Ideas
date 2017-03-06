@@ -7,12 +7,14 @@ package jahidul.projectideas.ents;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -25,6 +27,39 @@ public class Idea implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull
+    @Column(nullable = false)
+    private String title;
+
+    @NotNull
+    @Column(nullable = false)
+    private String aimsObjectives;
+
+    @NotNull
+    @Column(nullable = false)
+    private String question;
+
+    @NotNull
+    @Column(nullable = false)
+    private String deliverables;
+
+    @NotNull
+    @Column(nullable = false)
+    private String status;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(nullable = false)
+    private Date dateUpdated;
+
+    @ManyToOne
+    @Column(nullable = true)
+    private Person appliedStudent;
+
+    @ManyToOne
+    @NotNull
+    @Column(nullable = false)
+    private Person submitter;
 
     /**
      *
@@ -41,8 +76,6 @@ public class Idea implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    private String title;
 
     /**
      * Get the value of title
@@ -62,8 +95,6 @@ public class Idea implements Serializable {
         this.title = title;
     }
 
-    private String aimsObjectives;
-
     /**
      * Get the value of aimsObjectives
      *
@@ -81,8 +112,6 @@ public class Idea implements Serializable {
     public void setAimsObjectives(String aimsObjectives) {
         this.aimsObjectives = aimsObjectives;
     }
-
-    private String question;
 
     /**
      * Get the value of question
@@ -102,8 +131,6 @@ public class Idea implements Serializable {
         this.question = question;
     }
 
-    private String deliverables;
-
     /**
      * Get the value of deliverables
      *
@@ -121,8 +148,6 @@ public class Idea implements Serializable {
     public void setDeliverables(String deliverables) {
         this.deliverables = deliverables;
     }
-
-    private String status;
 
     /**
      * Get the value of status
@@ -142,9 +167,6 @@ public class Idea implements Serializable {
         this.status = status;
     }
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateUpdated;
-
     /**
      * Get the value of date
      *
@@ -163,9 +185,6 @@ public class Idea implements Serializable {
         this.dateUpdated = dateUpdated;
     }
 
-    @ManyToOne
-    private Person appliedStudent;
-
     /**
      * Get the value of appliedStudent
      *
@@ -183,9 +202,6 @@ public class Idea implements Serializable {
     public void setAppliedStudent(Person appliedStudent) {
         this.appliedStudent = appliedStudent;
     }
-
-    @ManyToOne
-    private Person submitter;
 
     /**
      * Get the value of submitterStudent
