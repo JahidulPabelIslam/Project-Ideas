@@ -10,7 +10,9 @@
         </ui:define>
 
         <ui:define name="content">
-            <h:form>
+            <h:form class="formSignin">
+
+                <h2 class="formSigninHeading">Please sign in</h2>
 
                 <h:panelGrid columns="3"
                              columnClasses="rightalign,leftalign,leftalign">
@@ -18,22 +20,22 @@
                     <h:outputLabel value="Username:" for="username"/>
                     <h:inputText id="username" label="username"
                                  required="true"
-                                 value="#{personBean.theUser.username}" />
+                                 value="#{personBean.theUser.username}" class="form-control username"/>
                     <h:message for="username" />
 
                     <h:outputLabel value="Password:" for="password"/>
                     <h:inputSecret id="password" label="password"
-                                 required="true"
-                                 value="#{personBean.theUser.password}"/>
+                                   required="true"
+                                   value="#{personBean.theUser.password}" class="form-control password"/>
                     <h:message for="password" />
 
-                    <h:commandButton id="logIn" value="Log In" action="#{personBean.logIn()}" class="btn btn-success"/>
-
                 </h:panelGrid>
+                <h:commandButton id="logIn" value="Log In" action="#{personBean.logIn()}" class="btn btn-success"/>
             </h:form>
 
-            <h:form>
-                <h:commandButton rendered="#{personBean.theUser.id == null}" value="Haven't Got a Account? Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
+            <h:form class="formSignin">
+                <h:outputText value="Haven't Got a Account? " />
+                <h:commandButton rendered="#{personBean.theUser.id == null}" value="Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
             </h:form>
         </ui:define>
     </ui:composition>
