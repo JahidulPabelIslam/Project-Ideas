@@ -22,7 +22,7 @@
                         <f:selectItem itemValue="Student" itemLabel="Student" />
                         <f:selectItem itemValue="Organisation" itemLabel="Organisation" />
                         <f:selectItem itemValue="Unapproved Organisation" itemLabel="Unapproved Organisation" />
-                        <f:ajax render="stuOptions orgOptions" />
+                        <f:ajax render="names staffOptions stuOptions orgOptions" />
                     </h:selectOneMenu>
                     <h:message rendered="#{personBean.theUser.type == 'Staff'}" for="type" />
 
@@ -33,9 +33,9 @@
                     <h:message for="username" />
 
                     <h:outputLabel value="Password:" for="password"/>
-                    <h:inputText id="password" label="password"
-                                 required="true"
-                                 value="#{personBean.person.password}"/>
+                    <h:inputSecret id="password" label="password"
+                                   required="true"
+                                   value="#{personBean.person.password}"/>
                     <h:message for="password" />
 
                     <h:outputLabel value="Email Address" for="email"/>
@@ -50,23 +50,48 @@
                                  value="#{personBean.person.phoneNumber}" />
                     <h:message for="phoneNumber" />
 
-                    <h:outputLabel value="First Name:" for="firstName"/>
-                    <h:inputText id="firstName" label="firstName"
-                                 required="true"
-                                 value="#{personBean.person.firstName}"/>
-                    <h:message for="firstName" />
-
-                    <h:outputLabel value="Middle Name:" for="middleName"/>
-                    <h:inputText id="middleName" label="middleName"
-                                 value="#{personBean.person.middleName}" />
-                    <h:message for="middleName" />
-
-                    <h:outputLabel value="Surname:" for="surname"/>
-                    <h:inputText id="surname" label="surname"
-                                 required="true"
-                                 value="#{personBean.person.surname}"/>
-                    <h:message for="surname" />
                 </h:panelGrid>
+
+                <h:panelGroup id="names" >
+
+                    <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Staff' or personBean.person.type == 'Student'}"
+                                 columnClasses="rightalign,leftalign,leftalign" class="table">
+
+                        <h:outputLabel value="First Name:" for="firstName" />
+                        <h:inputText id="firstName" label="firstName"
+                                     required="true"
+                                     value="#{personBean.person.firstName}"/>
+                        <h:message for="firstName" />
+
+                        <h:outputLabel value="Middle Name:" for="middleName"/>
+                        <h:inputText id="middleName" label="middleName"
+                                     value="#{personBean.person.middleName}"/>
+                        <h:message for="middleName"/>
+
+                        <h:outputLabel value="Surname:" for="surname"/>
+                        <h:inputText id="surname" label="surname"
+                                     required="true"
+                                     value="#{personBean.person.surname}"/>
+                        <h:message for="surname"/>
+
+
+                    </h:panelGrid>
+                </h:panelGroup>
+
+                <h:panelGroup id="staffOptions" >
+
+                    <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Staff'}"
+                                 columnClasses="rightalign,leftalign,leftalign" class="table">
+
+                        <h:outputLabel value="Role:" for="role"/>
+                        <h:inputText id="role" label="role"
+                                     required="true"
+                                     value="#{personBean.person.role}" />
+                        <h:message for="role" />
+
+                    </h:panelGrid>
+                </h:panelGroup>
+
                 <h:panelGroup id="stuOptions" >
 
                     <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Student'}"
@@ -103,6 +128,23 @@
                                      required="true"
                                      value="#{personBean.person.organisationAddress}"/>
                         <h:message for="organisationAddress" />
+
+                        <h:outputLabel value="First Name for the Contact:" for="firstName2"/>
+                        <h:inputText id="firstName2" label="firstName2"
+                                     required="true"
+                                     value="#{personBean.person.firstName}"/>
+                        <h:message for="firstName2" />
+
+                        <h:outputLabel value="Middle Name for the Contact:" for="middleName2"/>
+                        <h:inputText id="middleName2" label="middleName2"
+                                     value="#{personBean.person.middleName}" />
+                        <h:message for="middleName2" />
+
+                        <h:outputLabel value="Surname for the Contact:" for="surname2"/>
+                        <h:inputText id="surname2" label="surname2"
+                                     required="true"
+                                     value="#{personBean.person.surname}"/>
+                        <h:message for="surname2" />
                     </h:panelGrid>
                 </h:panelGroup>
 

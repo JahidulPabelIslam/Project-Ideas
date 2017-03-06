@@ -21,7 +21,8 @@
                 <h:outputLabel rendered="#{personBean.person.type == 'Student'}" value="Student ID:" />
                 <h:outputLabel rendered="#{personBean.person.type == 'Student'}" value="#{personBean.person.studentID}" />
 
-                <h:outputLabel value="Name:" />
+                <h:outputLabel value="Name:" rendered="#{personBean.person.type != 'Organisation' and personBean.person.type != 'Unapproved Organisation'}"/>
+                <h:outputLabel value="Contact Name:" rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"/>
                 <h:outputLabel value="#{personBean.person.firstName} #{personBean.person.middleName} #{personBean.person.surname}" />
 
                 <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}" value="Organisation Name:" />
@@ -33,6 +34,9 @@
                 <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="Organisation Address:" />
                 <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="#{personBean.person.organisationAddress}" />
 
+                <h:outputLabel rendered="#{personBean.person.type == 'Staff'}" value="Role:" />
+                <h:outputLabel rendered="#{personBean.person.type == 'Staff'}" value="#{personBean.person.role}" />
+                
                 <h:outputLabel value="Email:" />
                 <h:outputLabel value="#{personBean.person.email}" />
 
