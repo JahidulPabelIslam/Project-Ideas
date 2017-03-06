@@ -37,29 +37,53 @@ public class PersonFacade extends AbstractFacade<Person> {
         query.setParameter("password", password);
         return query.getResultList();
     }
-    
+
     public List<Person> findStudents() {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student'", Person.class);
         return query.getResultList();
     }
-    
+
     public List<Person> findStaff() {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff'", Person.class);
         return query.getResultList();
     }
-    
+
     public List<Person> findOrganisations() {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation'", Person.class);
         return query.getResultList();
     }
-    
+
     public List<Person> findUnapprovedOrganisations() {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation'", Person.class);
         return query.getResultList();
     }
-    
+
     public List<Person> findPersonsBySearch(String search) {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE lower(p.username) LIKE lower(:search)", Person.class);
+        query.setParameter("search", "%" + search + "%");
+        return query.getResultList();
+    }
+
+    public List<Person> findStudentsBySearch(String search) {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student' AND lower(p.username) LIKE lower(:search)", Person.class);
+        query.setParameter("search", "%" + search + "%");
+        return query.getResultList();
+    }
+
+    public List<Person> findStaffBySearch(String search) {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff' AND lower(p.username) LIKE lower(:search)", Person.class);
+        query.setParameter("search", "%" + search + "%");
+        return query.getResultList();
+    }
+
+    public List<Person> findOrganisationsBySearch(String search) {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation' AND lower(p.username) LIKE lower(:search)", Person.class);
+        query.setParameter("search", "%" + search + "%");
+        return query.getResultList();
+    }
+
+    public List<Person> findUnapprovedOrganisationsBySearch(String search) {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation' AND lower(p.username) LIKE lower(:search)", Person.class);
         query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }

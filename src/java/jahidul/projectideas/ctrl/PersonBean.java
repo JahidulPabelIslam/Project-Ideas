@@ -35,9 +35,9 @@ public class PersonBean implements Serializable {
 
     protected List<Person> personsList = new ArrayList<Person>();
 
-    protected String search;
+    protected String search = "";
 
-    protected String filter;
+    protected String filter = "All";
 
     @PostConstruct
     public void init() {
@@ -151,10 +151,6 @@ public class PersonBean implements Serializable {
         return "User";
     }
 
-    public void findAllPersons() {
-        personsList = personService.findAllPersons();
-    }
-
     public String prepareCreate() {
         person = new Person();
         person.setType("Unapproved Organisation");
@@ -166,34 +162,45 @@ public class PersonBean implements Serializable {
         return "Users";
     }
 
-    public void findPersonsBySearch() {
-        if (!"".equals(search)) {
-            personsList = personService.findPersonsBySearch(search);
-        } else {
-            personsList = personService.findAllPersons();
-        }
-    }
-
-    public void getFilteredPersons() {
-        if (null != filter) {
-            switch (filter) {
-                case "Students":
+    public void updatePersonsList() {
+        switch (filter) {
+            case "Students":
+                if (!"".equals(search)) {
+                    personsList = personService.findStudentsBySearch(search);
+                } else {
                     personsList = personService.findStudents();
-                    break;
-                case "Staff":
+                }
+                break;
+            case "Staff":
+                if (!"".equals(search)) {
+                    personsList = personService.findStaffBySearch(search);
+                } else {
                     personsList = personService.findStaff();
-                    break;
-                case "Organisations":
+                }
+                break;
+            case "Organisations":
+                if (!"".equals(search)) {
+                    personsList = personService.findOrganisationsBySearch(search);
+                } else {
                     personsList = personService.findOrganisations();
-                    break;
-                case "Unapproved Organisations":
+                }
+                break;
+            case "Unapproved Organisations":
+                if (!"".equals(search)) {
+                    personsList = personService.findUnapprovedOrganisationsBySearch(search);
+                } else {
                     personsList = personService.findUnapprovedOrganisations();
-                    break;
-                default:
+                }
+                break;
+            default:
+                if (!"".equals(search)) {
+                    personsList = personService.findPersonsBySearch(search);
+                } else {
                     personsList = personService.findAllPersons();
-                    break;
-            }
+                }
+                break;
         }
+
     }
 
 }

@@ -40,24 +40,40 @@ public class PersonService {
     public List<Person> logIn(String username, String password) {
         return personFacade.logIn(username, password);
     }
-    
+
     public List<Person> findStudents() {
         return personFacade.findStudents();
     }
-    
+
     public List<Person> findStaff() {
         return personFacade.findStaff();
     }
-    
+
     public List<Person> findOrganisations() {
         return personFacade.findOrganisations();
     }
-    
+
     public List<Person> findUnapprovedOrganisations() {
         return personFacade.findUnapprovedOrganisations();
     }
-    
+
     public List<Person> findPersonsBySearch(String search) {
         return personFacade.findPersonsBySearch(search);
+    }
+
+    public List<Person> findStudentsBySearch(String search) {
+        return personFacade.findStudentsBySearch(search);
+    }
+
+    public List<Person> findStaffBySearch(String search) {
+        return personFacade.findStaffBySearch(search);
+    }
+
+    public List<Person> findOrganisationsBySearch(String search) {
+        return personFacade.findOrganisationsBySearch(search);
+    }
+
+    public List<Person> findUnapprovedOrganisationsBySearch(String search) {
+        return personFacade.findUnapprovedOrganisationsBySearch(search);
     }
 }

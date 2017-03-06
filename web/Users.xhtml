@@ -24,7 +24,7 @@
                             <f:selectItem itemValue="Staff" itemLabel="Staff" />
                             <f:selectItem itemValue="Organisations" itemLabel="Organisations" />
                             <f:selectItem rendered="#{personBean.theUser.type == 'Staff'}" itemValue="Unapproved Organisations" itemLabel="Unapproved Organisations" />
-                            <f:ajax event="change" listener="#{personBean.getFilteredPersons()}" render="users"/>
+                            <f:ajax event="change" listener="#{personBean.updatePersonsList()}" render="users"/>
                         </h:selectOneMenu>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <h:outputLabel value="Search:" for="search" class="col-sm-2 control-label"/>
                     <div class="col-sm-10">
                         <h:inputText id="search" label="search" value="#{personBean.search}" class="form-control">
-                            <f:ajax event="keyup" listener="#{personBean.findPersonsBySearch()}" render="users" />
+                            <f:ajax event="keyup" listener="#{personBean.updatePersonsList()}" render="users" />
                         </h:inputText>
                     </div>
                 </div>
