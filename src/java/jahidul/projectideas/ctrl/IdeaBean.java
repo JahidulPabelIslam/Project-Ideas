@@ -161,6 +161,8 @@ public class IdeaBean implements Serializable {
 
     public String viewAllIdeas() {
         ideasList = ideaService.findAllIdeas();
+        filter = "All";
+        search = "";
         return "index";
     }
 }

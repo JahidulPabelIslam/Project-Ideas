@@ -159,6 +159,8 @@ public class PersonBean implements Serializable {
 
     public String viewAllPersons() {
         personsList = personService.findAllPersons();
+        filter = "All";
+        search = "";
         return "Users";
     }
 
