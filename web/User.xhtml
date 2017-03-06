@@ -18,24 +18,24 @@
                 <h:outputLabel value="User Type:" />
                 <h:outputLabel value="#{personBean.person.type}" />
 
-                <h:outputLabel rendered="#{personBean.person.type == 'Student'}" value="Student ID:" />
-                <h:outputLabel rendered="#{personBean.person.type == 'Student'}" value="#{personBean.person.studentID}" />
+                <h:outputLabel rendered="#{personBean.isPersonStudent()}" value="Student ID:" />
+                <h:outputLabel rendered="#{personBean.isPersonStudent()}" value="#{personBean.person.studentID}" />
 
-                <h:outputLabel value="Name:" rendered="#{personBean.person.type != 'Organisation' and personBean.person.type != 'Unapproved Organisation'}"/>
-                <h:outputLabel value="Contact Name:" rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"/>
+                <h:outputLabel value="Name:" rendered="#{!personBean.isPersonAnyOrganisation()}"/>
+                <h:outputLabel value="Contact Name:" rendered="#{personBean.isPersonAnyOrganisation()}"/>
                 <h:outputLabel value="#{personBean.person.firstName} #{personBean.person.middleName} #{personBean.person.surname}" />
 
-                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}" value="Organisation Name:" />
-                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="#{personBean.person.organisationName}" />
+                <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}" value="Organisation Name:" />
+                <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="#{personBean.person.organisationName}" />
 
-                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="Organisation Outline:" />
-                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="#{personBean.person.organisationOutline}" />
+                <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="Organisation Outline:" />
+                <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="#{personBean.person.organisationOutline}" />
 
-                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="Organisation Address:" />
-                <h:outputLabel rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"  value="#{personBean.person.organisationAddress}" />
+                <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="Organisation Address:" />
+                <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="#{personBean.person.organisationAddress}" />
 
-                <h:outputLabel rendered="#{personBean.person.type == 'Staff'}" value="Role:" />
-                <h:outputLabel rendered="#{personBean.person.type == 'Staff'}" value="#{personBean.person.role}" />
+                <h:outputLabel rendered="#{personBean.isPersonStaff()}" value="Role:" />
+                <h:outputLabel rendered="#{personBean.isPersonStaff()}" value="#{personBean.person.role}" />
                 
                 <h:outputLabel value="Email:" />
                 <h:outputLabel value="#{personBean.person.email}" />
@@ -45,10 +45,10 @@
 
                 <h:outputLabel value="Actions:" />
                 <h:form>
-                    <h:commandButton rendered="#{personBean.theUser.type == 'Staff' and person.type == 'Unapproved Organisation'}" id="approveOrganisation" value="Approve Organisation" action="#{personBean.approveOrganisation(person)}" class="btn btn-primary"/>
-                    <h:commandButton rendered="#{personBean.theUser.type == 'Staff' and person.type == 'Organisation'}" id="unauthoriseOrganisation" value="Unapprove Organisation" action="#{personBean.unapproveOrganisation(person)}" class="btn btn-danger"/>
-                    <h:commandButton rendered="#{personBean.person == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{personBean.setUpEditPerson(personBean.person)}" class="btn btn-default"/>
-                    <h:commandButton rendered="#{personBean.person == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
+                    <h:commandButton rendered="#{personBean.isUserStaff() and personBean.isPersonUnapprovedOrganisation()}" id="approveOrganisation" value="Approve Organisation" action="#{personBean.approveOrganisation(person)}" class="btn btn-primary"/>
+                    <h:commandButton rendered="#{personBean.isUserStaff() and personBean.isPersonApprovedOrganisation()}" id="unauthoriseOrganisation" value="Unapprove Organisation" action="#{personBean.unapproveOrganisation(person)}" class="btn btn-danger"/>
+                    <h:commandButton rendered="#{personBean.isPersonTheUser() or personBean.isUserStaff()}" id="edit" value="Edit" action="#{personBean.setUpEditPerson(personBean.person)}" class="btn btn-primary"/>
+                    <h:commandButton rendered="#{personBean.isPersonTheUser() or personBean.isUserStaff()}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
                 </h:form>             
             </h:panelGrid>
         </ui:define>

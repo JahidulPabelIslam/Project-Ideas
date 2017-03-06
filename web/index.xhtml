@@ -13,7 +13,7 @@
 
         <ui:define name="content">
             <h:form class="form-horizontal">
-                
+
                 <div class="form-group">
                     <h:outputLabel value="View:" for="filter" class="col-sm-2 control-label"/>
                     <div class="col-sm-10">
@@ -25,7 +25,7 @@
                         </h:selectOneMenu>
                     </div>
                 </div>
-               
+
                 <div class="form-group">
                     <h:outputLabel value="Search:" for="search" class="col-sm-2 control-label"/>
                     <div class="col-sm-10">
@@ -41,23 +41,15 @@
                     <f:facet name="header">
                         <h:outputText value="Title" />
                     </f:facet>
-                    <h:outputText value="#{idea.title}" />
+                    <h:form>
+                        <h:commandLink id="view" value="#{idea.title}" action="#{ideaBean.viewIdea(idea)}"/>
+                    </h:form>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Status" />
                     </f:facet>
                     <h:outputText value="#{idea.status}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Actions" />
-                    </f:facet>
-                    <h:form>
-                        <h:commandButton id="view" value="View" action="#{ideaBean.viewIdea(idea)}" class="btn btn-default" />
-                        <h:commandButton rendered="#{idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(idea)}" class="btn btn-primary"/>
-                        <h:commandButton rendered="#{idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(idea)}" class="btn btn-danger"/>
-                    </h:form>
                 </h:column>
             </h:dataTable>
         </ui:define>

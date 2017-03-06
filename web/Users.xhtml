@@ -24,7 +24,7 @@
                             <f:selectItem itemValue="Students" itemLabel="Students" />
                             <f:selectItem itemValue="Staff" itemLabel="Staff" />
                             <f:selectItem itemValue="Organisations" itemLabel="Organisations" />
-                            <f:selectItem rendered="#{personBean.theUser.type == 'Staff'}" itemValue="Unapproved Organisations" itemLabel="Unapproved Organisations" />
+                            <f:selectItem itemValue="Unapproved Organisations" itemLabel="Unapproved Organisations" />
                             <f:ajax event="change" listener="#{personBean.updatePersonsList()}" render="users"/>
                         </h:selectOneMenu>
                     </div>
@@ -40,31 +40,21 @@
                 </div>
 
             </h:form>
-            
+
             <h:dataTable id="users" value="#{personBean.personsList}" var="person" border="0" cellpadding="2" cellspacing="0" class="table table-striped table-bordered">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Name" />
                     </f:facet>
-                    <h:outputText value="#{person}" />
+                    <h:form>
+                        <h:commandLink id="view" value="#{person}" action="#{personBean.viewPerson(person)}"/>
+                    </h:form>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Type" />
                     </f:facet>
                     <h:outputText value="#{person.type}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Actions" />
-                    </f:facet>
-                    <h:form>
-                        <h:commandButton id="view" value="View" action="#{personBean.viewPerson(person)}" class="btn btn-default" />
-                        <h:commandButton rendered="#{personBean.theUser.type == 'Staff' and person.type == 'Unapproved Organisation'}" id="approveOrganisation" value="Approve Organisation" action="#{personBean.approveOrganisation(person)}" class="btn btn-primary"/>
-                        <h:commandButton rendered="#{personBean.theUser.type == 'Staff' and person.type == 'Organisation'}" id="unauthoriseOrganisation" value="Unapprove Organisation" action="#{personBean.unapproveOrganisation(person)}" class="btn btn-danger"/>
-                        <h:commandButton rendered="#{person == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{personBean.setUpEditPerson(person)}" class="btn btn-primary"/>
-                        <h:commandButton rendered="#{person == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{personBean.deletePerson(person)}" class="btn btn-danger"/>
-                    </h:form>
                 </h:column>
             </h:dataTable>
         </ui:define>

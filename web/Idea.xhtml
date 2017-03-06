@@ -43,8 +43,8 @@
 
                 <h:outputLabel value="Actions:" />
                 <h:form>
-                    <h:commandButton rendered="#{ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(ideaBean.idea)}" class="btn btn-primary" />
-                    <h:commandButton rendered="#{ideaBean.idea.submitter == personBean.theUser or personBean.theUser.type == 'Staff'}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" class="btn btn-danger" />
+                    <h:commandButton rendered="#{ideaBean.isUserTheSubmitter() or personBean.isUserStaff()}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(ideaBean.idea)}" class="btn btn-primary" />
+                    <h:commandButton rendered="#{ideaBean.isUserTheSubmitter() or personBean.isUserStaff()}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" class="btn btn-danger" />
                 </h:form>
             </h:panelGrid>
         </ui:define>

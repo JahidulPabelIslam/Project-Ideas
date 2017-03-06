@@ -207,7 +207,42 @@ public class PersonBean implements Serializable {
                 }
                 break;
         }
-
+    }
+    
+    public boolean isUserStaff() {
+        return "Staff".equals(theUser.getType());
+    }
+    
+    public boolean isPersonStaff() {
+        return "Staff".equals(person.getType());
+    }
+    
+    public boolean isUserStudent() {
+        return "Student".equals(theUser.getType());
+    }
+    
+    public boolean isPersonStudent() {
+        return "Student".equals(person.getType());
+    }
+    
+    public boolean isPersonAnyOrganisation() {
+        return "Organisation".equals(person.getType()) || "Unapproved Organisation".equals(person.getType());
+    }
+    
+    public boolean isPersonApprovedOrganisation() {
+        return "Organisation".equals(person.getType());
+    }
+    
+    public boolean isTheUserApprovedOrganisation() {
+        return "Organisation".equals(theUser.getType());
+    }
+    
+    public boolean isPersonUnapprovedOrganisation() {
+        return "Unapproved Organisation".equals(person.getType());
+    }
+    
+    public boolean isPersonTheUser() {
+        return theUser == person;
     }
 
 }

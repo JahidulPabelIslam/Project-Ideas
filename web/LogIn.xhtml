@@ -33,9 +33,9 @@
                 <h:commandButton id="logIn" value="Log In" action="#{personBean.logIn()}" class="btn btn-success"/>
             </h:form>
 
-            <h:form class="formSignin">
+            <h:form class="formSignin" rendered="#{personBean.theUser.id == null}">
                 <h:outputText value="Haven't Got a Account? " />
-                <h:commandButton rendered="#{personBean.theUser.id == null}" value="Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
+                <h:commandButton value="Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -16,15 +16,15 @@
                 <h:panelGrid columns="3"
                              columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
-                    <h:outputLabel rendered="#{personBean.theUser.type == 'Staff'}" value="Type:" for="type"/>
-                    <h:selectOneMenu rendered="#{personBean.theUser.type == 'Staff'}" id="type" label="type" required="true" value="#{personBean.person.type}">
+                    <h:outputLabel rendered="#{personBean.isUserStaff()}" value="Type:" for="type"/>
+                    <h:selectOneMenu rendered="#{personBean.isUserStaff()}" id="type" label="type" required="true" value="#{personBean.person.type}">
                         <f:selectItem itemValue="Staff" itemLabel="Staff" />
-                        <f:selectItem itemValue="Student" itemLabel="Student" />
-                        <f:selectItem itemValue="Organisation" itemLabel="Organisation" />
-                        <f:selectItem itemValue="Unapproved Organisation" itemLabel="Unapproved Organisation" />
+                        <f:selectItem itemValue="Students" itemLabel="Students" />
+                        <f:selectItem itemValue="Organisations" itemLabel="Organisations" />
+                        <f:selectItem itemValue="Unapproved Organisations" itemLabel="Unapproved Organisations" />
                         <f:ajax render="names staffOptions stuOptions orgOptions" />
                     </h:selectOneMenu>
-                    <h:message rendered="#{personBean.theUser.type == 'Staff'}" for="type" />
+                    <h:message rendered="#{personBean.isUserStaff()}" for="type" />
 
                     <h:outputLabel value="Username:" for="username"/>
                     <h:inputText id="username" label="username"
@@ -54,7 +54,7 @@
 
                 <h:panelGroup id="names" >
 
-                    <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Staff' or personBean.person.type == 'Student'}"
+                    <h:panelGrid columns="3" rendered="#{personBean.isPersonStaff() or personBean.isPersonStudent()}"
                                  columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
                         <h:outputLabel value="First Name:" for="firstName" />
@@ -74,13 +74,12 @@
                                      value="#{personBean.person.surname}"/>
                         <h:message for="surname"/>
 
-
                     </h:panelGrid>
                 </h:panelGroup>
 
                 <h:panelGroup id="staffOptions" >
 
-                    <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Staff'}"
+                    <h:panelGrid columns="3" rendered="#{personBean.isPersonStaff()}"
                                  columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
                         <h:outputLabel value="Role:" for="role"/>
@@ -94,7 +93,7 @@
 
                 <h:panelGroup id="stuOptions" >
 
-                    <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Student'}"
+                    <h:panelGrid columns="3" rendered="#{personBean.isPersonStudent()}"
                                  columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
                         <h:outputLabel value="Student ID:" for="studentID"/>
@@ -108,7 +107,7 @@
 
                 <h:panelGroup id="orgOptions" >
 
-                    <h:panelGrid columns="3" rendered="#{personBean.person.type == 'Organisation' or personBean.person.type == 'Unapproved Organisation'}"
+                    <h:panelGrid columns="3" rendered="#{personBean.isPersonAnyOrganisation()}"
                                  columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered"> 
 
                         <h:outputLabel value="Organisation Name:" for="organisationName"/>
@@ -149,14 +148,15 @@
                 </h:panelGroup>
 
                 <h:commandButton rendered="#{personBean.person.id == null}" id="add" value="Add" action="#{personBean.addUser()}" class="btn btn-success"/>
-                <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="edit" value="Update" action="#{personBean.updatePerson(personBean.person)}" class="btn btn-primary"/>
-                <h:commandButton rendered="#{personBean.person.id != null and (personBean.person == personBean.theUser or personBean.theUser.type == 'Staff')}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
+                <h:commandButton rendered="#{personBean.person.id != null and (personBean.isPersonTheUser() or personBean.isUserStaff())}" id="edit" value="Update" action="#{personBean.updatePerson(personBean.person)}" class="btn btn-primary"/>
+                <h:commandButton rendered="#{personBean.person.id != null and (personBean.isPersonTheUser() or personBean.isUserStaff())}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
             </h:form>
             
-            <h:form>
+            <h:form rendered="#{personBean.theUser.id == null}">
                 <h:outputText value="Already have a account?" />
-                <h:commandLink rendered="#{personBean.theUser.id == null}" value="Log In" action="LogIn" class="btn btn-primary"/>
+                <h:commandLink  value="Log In" action="LogIn" class="btn btn-primary"/>
             </h:form>
+            
         </ui:define>
     </ui:composition>
 </html>

@@ -174,4 +174,10 @@ public class IdeaBean implements Serializable {
         search = "";
         return "index";
     }
+    
+    public boolean isUserTheSubmitter() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
+        return idea.getSubmitter() == personBean.theUser;
+    }
 }
