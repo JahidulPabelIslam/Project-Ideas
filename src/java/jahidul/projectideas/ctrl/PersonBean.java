@@ -41,7 +41,11 @@ public class PersonBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        personsList = personService.findAllPersons();
+        if (isUserStaff()) {
+            personsList = personService.findAllPersons();
+        } else {
+            personsList = personService.findAllPersonsForNonStaff();
+        }
     }
 
     public PersonService getPersonService() {
@@ -92,16 +96,14 @@ public class PersonBean implements Serializable {
         this.filter = filter;
     }
 
-    private List<Person> results;
-
     public String logIn() {
-        results = personService.logIn(theUser.getUsername(), theUser.getPassword());
+        List<Person> results = personService.logIn(theUser.getUsername(), theUser.getPassword());
         if (!results.isEmpty()) {
             theUser = results.get(0);
             return "index";
         }
         theUser = new Person();
-        
+
         return "LogIn";
     }
 
@@ -117,12 +119,17 @@ public class PersonBean implements Serializable {
 
     public String setUpEditPerson(Person person) {
         this.person = person;
-        return "AddUser";
+        if (isUserStaff() || isPersonTheUser()) {
+            return "AddUser";
+        }
+        return "";
     }
 
     public String updatePerson(Person person) {
         this.person = person;
-        this.person = personService.updatePerson(person);
+        if (isUserStaff() || isPersonTheUser()) {
+            this.person = personService.updatePerson(person);
+        }
         return "User";
     }
 
@@ -133,22 +140,39 @@ public class PersonBean implements Serializable {
 
     public String deletePerson(Person person) {
         this.person = person;
-        personService.deletePerson(person);
-        personsList = personService.findAllPersons();
-        return "Users";
+        if (isUserStaff() && !isPersonTheUser()) {
+            personService.deletePerson(this.person);
+            personsList = personService.findAllPersons();
+            return "Users";
+        } else if (isUserStaff() && isPersonTheUser()) {
+            personService.deletePerson(this.person);
+            personsList = personService.findAllPersons();
+            theUser = new Person();
+            return "Users";
+        } else if (isPersonTheUser()) {
+            personService.deletePerson(this.person);
+            personsList = personService.findAllPersons();
+            theUser = new Person();
+            return "Users";
+        }
+        return null;
     }
 
     public String approveOrganisation(Person person) {
         this.person = person;
-        this.person.setType("Organisation");
-        this.person = personService.updatePerson(person);
+        if (isUserStaff()) {
+            this.person.setType("Organisation");
+            this.person = personService.updatePerson(person);
+        }
         return "User";
     }
 
     public String unapproveOrganisation(Person person) {
         this.person = person;
-        this.person.setType("Unapproved Organisation");
-        this.person = personService.updatePerson(person);
+        if (isUserStaff()) {
+            this.person.setType("Unapproved Organisation");
+            this.person = personService.updatePerson(person);
+        }
         return "User";
     }
 
@@ -159,12 +183,16 @@ public class PersonBean implements Serializable {
     }
 
     public String viewAllPersons() {
-        personsList = personService.findAllPersons();
+        if (isUserStaff()) {
+            personsList = personService.findAllPersons();
+        } else {
+            personsList = personService.findAllPersonsForNonStaff();
+        }
         filter = "All";
         search = "";
         return "Users";
     }
-    
+
     public List<Person> getStudents() {
         return personService.findStudents();
     }
@@ -193,54 +221,61 @@ public class PersonBean implements Serializable {
                 }
                 break;
             case "Unapproved Organisations":
-                if (!"".equals(search)) {
+                if (isUserStaff() && !"".equals(search)) {
                     personsList = personService.findUnapprovedOrganisationsBySearch(search);
-                } else {
+                } else if (isUserStaff()) {
                     personsList = personService.findUnapprovedOrganisations();
+                } else {
+                    filter = "All";
+                    personsList = personService.findAllPersonsForNonStaff();
                 }
                 break;
             default:
-                if (!"".equals(search)) {
+                if (isUserStaff() && !"".equals(search)) {
+                    personsList = personService.findPersonsBySearchForNonStaff(search);
+                } else if (!"".equals(search)) {
                     personsList = personService.findPersonsBySearch(search);
-                } else {
+                } else if (isUserStaff()) {
                     personsList = personService.findAllPersons();
+                } else {
+                    personsList = personService.findAllPersonsForNonStaff();
                 }
                 break;
         }
     }
-    
+
     public boolean isUserStaff() {
         return "Staff".equals(theUser.getType());
     }
-    
+
     public boolean isPersonStaff() {
         return "Staff".equals(person.getType());
     }
-    
+
     public boolean isUserStudent() {
         return "Student".equals(theUser.getType());
     }
-    
+
     public boolean isPersonStudent() {
         return "Student".equals(person.getType());
     }
-    
+
     public boolean isPersonAnyOrganisation() {
         return "Organisation".equals(person.getType()) || "Unapproved Organisation".equals(person.getType());
     }
-    
+
     public boolean isPersonApprovedOrganisation() {
         return "Organisation".equals(person.getType());
     }
-    
+
     public boolean isTheUserApprovedOrganisation() {
         return "Organisation".equals(theUser.getType());
     }
-    
+
     public boolean isPersonUnapprovedOrganisation() {
         return "Unapproved Organisation".equals(person.getType());
     }
-    
+
     public boolean isPersonTheUser() {
         return theUser == person;
     }

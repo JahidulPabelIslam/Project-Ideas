@@ -87,4 +87,15 @@ public class PersonFacade extends AbstractFacade<Person> {
         query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }
+    
+    public List<Person> findAllPersonsForNonStaff() {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE NOT p.type = 'Unapproved Organisation'", Person.class);
+        return query.getResultList();
+    }
+    
+    public List<Person> findPersonsBySearchForNonStaff(String search) {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE NOT p.type = 'Unapproved Organisation' AND lower(p.username) LIKE lower(:search)", Person.class);
+        query.setParameter("search", "%" + search + "%");
+        return query.getResultList();
+    }
 }

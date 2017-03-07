@@ -76,4 +76,12 @@ public class PersonService {
     public List<Person> findUnapprovedOrganisationsBySearch(String search) {
         return personFacade.findUnapprovedOrganisationsBySearch(search);
     }
+    
+    public List<Person> findAllPersonsForNonStaff() {
+        return personFacade.findAllPersonsForNonStaff();
+    }
+    
+    public List<Person> findPersonsBySearchForNonStaff(String search) {
+        return personFacade.findPersonsBySearchForNonStaff(search);
+    }
 }
