@@ -10,6 +10,7 @@ import jahidul.projectideas.ents.Person;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -277,7 +278,7 @@ public class PersonBean implements Serializable {
     }
 
     public boolean isPersonTheUser() {
-        return theUser == person;
+        return Objects.equals(theUser.getId(), person.getId());
     }
 
 }
