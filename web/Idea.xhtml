@@ -36,8 +36,9 @@
                 <h:outputLabel value="#{ideaBean.idea.appliedStudent}" />
 
                 <h:outputLabel value="Submitter:" />
-                <h:outputLabel value="#{ideaBean.idea.submitter}" />
-
+                <h:form>
+                    <h:commandLink id="view" value="#{ideaBean.idea.submitter}" action="#{personBean.viewPerson(ideaBean.idea.submitter)}"/>
+                </h:form>   
                 <h:outputLabel value="Date submitted/last updated:" />
                 <h:outputLabel value="#{ideaBean.idea.dateUpdated}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputLabel>
 

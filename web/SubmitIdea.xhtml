@@ -20,29 +20,29 @@
                     <h:outputLabel value="Title:" for="title"/>
                     <h:inputText id="title" label="Title"
                                  required="true"
-                                 value="#{ideaBean.idea.title}" />
+                                 value="#{ideaBean.idea.title}" class="form-control"/>
                     <h:message for="title" />
 
                     <h:outputLabel value="Aim and Objectives:" for="aimsObjectives"/>
                     <h:inputText id="aimsObjectives" label="aimsObjectives"
                                  required="true"
-                                 value="#{ideaBean.idea.aimsObjectives}"/>
+                                 value="#{ideaBean.idea.aimsObjectives}" class="form-control"/>
                     <h:message for="aimsObjectives" />
 
                     <h:outputLabel value="Project Question:" for="question"/>
                     <h:inputText id="question" label="question"
                                  required="true"
-                                 value="#{ideaBean.idea.question}" />
+                                 value="#{ideaBean.idea.question}" class="form-control"/>
                     <h:message for="question" />
 
                     <h:outputLabel value="Deliverables:" for="deliverables"/>
                     <h:inputText id="deliverables" label="deliverables"
                                  required="true"
-                                 value="#{ideaBean.idea.deliverables}"/>
+                                 value="#{ideaBean.idea.deliverables}" class="form-control"/>
                     <h:message for="deliverables" />
 
                     <h:outputLabel rendered="#{personBean.isUserStaff()}" value="Status:" for="status"/>
-                    <h:selectOneMenu rendered="#{personBean.isUserStaff()}" id="status" label="status" required="true" value="#{ideaBean.idea.status}">
+                    <h:selectOneMenu rendered="#{personBean.isUserStaff()}" id="status" label="status" required="true" value="#{ideaBean.idea.status}" class="form-control">
                         <f:selectItem itemValue="Provisional" itemLabel="Provisional" />
                         <f:selectItem itemValue="Approved" itemLabel="Approved" />
                         <f:selectItem itemValue="Rejected" itemLabel="Rejected"/>
@@ -50,15 +50,19 @@
                     <h:message rendered="#{personBean.isUserStaff()}" for="status" />
 
                     <h:outputLabel rendered="#{personBean.isUserStudent()}" value="Apply for Idea:" />
-                    <h:selectBooleanCheckbox rendered="#{personBean.isUserStudent()}" id="apply" value="#{ideaBean.apply}" />
+                    <h:selectBooleanCheckbox rendered="#{personBean.isUserStudent()}" id="apply" value="#{ideaBean.apply}" class="form-control"/>
                     <h:message rendered="#{personBean.isUserStudent()}" for="apply" />
 
-                    <h:outputLabel rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" value="Applied Student:" for="appliedStudent"/>
-                    <h:selectOneMenu rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" value="#{ideaBean.idea.appliedStudent}" id="appliedStudent" label="appliedStudent">
+<!--                    <h:outputLabel rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" value="Applied Student:" for="appliedStudent"/>
+                    <h:selectOneMenu rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" value="#{ideaBean.idea.appliedStudent}" id="appliedStudent" label="appliedStudent" class="form-control">
                         <f:selectItem itemValue="" itemLabel="Select The Student That Will Undertake This:" />
-                        <f:selectItems value="#{personBean.personsList}" />
+                        <f:selectItems value="#{personBean.personsList}" var="person"
+                                       itemLabel="#{person.firstName}"
+                                       itemValue="#{person}" />
+
+
                     </h:selectOneMenu>
-                    <h:message rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" for="appliedStudent" />
+                    <h:message rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" for="appliedStudent" />-->
                 </h:panelGrid>
 
                 <h:commandButton rendered="#{ideaBean.idea.id == null}" id="add" value="Add" action="#{ideaBean.addIdea(personBean.theUser)}" class="btn btn-success"/>

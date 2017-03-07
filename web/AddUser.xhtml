@@ -17,7 +17,7 @@
                              columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
                     <h:outputLabel rendered="#{personBean.isUserStaff()}" value="Type:" for="type"/>
-                    <h:selectOneMenu rendered="#{personBean.isUserStaff()}" id="type" label="type" required="true" value="#{personBean.person.type}">
+                    <h:selectOneMenu rendered="#{personBean.isUserStaff()}" id="type" label="type" required="true" value="#{personBean.person.type}" class="form-control">
                         <f:selectItem itemValue="Staff" itemLabel="Staff" />
                         <f:selectItem itemValue="Student" itemLabel="Student" />
                         <f:selectItem itemValue="Organisation" itemLabel="Organisation" />
@@ -29,25 +29,26 @@
                     <h:outputLabel value="Username:" for="username"/>
                     <h:inputText id="username" label="username"
                                  required="true"
-                                 value="#{personBean.person.username}" />
+                                 value="#{personBean.person.username}" class="form-control"/>
                     <h:message for="username" />
 
                     <h:outputLabel value="Password:" for="password"/>
                     <h:inputSecret id="password" label="password"
                                    required="true"
-                                   value="#{personBean.person.password}"/>
+                                   value="#{personBean.person.password}" class="form-control"/>
                     <h:message for="password" />
 
                     <h:outputLabel value="Email Address" for="email"/>
                     <h:inputText id="email" label="email"
                                  required="true"
-                                 value="#{personBean.person.email}"/>
+                                 value="#{personBean.person.email}" class="form-control"/>
+
                     <h:message for="email" />
 
                     <h:outputLabel value="Phone Number:" for="phoneNumber"/>
                     <h:inputText id="phoneNumber" label="phoneNumber"
                                  required="true"
-                                 value="#{personBean.person.phoneNumber}" />
+                                 value="#{personBean.person.phoneNumber}" class="form-control"/>
                     <h:message for="phoneNumber" />
 
                 </h:panelGrid>
@@ -60,18 +61,18 @@
                         <h:outputLabel value="First Name:" for="firstName" />
                         <h:inputText id="firstName" label="firstName"
                                      required="true"
-                                     value="#{personBean.person.firstName}"/>
+                                     value="#{personBean.person.firstName}" class="form-control"/>
                         <h:message for="firstName" />
 
                         <h:outputLabel value="Middle Name:" for="middleName"/>
                         <h:inputText id="middleName" label="middleName"
-                                     value="#{personBean.person.middleName}"/>
+                                     value="#{personBean.person.middleName}" class="form-control"/>
                         <h:message for="middleName"/>
 
                         <h:outputLabel value="Surname:" for="surname"/>
                         <h:inputText id="surname" label="surname"
                                      required="true"
-                                     value="#{personBean.person.surname}"/>
+                                     value="#{personBean.person.surname}" class="form-control"/>
                         <h:message for="surname"/>
 
                     </h:panelGrid>
@@ -85,7 +86,7 @@
                         <h:outputLabel value="Role:" for="role"/>
                         <h:inputText id="role" label="role"
                                      required="true"
-                                     value="#{personBean.person.staffRole}" />
+                                     value="#{personBean.person.staffRole}" class="form-control"/>
                         <h:message for="role" />
 
                     </h:panelGrid>
@@ -99,7 +100,7 @@
                         <h:outputLabel value="Student ID:" for="studentID"/>
                         <h:inputText id="studentID" label="studentID"
                                      required="true"
-                                     value="#{personBean.person.studentID}" />
+                                     value="#{personBean.person.studentID}" class="form-control"/>
                         <h:message for="studentID" />
 
                     </h:panelGrid>
@@ -113,36 +114,36 @@
                         <h:outputLabel value="Organisation Name:" for="organisationName"/>
                         <h:inputText id="organisationName" label="organisationName"
                                      required="true"
-                                     value="#{personBean.person.organisationName}"/>
+                                     value="#{personBean.person.organisationName}" class="form-control"/>
                         <h:message for="organisationName" />
 
                         <h:outputLabel value="Outline of the Organisation:" for="organisationOutline"/>
                         <h:inputText  id="organisationOutline" label="organisationOutline"
                                       required="true"
-                                      value="#{personBean.person.organisationOutline}" />
+                                      value="#{personBean.person.organisationOutline}" class="form-control"/>
                         <h:message for="organisationOutline" />
 
                         <h:outputLabel value="Address of the Organisation:" for="organisationAddress"/>
                         <h:inputText id="organisationAddress" label="organisationAddress"
                                      required="true"
-                                     value="#{personBean.person.organisationAddress}"/>
+                                     value="#{personBean.person.organisationAddress}" class="form-control"/>
                         <h:message for="organisationAddress" />
 
                         <h:outputLabel value="First Name for the Contact:" for="firstName2"/>
                         <h:inputText id="firstName2" label="firstName2"
                                      required="true"
-                                     value="#{personBean.person.firstName}"/>
+                                     value="#{personBean.person.firstName}" class="form-control"/>
                         <h:message for="firstName2" />
 
                         <h:outputLabel value="Middle Name for the Contact:" for="middleName2"/>
                         <h:inputText id="middleName2" label="middleName2"
-                                     value="#{personBean.person.middleName}" />
+                                     value="#{personBean.person.middleName}" class="form-control"/>
                         <h:message for="middleName2" />
 
                         <h:outputLabel value="Surname for the Contact:" for="surname2"/>
                         <h:inputText id="surname2" label="surname2"
                                      required="true"
-                                     value="#{personBean.person.surname}"/>
+                                     value="#{personBean.person.surname}" class="form-control"/>
                         <h:message for="surname2" />
                     </h:panelGrid>
                 </h:panelGroup>
