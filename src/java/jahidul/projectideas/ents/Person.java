@@ -6,10 +6,12 @@
 package jahidul.projectideas.ents;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -22,6 +24,51 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @NotNull
+    @Column(nullable = false)
+    private String password;
+
+    @NotNull
+    @Column(nullable = false)
+    private String type;
+
+    @NotNull
+    @Column(nullable = false)
+    private String email;
+
+    @NotNull
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    @NotNull
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = true)
+    private String middleName;
+
+    @NotNull
+    @Column(nullable = false)
+    private String surname;
+
+    @Column(nullable = true)
+    private int studentID;
+
+    @Column(nullable = true)
+    private String organisationName;
+    @Column(nullable = true)
+    private String organisationOutline;
+
+    @Column(nullable = true)
+    private String organisationAddress;
+
+    @Column(nullable = true)
+    private String staffRole;
 
     /**
      *
@@ -38,8 +85,6 @@ public class Person implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    private String username;
 
     /**
      * Get the value of username
@@ -59,8 +104,6 @@ public class Person implements Serializable {
         this.username = username;
     }
 
-    private String password;
-
     /**
      * Get the value of password
      *
@@ -78,8 +121,6 @@ public class Person implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    private String type;
 
     /**
      * Get the value of type
@@ -99,8 +140,6 @@ public class Person implements Serializable {
         this.type = type;
     }
 
-    private String email;
-
     /**
      * Get the value of email
      *
@@ -118,8 +157,6 @@ public class Person implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    private String phoneNumber;
 
     /**
      * Get the value of phoneNumber
@@ -139,8 +176,6 @@ public class Person implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    private String firstName;
-
     /**
      * Get the value of firstName
      *
@@ -158,8 +193,6 @@ public class Person implements Serializable {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
-    private String middleName;
 
     /**
      * Get the value of middleName
@@ -179,8 +212,6 @@ public class Person implements Serializable {
         this.middleName = middleName;
     }
 
-    private String surname;
-
     /**
      * Get the value of surname
      *
@@ -198,8 +229,6 @@ public class Person implements Serializable {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
-    private int studentID;
 
     /**
      * Get the value of studentID
@@ -219,8 +248,6 @@ public class Person implements Serializable {
         this.studentID = studentID;
     }
 
-    private String organisationName;
-
     /**
      * Get the value of organisationName
      *
@@ -238,8 +265,6 @@ public class Person implements Serializable {
     public void setOrganisationName(String organisationName) {
         this.organisationName = organisationName;
     }
-
-    private String organisationOutline;
 
     /**
      * Get the value of organisationOutline
@@ -259,8 +284,6 @@ public class Person implements Serializable {
         this.organisationOutline = organisationOutline;
     }
 
-    private String organisationAddress;
-
     /**
      * Get the value of organisationAddress
      *
@@ -279,24 +302,22 @@ public class Person implements Serializable {
         this.organisationAddress = organisationAddress;
     }
 
-    private String role;
-
     /**
-     * Get the value of role
+     * Get the value of staffRole
      *
-     * @return the value of role
+     * @return the value of staffRole
      */
-    public String getRole() {
-        return role;
+    public String getSaffRole() {
+        return staffRole;
     }
 
     /**
-     * Set the value of role
+     * Set the value of staffRole
      *
-     * @param role new value of role
+     * @param staffRole new value of staffRole
      */
-    public void setRole(String role) {
-        this.role = role;
+    public void setStaffRole(String staffRole) {
+        this.staffRole = staffRole;
     }
 
     @Override
@@ -321,7 +342,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        if (this.type == "Organisation" || this.type == "Unapproved Organisation") {
+        if ("Organisation".equals(this.type) || "Unapproved Organisation".equals(this.type)) {
             return this.organisationName;
         } else {
             return this.firstName + " " + this.surname;
