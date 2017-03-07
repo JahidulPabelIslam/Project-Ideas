@@ -307,7 +307,7 @@ public class Person implements Serializable {
      *
      * @return the value of staffRole
      */
-    public String getSaffRole() {
+    public String getStaffRole() {
         return staffRole;
     }
 
@@ -319,6 +319,8 @@ public class Person implements Serializable {
     public void setStaffRole(String staffRole) {
         this.staffRole = staffRole;
     }
+
+    
 
     @Override
     public int hashCode() {
