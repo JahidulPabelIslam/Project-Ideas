@@ -168,6 +168,20 @@ public class IdeaBean implements Serializable {
                     ideasList = ideaService.findProvisionalIdeas();
                 }
                 break;
+            case "Approved":
+                if (!"".equals(search)) {
+                    ideasList = ideaService.findApprovedIdeasBySearch(search);
+                } else {
+                    ideasList = ideaService.findApprovedIdeas();
+                }
+                break;
+            case "Rejected":
+                if (!"".equals(search)) {
+                    ideasList = ideaService.findRejectedIdeasBySearch(search);
+                } else {
+                    ideasList = ideaService.findRejectedIdeas();
+                }
+                break;
             default:
                 if (!"".equals(search)) {
                     ideasList = ideaService.findIdeasBySearch(search);

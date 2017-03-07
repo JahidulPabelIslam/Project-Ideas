@@ -13,7 +13,7 @@
 
         <ui:define name="content">
             <h:form>
-                
+
                 <h:panelGrid columns="3"
                              columnClasses="rightalign,leftalign,leftalign" class="table table-striped table-bordered">
 
@@ -45,6 +45,7 @@
                     <h:selectOneMenu rendered="#{personBean.isUserStaff()}" id="status" label="status" required="true" value="#{ideaBean.idea.status}">
                         <f:selectItem itemValue="Provisional" itemLabel="Provisional" />
                         <f:selectItem itemValue="Approved" itemLabel="Approved" />
+                        <f:selectItem itemValue="Rejected" itemLabel="Rejected"/>
                     </h:selectOneMenu>
                     <h:message rendered="#{personBean.isUserStaff()}" for="status" />
 

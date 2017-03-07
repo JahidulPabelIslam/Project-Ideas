@@ -63,4 +63,20 @@ public class IdeaService {
     public List<Idea> findProvisionalIdeasBySearch(String search) {
         return ideaFacade.findProvisionalIdeasBySearch(search);
     }
+    
+    public List<Idea> findApprovedIdeasBySearch(String search) {
+        return ideaFacade.findApprovedIdeasBySearch(search);
+    }
+    
+    public List<Idea> findApprovedIdeas() {
+        return ideaFacade.findApprovedIdeas();
+    }
+    
+    public List<Idea> findRejectedIdeasBySearch(String search) {
+        return ideaFacade.findRejectedIdeasBySearch(search);
+    }
+    
+    public List<Idea> findRejectedIdeas() {
+        return ideaFacade.findRejectedIdeas();
+    }
 }

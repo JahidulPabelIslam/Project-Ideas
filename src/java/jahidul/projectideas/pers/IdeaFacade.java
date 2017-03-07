@@ -58,4 +58,26 @@ public class IdeaFacade extends AbstractFacade<Idea> {
         query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }
+    
+    public List<Idea> findApprovedIdeasBySearch(String search) {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND lower(i.title) LIKE lower(:search)", Idea.class);
+        query.setParameter("search", "%" + search + "%");
+        return query.getResultList();
+    }
+    
+    public List<Idea> findApprovedIdeas() {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved'", Idea.class);
+        return query.getResultList();
+    }
+    
+    public List<Idea> findRejectedIdeasBySearch(String search) {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Rejected' AND lower(i.title) LIKE lower(:search)", Idea.class);
+        query.setParameter("search", "%" + search + "%");
+        return query.getResultList();
+    }
+    
+    public List<Idea> findRejectedIdeas() {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Rejected'", Idea.class);
+        return query.getResultList();
+    }
 }
