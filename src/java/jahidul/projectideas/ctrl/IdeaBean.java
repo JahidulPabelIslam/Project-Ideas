@@ -41,7 +41,7 @@ public class IdeaBean implements Serializable {
     protected String search = "";
 
     protected String filter = "All";
-    
+
     @PostConstruct
     public void init() {
         ideasList = ideaService.findAllIdeas();
@@ -96,12 +96,15 @@ public class IdeaBean implements Serializable {
     }
 
     public String addIdea(Person p) {
-        if (apply) {
-            idea.setAppliedStudent(p);
+        if (isTheUserApprovedOrganisation() || isUserTheStaff() || isUserStudent()) {
+            if (apply && isUserStudent()) {
+                idea.setAppliedStudent(p);
+            }
+            ideaService.addIdea(idea, p);
+            ideasList = ideaService.findAllIdeas();
+            return "Idea.xhtml";
         }
-        ideaService.addIdea(idea, p);
-        ideasList = ideaService.findAllIdeas();
-        return "Idea.xhtml";
+        return null;
     }
 
     public String viewIdea(Idea idea) {
@@ -111,29 +114,42 @@ public class IdeaBean implements Serializable {
 
     public String setUpEditIdea(Idea idea) {
         this.idea = idea;
-        if (this.idea.getAppliedStudent() != null) {
-            apply = true;
+        if (isUserTheSubmitter() || isUserTheStaff()) {
+            if (this.idea.getAppliedStudent() != null) {
+                apply = true;
+            }
+            return "SubmitIdea";
         }
-        return "SubmitIdea.xhtml";
+        return null;
+
     }
 
     public String editIdea(Idea idea) {
-        this.idea = ideaService.editIdea(idea);
-        ideasList = ideaService.findAllIdeas();
-        return "Idea.xhtml";
+        this.idea = idea;
+        if (isUserTheSubmitter() || isUserTheStaff()) {
+            this.idea = ideaService.editIdea(idea);
+        }
+        return "Idea";
     }
 
     public String deleteIdea(Idea idea) {
-        ideaService.deleteIdea(idea);
-        ideasList = ideaService.findAllIdeas();
-        return "index.xhtml";
+        this.idea = idea;
+        if (isUserTheSubmitter() || isUserTheStaff()) {
+            ideaService.deleteIdea(idea);
+            ideasList = ideaService.findAllIdeas();
+            this.idea = new Idea();
+        }
+        return "index";
     }
 
     public String prepareCreate() {
-        idea = new Idea();
-        idea.setStatus("Provisional");
-        updatePersonsList();
-        return "SubmitIdea";
+        if (isTheUserApprovedOrganisation() || isUserTheStaff() || isUserStudent()) {
+            idea = new Idea();
+            idea.setStatus("Provisional");
+            updatePersonsList();
+            return "SubmitIdea";
+        }
+        return null;
     }
 
     public void updateIdeasList() {
@@ -161,7 +177,7 @@ public class IdeaBean implements Serializable {
                 break;
         }
     }
-    
+
     public void updatePersonsList() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
@@ -174,10 +190,28 @@ public class IdeaBean implements Serializable {
         search = "";
         return "index";
     }
-    
+
     public boolean isUserTheSubmitter() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
         return idea.getSubmitter() == personBean.theUser;
+    }
+
+    public boolean isUserTheStaff() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
+        return personBean.isUserStaff();
+    }
+
+    public boolean isTheUserApprovedOrganisation() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
+        return personBean.isTheUserApprovedOrganisation();
+    }
+
+    public boolean isUserStudent() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
+        return personBean.isUserStudent();
     }
 }
