@@ -61,6 +61,7 @@ public class Person implements Serializable {
 
     @Column(nullable = true)
     private String organisationName;
+    
     @Column(nullable = true)
     private String organisationOutline;
 

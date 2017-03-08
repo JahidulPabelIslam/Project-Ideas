@@ -233,9 +233,9 @@ public class PersonBean implements Serializable {
                 break;
             default:
                 if (isUserStaff() && !"".equals(search)) {
-                    personsList = personService.findPersonsBySearchForNonStaff(search);
-                } else if (!"".equals(search)) {
                     personsList = personService.findPersonsBySearch(search);
+                } else if (!"".equals(search)) {
+                    personsList = personService.findPersonsBySearchForNonStaff(search);
                 } else if (isUserStaff()) {
                     personsList = personService.findAllPersons();
                 } else {

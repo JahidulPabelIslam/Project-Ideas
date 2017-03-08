@@ -59,42 +59,57 @@ public class PersonFacade extends AbstractFacade<Person> {
     }
 
     public List<Person> findPersonsBySearch(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE lower(p.username) LIKE lower(:search)", Person.class);
-        query.setParameter("search", "%" + search + "%");
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE lower(p.firstName) LIKE lower(:search) OR lower(p.surname) LIKE lower(:search) OR lower(p.organisationName) LIKE lower(:search)", Person.class);
+        String finalSearch = "%";
+        String[] strings = search.split(" ");
+        for (String string : strings) {
+            finalSearch += string + "%";
+        }
+        query.setParameter("search", finalSearch);
         return query.getResultList();
     }
 
     public List<Person> findStudentsBySearch(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student' AND lower(p.username) LIKE lower(:search)", Person.class);
-        query.setParameter("search", "%" + search + "%");
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student' AND ( lower(p.firstName) LIKE lower(:search) OR lower(p.surname) LIKE lower(:search) )", Person.class);
+        String finalSearch = "%";
+        String[] strings = search.split(" ");
+        for (String string : strings) {
+            finalSearch += string + "%";
+        }
+        query.setParameter("search", finalSearch);
         return query.getResultList();
     }
 
     public List<Person> findStaffBySearch(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff' AND lower(p.username) LIKE lower(:search)", Person.class);
-        query.setParameter("search", "%" + search + "%");
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff' AND ( lower(p.firstName) LIKE lower(:search) OR lower(p.surname) LIKE lower(:search) OR lower(p.staffRole) LIKE lower(:search) )", Person.class);
+        String finalSearch = "%";
+        String[] strings = search.split(" ");
+        for (String string : strings) {
+            finalSearch += string + "%";
+        }
+        query.setParameter("search", finalSearch);
         return query.getResultList();
     }
 
     public List<Person> findOrganisationsBySearch(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation' AND lower(p.username) LIKE lower(:search)", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation' AND ( lower(p.organisationName) LIKE lower(:search) )", Person.class);
         query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }
 
     public List<Person> findUnapprovedOrganisationsBySearch(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation' AND lower(p.username) LIKE lower(:search)", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation' AND ( lower(p.organisationName) LIKE lower(:search) )", Person.class);
         query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }
-    
+
     public List<Person> findAllPersonsForNonStaff() {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE NOT p.type = 'Unapproved Organisation'", Person.class);
         return query.getResultList();
     }
-    
+
     public List<Person> findPersonsBySearchForNonStaff(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE NOT p.type = 'Unapproved Organisation' AND lower(p.username) LIKE lower(:search)", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE NOT p.type = 'Unapproved Organisation' AND ( lower(p.firstName) LIKE lower(:search) OR lower(p.surname) LIKE lower(:search) OR lower(p.organisationName) LIKE lower(:search) )", Person.class);
         query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }
