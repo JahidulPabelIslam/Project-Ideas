@@ -51,5 +51,12 @@ table {
 
 .feedback li {
     display: inline-block;
+}
 
+table {
+    text-align: center;
+}
+
+.noneFound {
+    display: inline-block;
 }

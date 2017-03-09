@@ -41,9 +41,9 @@
                 </div>
             </h:form>
 
-            <h:panelGroup id="ideas">
+            <h:panelGrid columns="1" id="ideas">
                 
-                <h:outputText rendered="#{ideaBean.ideasList.size() == 0}" value="No Ideas Found" class="alert alert-danger"/>
+                <h:outputText rendered="#{ideaBean.ideasList.size() == 0}" value="No Ideas Found" class="alert alert-danger noneFound"/>
 
                 <h:dataTable rendered="#{ideaBean.ideasList.size() > 0}" value="#{ideaBean.ideasList}" var="idea" border="0" cellpadding="2" cellspacing="0" class="table table-striped table-bordered">
                     <h:column>
@@ -71,7 +71,7 @@
                         <h:outputText value="#{idea.aimsObjectives}" />
                     </h:column>
                 </h:dataTable>
-            </h:panelGroup>
+            </h:panelGrid>
         </ui:define>
     </ui:composition>
 
