@@ -52,7 +52,7 @@
                 </h:form>             
             </h:panelGrid>
 
-            <h:panelGrid rendered="#{personBean.isUserStudent() and personBean.person.idea != null}" columns="2" class="table table-striped table-bordered">
+            <h:panelGrid rendered="#{personBean.person.idea != null}" columns="2" class="table table-striped table-bordered">
 
                 <h:outputLabel value="Project title:" />
                 <h:outputText value="#{personBean.person.idea.title}" />
