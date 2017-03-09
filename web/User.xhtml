@@ -16,32 +16,32 @@
             <h:panelGrid columns="2" class="table table-striped table-bordered">
 
                 <h:outputLabel value="User Type:" />
-                <h:outputLabel value="#{personBean.person.type}" />
+                <h:outputText value="#{personBean.person.type}" />
 
                 <h:outputLabel rendered="#{personBean.isPersonStudent()}" value="Student ID:" />
-                <h:outputLabel rendered="#{personBean.isPersonStudent()}" value="#{personBean.person.studentID}" />
+                <h:outputText rendered="#{personBean.isPersonStudent()}" value="#{personBean.person.studentID}" />
 
                 <h:outputLabel value="Name:" rendered="#{!personBean.isPersonAnyOrganisation()}"/>
-                <h:outputLabel value="Contact Name:" rendered="#{personBean.isPersonAnyOrganisation()}"/>
-                <h:outputLabel value="#{personBean.person.firstName} #{personBean.person.middleName} #{personBean.person.surname}" />
+                <h:outputText value="Contact Name:" rendered="#{personBean.isPersonAnyOrganisation()}"/>
+                <h:outputText value="#{personBean.person.firstName} #{personBean.person.middleName} #{personBean.person.surname}" />
 
                 <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}" value="Organisation Name:" />
-                <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="#{personBean.person.organisationName}" />
+                <h:outputText rendered="#{personBean.isPersonAnyOrganisation()}"  value="#{personBean.person.organisationName}" />
 
                 <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="Organisation Outline:" />
-                <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="#{personBean.person.organisationOutline}" />
+                <h:outputText rendered="#{personBean.isPersonAnyOrganisation()}"  value="#{personBean.person.organisationOutline}" />
 
                 <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="Organisation Address:" />
-                <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}"  value="#{personBean.person.organisationAddress}" />
+                <h:outputText rendered="#{personBean.isPersonAnyOrganisation()}"  value="#{personBean.person.organisationAddress}" />
 
                 <h:outputLabel rendered="#{personBean.isPersonStaff()}" value="Role:" />
-                <h:outputLabel rendered="#{personBean.isPersonStaff()}" value="#{personBean.person.staffRole}" />
+                <h:outputText rendered="#{personBean.isPersonStaff()}" value="#{personBean.person.staffRole}" />
                 
                 <h:outputLabel value="Email:" />
-                <h:outputLabel value="#{personBean.person.email}" />
+                <h:outputText value="#{personBean.person.email}" />
 
                 <h:outputLabel value="Phone Number:" />
-                <h:outputLabel value="#{personBean.person.phoneNumber}" />
+                <h:outputText value="#{personBean.person.phoneNumber}" />
 
                 <h:outputLabel value="Actions:" />
                 <h:form>

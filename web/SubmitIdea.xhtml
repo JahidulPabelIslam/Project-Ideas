@@ -20,25 +20,25 @@
                     <h:outputLabel value="Title:" for="title"/>
                     <h:inputText id="title" label="Title"
                                  required="true"
-                                 value="#{ideaBean.idea.title}" class="form-control"/>
+                                 value="#{ideaBean.idea.title}" class="form-control" requiredMessage="Please enter the project title."/>
                     <h:message for="title" />
 
-                    <h:outputLabel value="Aim and Objectives:" for="aimsObjectives"/>
+                    <h:outputLabel value="Aim &amp; Objectives:" for="aimsObjectives"/>
                     <h:inputText id="aimsObjectives" label="aimsObjectives"
                                  required="true"
-                                 value="#{ideaBean.idea.aimsObjectives}" class="form-control"/>
+                                 value="#{ideaBean.idea.aimsObjectives}" class="form-control" requiredMessage="Please enter the aim &amp; objectives."/>
                     <h:message for="aimsObjectives" />
 
                     <h:outputLabel value="Project Question:" for="question"/>
                     <h:inputText id="question" label="question"
                                  required="true"
-                                 value="#{ideaBean.idea.question}" class="form-control"/>
+                                 value="#{ideaBean.idea.question}" class="form-control" requiredMessage="Please enter the project question."/>
                     <h:message for="question" />
 
                     <h:outputLabel value="Deliverables:" for="deliverables"/>
                     <h:inputText id="deliverables" label="deliverables"
                                  required="true"
-                                 value="#{ideaBean.idea.deliverables}" class="form-control"/>
+                                 value="#{ideaBean.idea.deliverables}" class="form-control" requiredMessage="Please enter the deliverables."/>
                     <h:message for="deliverables" />
 
                     <h:outputLabel rendered="#{personBean.isUserStaff()}" value="Status:" for="status"/>
