@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 
@@ -53,7 +54,7 @@ public class Idea implements Serializable {
     @Column(nullable = false)
     private Date dateUpdated;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(nullable = true)
     private Person appliedStudent;
 

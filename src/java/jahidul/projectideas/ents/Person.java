@@ -6,11 +6,15 @@
 package jahidul.projectideas.ents;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -61,7 +65,7 @@ public class Person implements Serializable {
 
     @Column(nullable = true)
     private String organisationName;
-    
+
     @Column(nullable = true)
     private String organisationOutline;
 
@@ -70,6 +74,14 @@ public class Person implements Serializable {
 
     @Column(nullable = true)
     private String staffRole;
+    
+    @JoinColumn(nullable = true)
+    @OneToOne(mappedBy = "appliedStudent")
+    private Idea idea;
+    
+    @JoinColumn(nullable = true)
+    @OneToMany(mappedBy = "submitter")
+    private List<Idea> ideas;
 
     /**
      *
@@ -321,7 +333,21 @@ public class Person implements Serializable {
         this.staffRole = staffRole;
     }
 
-    
+    public Idea getIdea() {
+        return idea;
+    }
+
+    public void setIdea(Idea idea) {
+        this.idea = idea;
+    }
+
+    public List<Idea> getIdeas() {
+        return ideas;
+    }
+
+    public void setIdeas(List<Idea> ideas) {
+        this.ideas = ideas;
+    }
 
     @Override
     public int hashCode() {
