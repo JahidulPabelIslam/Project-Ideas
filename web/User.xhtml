@@ -55,9 +55,11 @@
                     </h:form>             
                 </h:panelGrid>
 
-                <h:outputText rendered="#{personBean.person.idea != null}" value="Choosen Idea." class="alert alert-success noneFound"/>
+                <h:outputText rendered="#{personBean.isPersonStudent() and personBean.person.idea != null}" value="Choosen Idea." class="alert alert-success noneFound"/>
+                
+                <h:outputText rendered="#{personBean.isPersonStudent() and personBean.person.idea == null}" value="No Idea Choosen." class="alert alert-danger noneFound"/>
 
-                <h:panelGrid rendered="#{personBean.person.idea != null}" columns="2" class="table table-striped table-bordered">
+                <h:panelGrid rendered="#{personBean.isPersonStudent() and personBean.person.idea != null}" columns="2" class="table table-striped table-bordered">
 
                     <h:outputLabel value="Project title:" />
                     <h:outputText value="#{personBean.person.idea.title}" />

@@ -75,11 +75,9 @@ public class Person implements Serializable {
     @Column(nullable = true)
     private String staffRole;
     
-    @JoinColumn(nullable = true)
     @OneToOne(mappedBy = "appliedStudent")
     private Idea idea;
     
-    @JoinColumn(nullable = true)
     @OneToMany(mappedBy = "submitter")
     private List<Idea> ideas;
 

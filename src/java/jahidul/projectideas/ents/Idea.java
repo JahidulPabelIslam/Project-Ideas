@@ -55,12 +55,10 @@ public class Idea implements Serializable {
     private Date dateUpdated;
 
     @OneToOne
-    @JoinColumn(nullable = true)
     private Person appliedStudent;
 
     @ManyToOne
     @NotNull
-    @JoinColumn(nullable = false)
     private Person submitter;
 
     /**
