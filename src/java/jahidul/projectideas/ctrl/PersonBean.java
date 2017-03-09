@@ -14,6 +14,8 @@ import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -103,6 +105,8 @@ public class PersonBean implements Serializable {
             theUser = results.get(0);
             return "index";
         }
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username and/or password not recognised.", "Sign In Error");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         theUser = new Person();
 
         return "LogIn";

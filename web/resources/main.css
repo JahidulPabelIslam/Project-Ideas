@@ -38,3 +38,18 @@ table {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.btn {
+    margin: 5px;
+}
+
+.feedback {
+    list-style:none;
+    padding: 0;
+    text-align: center;
+}
+
+.feedback li {
+    display: inline-block;
+
+}

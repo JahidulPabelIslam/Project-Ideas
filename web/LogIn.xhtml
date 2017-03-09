@@ -37,6 +37,9 @@
                 <h:outputText value="Haven't Got a Account? " />
                 <h:commandButton value="Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
             </h:form>
+            
+            <h:messages class="feedback" errorClass="alert alert-danger"></h:messages>
+            
         </ui:define>
     </ui:composition>
 
