@@ -32,6 +32,7 @@
                             <li><h:commandLink rendered="#{personBean.theUser.id != null}" value="Add Idea" action="#{ideaBean.prepareCreate()}"/></li>
                             <li><h:commandLink rendered="#{personBean.isUserStaff()}" value="Add User" action="#{personBean.prepareCreate()}"/></li>
                             <li><h:commandLink rendered="#{personBean.theUser.id == null}" value="Log In" action="LogIn"/></li>
+                            <li><h:commandLink rendered="#{personBean.theUser.id != null}" value="My Account" action="#{personBean.viewPerson(personBean.theUser)}"/></li>
                             <li><h:commandLink rendered="#{personBean.theUser.id != null}" value="Log Out" action="#{personBean.logOut()}" /></li>
                         </ul>
                     </div>
