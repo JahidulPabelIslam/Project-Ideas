@@ -14,7 +14,7 @@
         <ui:define name="content">
             <h:panelGrid columns="1" >
                 
-                <h:outputText rendered="#{personBean.person.idea != null}" value="User Details." class="alert alert-success noneFound"/>
+                <h:outputText value="User Details." class="alert alert-success noneFound"/>
                 
                 <h:panelGrid columns="2" class="table table-striped table-bordered">
 
@@ -55,7 +55,7 @@
                     </h:form>             
                 </h:panelGrid>
 
-                <h:outputText rendered="#{personBean.isPersonStudent() and personBean.person.idea != null}" value="Choosen Idea." class="alert alert-success noneFound"/>
+                <h:outputText rendered="#{personBean.isPersonStudent()}" value="Choosen Idea." class="alert alert-success noneFound"/>
                 
                 <h:outputText rendered="#{personBean.isPersonStudent() and personBean.person.idea == null}" value="No Idea Choosen." class="alert alert-danger noneFound"/>
 
@@ -98,7 +98,8 @@
                     </h:form>
                 </h:panelGrid>
 
-                <h:outputText rendered="#{personBean.person.idea != null}" value="Submitted Ideas." class="alert alert-success noneFound"/>
+                <h:outputText value="Submitted Ideas." class="alert alert-success noneFound"/>
+                
                 <h:panelGrid columns="1" >
 
                     <h:outputText rendered="#{personBean.person.ideas.size() == 0}" value="No Ideas Found" class="alert alert-danger noneFound"/>
