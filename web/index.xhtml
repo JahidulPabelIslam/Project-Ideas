@@ -50,11 +50,20 @@
                         <h:commandLink id="view" value="#{idea.title}" action="#{ideaBean.viewIdea(idea)}"/>
                     </h:form>
                 </h:column>
+                
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Status" />
                     </f:facet>
+                    
                     <h:outputText value="#{idea.status}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Aims &amp; Objectives" />
+                    </f:facet>
+                    <h:outputText value="#{idea.aimsObjectives}" />
                 </h:column>
             </h:dataTable>
         </ui:define>
