@@ -115,6 +115,9 @@ public class PersonBean implements Serializable {
 
     public String addUser() {
         personService.addPerson(person);
+        if (!isUserStaff()) {
+            return "registrationConfirmation";
+        }
         return "User";
     }
 
