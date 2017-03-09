@@ -40,11 +40,11 @@ public class IdeaBean implements Serializable {
 
     protected String search = "";
 
-    protected String filter = "All";
+    protected String filter = "Approved";
 
     @PostConstruct
     public void init() {
-        ideasList = ideaService.findAllIdeas();
+        updateIdeasList();
     }
 
     public IdeaService getIdeaService() {
@@ -199,9 +199,9 @@ public class IdeaBean implements Serializable {
     }
 
     public String viewAllIdeas() {
-        ideasList = ideaService.findAllIdeas();
-        filter = "All";
+        filter = "Approved";
         search = "";
+        updateIdeasList();
         return "index";
     }
 

@@ -16,22 +16,24 @@
             <h:form class="form-horizontal">
 
                 <div class="form-group">
-                    <h:outputLabel value="View:" for="filter" class="col-sm-2 control-label"/>
-                    <div class="col-sm-10">
+                    <h:outputLabel value="View:" for="filter" class="col-sm-1 control-label"/>
+                    <div class="col-sm-11">
                         <h:selectOneMenu id="filter" label="filter" value="#{ideaBean.filter}" class="form-control" >
-                            <f:selectItem itemValue="All" itemLabel="All"/>
+                            <c:if test="${personBean.isUserStaff()}">
+                                <f:selectItem itemValue="All" itemLabel="All"/>
+                                <f:selectItem itemValue="Provisional" itemLabel="Provisional"/>
+                                <f:selectItem itemValue="Rejected" itemLabel="Rejected"/>
+                            </c:if>
                             <f:selectItem itemValue="Approved" itemLabel="Approved"/>
                             <f:selectItem itemValue="Approved But Unallocated" itemLabel="Approved But Unallocated"/>
-                            <f:selectItem itemValue="Provisional" itemLabel="Provisional"/>
-                            <f:selectItem itemValue="Rejected" itemLabel="Rejected"/>
                             <f:ajax event="change" listener="#{ideaBean.updateIdeasList()}" render="ideas"/>
                         </h:selectOneMenu>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <h:outputLabel value="Search:" for="search" class="col-sm-2 control-label"/>
-                    <div class="col-sm-10">
+                    <h:outputLabel value="Search:" for="search" class="col-sm-1 control-label"/>
+                    <div class="col-sm-11">
                         <h:inputText id="search" label="search" value="#{ideaBean.search}" class="form-control">
                             <f:ajax event="keyup" listener="#{ideaBean.updateIdeasList()}" render="ideas" />
                         </h:inputText> 

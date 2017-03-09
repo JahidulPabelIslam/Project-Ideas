@@ -50,7 +50,7 @@
                     <h:message rendered="#{personBean.isUserStaff()}" for="status" />
 
                     <h:outputLabel rendered="#{personBean.isUserStudent()}" value="Apply for Idea:" />
-                    <h:selectBooleanCheckbox rendered="#{personBean.isUserStudent()}" id="apply" value="#{ideaBean.apply}" class="form-control"/>
+                    <h:selectBooleanCheckbox rendered="#{personBean.isUserStudent()}" id="apply" value="#{ideaBean.apply}"/>
                     <h:message rendered="#{personBean.isUserStudent()}" for="apply" />
 
 <!--                    <h:outputLabel rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" value="Applied Student:" for="appliedStudent"/>
