@@ -41,32 +41,37 @@
                 </div>
             </h:form>
 
-            <h:dataTable id="ideas" value="#{ideaBean.ideasList}" var="idea" border="0" cellpadding="2" cellspacing="0" class="table table-striped table-bordered">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Title" />
-                    </f:facet>
-                    <h:form>
-                        <h:commandLink id="view" value="#{idea.title}" action="#{ideaBean.viewIdea(idea)}"/>
-                    </h:form>
-                </h:column>
+            <h:panelGroup id="ideas">
+                
+                <h:outputText rendered="#{ideaBean.ideasList.size() == 0}" value="No Ideas Found" class="alert alert-danger"/>
 
-                <h:column  >
-                    <f:facet name="header">
-                        <h:outputText value="Status" />
-                    </f:facet>
+                <h:dataTable rendered="#{ideaBean.ideasList.size() > 0}" value="#{ideaBean.ideasList}" var="idea" border="0" cellpadding="2" cellspacing="0" class="table table-striped table-bordered">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Title" />
+                        </f:facet>
+                        <h:form>
+                            <h:commandLink id="view" value="#{idea.title}" action="#{ideaBean.viewIdea(idea)}"/>
+                        </h:form>
+                    </h:column>
 
-                    <h:outputText value="#{idea.status}" />
-                </h:column>
+                    <h:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Status" />
+                        </f:facet>
+
+                        <h:outputText value="#{idea.status}" />
+                    </h:column>
 
 
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Aims &amp; Objectives" />
-                    </f:facet>
-                    <h:outputText value="#{idea.aimsObjectives}" />
-                </h:column>
-            </h:dataTable>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Aims &amp; Objectives" />
+                        </f:facet>
+                        <h:outputText value="#{idea.aimsObjectives}" />
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
         </ui:define>
     </ui:composition>
 
