@@ -173,7 +173,7 @@ public class PersonBean implements Serializable {
      * @return
      */
     public String logIn() {
-        List<Person> results = personService.logIn(theUser.getUsername(), theUser.getPassword());
+        List<Person> results = personService.findPersonByUsernamePassword(theUser.getUsername(), theUser.getPassword());
         if (!results.isEmpty()) {
             theUser = results.get(0);
             return "index";
@@ -209,15 +209,21 @@ public class PersonBean implements Serializable {
      * @return
      */
     public String addUser() {
-        personService.addPerson(person);
-        if (!isUserStaff()) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "An administrator will review your details and enable\n"
-                    + "                           your account soon, come back later and try to log in.", "Sign In Error");
+        try {
+            personService.addPerson(person);
+            if (!isUserStaff()) {
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully registered, An administrator will review your details and enable\n"
+                        + "                           your account soon, come back later and try to log in.", "Successfully registered.");
+                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                person = new Person();
+                return null;
+            }
+            return "User";
+        } catch (Exception be) {
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, be.getMessage(), be.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-            person = new Person();
             return null;
         }
-        return "User";
     }
 
     /**

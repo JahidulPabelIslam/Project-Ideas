@@ -44,10 +44,21 @@ public class PersonFacade extends AbstractFacade<Person> {
      * @param password
      * @return
      */
-    public List<Person> logIn(String username, String password) {
+    public List<Person> findPersonByUsernamePassword(String username, String password) {
         TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.username = :username AND p.password = :password AND NOT p.type = 'Unapproved Organisation'", Person.class);
         query.setParameter("username", username);
         query.setParameter("password", password);
+        return query.getResultList();
+    }
+    
+    /**
+     *
+     * @param username
+     * @return
+     */
+    public List<Person> findPersonByUsername(String username) {
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.username = :username", Person.class);
+        query.setParameter("username", username);
         return query.getResultList();
     }
 
