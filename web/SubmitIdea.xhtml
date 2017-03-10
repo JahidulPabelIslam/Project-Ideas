@@ -53,15 +53,16 @@
                     <h:selectBooleanCheckbox rendered="#{personBean.isUserStudent()}" id="apply" value="#{ideaBean.apply}"/>
                     <h:message rendered="#{personBean.isUserStudent()}" for="apply" class="error"/>
 
-<!--                    <h:outputLabel rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" value="Applied Student:" for="appliedStudent"/>
+                    <h:outputLabel rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" value="Applied Student:" for="appliedStudent"/>
                     <h:selectOneMenu rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" 
                                      value="#{ideaBean.idea.appliedStudent}" id="appliedStudent" label="appliedStudent" class="form-control">
                         <f:selectItem itemValue="" itemLabel="Select The Student That Will Undertake This:" />
-                        <f:selectItems value="#{personBean.personsList}" var="person"
-                                       itemValue="#{person}"
-                                       itemLabel="#{person.id}"/>
+                        <f:selectItems value="#{personBean.personsList}"
+                                       var="person"
+                                       itemLabel="#{person.firstName}"
+                                       itemValue="#{person.id}" /> 
                     </h:selectOneMenu>
-                    <h:message rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" for="appliedStudent" />-->
+                    <h:message rendered="#{personBean.isTheUserApprovedOrganisation() or personBean.isUserStaff()}" for="appliedStudent" />
 
                 </h:panelGrid>
 
