@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -74,10 +73,10 @@ public class Person implements Serializable {
 
     @Column(nullable = true)
     private String staffRole;
-    
-    @OneToOne(mappedBy = "appliedStudent")
-    private Idea idea;
-    
+
+    @OneToOne(mappedBy = "implementer")
+    private Idea implementingIdea;
+
     @OneToMany(mappedBy = "submitter")
     private List<Idea> ideas;
 
@@ -331,20 +330,12 @@ public class Person implements Serializable {
         this.staffRole = staffRole;
     }
 
-    /**
-     *
-     * @return
-     */
-    public Idea getIdea() {
-        return idea;
+    public Idea getImplementingIdea() {
+        return implementingIdea;
     }
 
-    /**
-     *
-     * @param idea
-     */
-    public void setIdea(Idea idea) {
-        this.idea = idea;
+    public void setImplementingIdea(Idea implementingIdea) {
+        this.implementingIdea = implementingIdea;
     }
 
     /**

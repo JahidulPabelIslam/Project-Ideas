@@ -55,14 +55,14 @@ public class IdeaFacade extends AbstractFacade<Idea> {
      */
     public List<Idea> findAllBySearch(String search) {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search) ORDER BY i.dateUpdated DESC", Idea.class);
-        
+
         String finalSearch = "%";
         String[] strings = search.split(" ");
         for (String string : strings) {
             finalSearch += string + "%";
         }
         query.setParameter("search", finalSearch);
-        
+
         return query.getResultList();
     }
 
@@ -102,7 +102,7 @@ public class IdeaFacade extends AbstractFacade<Idea> {
      * @return
      */
     public List<Idea> findApprovedButUnallocatedIdeas() {
-        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.appliedStudent IS NULL ORDER BY i.dateUpdated DESC", Idea.class);
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.implementer IS NULL ORDER BY i.dateUpdated DESC", Idea.class);
         return query.getResultList();
     }
 
@@ -112,15 +112,15 @@ public class IdeaFacade extends AbstractFacade<Idea> {
      * @return
      */
     public List<Idea> findApprovedButUnallocatedIdeasBySearch(String search) {
-        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.appliedStudent IS NULL AND (lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search)) ORDER BY i.dateUpdated DESC", Idea.class);
-        
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.implementer IS NULL AND (lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search)) ORDER BY i.dateUpdated DESC", Idea.class);
+
         String finalSearch = "%";
         String[] strings = search.split(" ");
         for (String string : strings) {
             finalSearch += string + "%";
         }
         query.setParameter("search", finalSearch);
-        
+
         return query.getResultList();
     }
 }

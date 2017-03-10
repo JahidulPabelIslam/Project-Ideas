@@ -55,7 +55,7 @@
 
                     <h:outputLabel rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" value="Applied Student:" for="appliedStudent"/>
                     <h:selectOneMenu rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" 
-                                     value="#{ideaBean.idea.appliedStudent}" id="appliedStudent" label="appliedStudent" class="form-control">
+                                     value="#{ideaBean.idea.implementer}" id="appliedStudent" label="appliedStudent" class="form-control">
                         <f:selectItem itemValue="" itemLabel="Select The Student That Will Undertake This:" />
                         <f:selectItems value="#{personBean.personsList}"
                                        var="person"

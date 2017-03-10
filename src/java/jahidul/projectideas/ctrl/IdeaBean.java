@@ -176,7 +176,7 @@ public class IdeaBean implements Serializable {
     public String addIdea(Person p) {
         if (isUserApprovedOrganisation() || isUserStaff() || isUserStudent()) {
             if (apply && isUserStudent()) {
-                idea.setAppliedStudent(p);
+                idea.setImplementer(p);
             }
             ideaService.addIdea(idea, p);
             ideasList = ideaService.findAll();
@@ -203,7 +203,7 @@ public class IdeaBean implements Serializable {
     public String setUpEditIdea(Idea idea) {
         this.idea = idea;
         if (isUserSubmitter() || isUserStaff()) {
-            if (this.idea.getAppliedStudent() != null) {
+            if (this.idea.getImplementer() != null) {
                 apply = true;
             }
             return "SubmitIdea";
@@ -219,8 +219,8 @@ public class IdeaBean implements Serializable {
      * @return
      */
     public String applyForIdea(Idea idea, Person theUser) {
-        if (this.idea.getAppliedStudent() == null && (isUserStudent())) {
-            idea.setAppliedStudent(theUser);
+        if (this.idea.getImplementer() == null && (isUserStudent())) {
+            idea.setImplementer(theUser);
             this.idea = ideaService.editIdea(idea);
             getPersonBean().setTheUser(getPersonBean().getPersonService().getPersonFacade().find(theUser.getId()));
             return "Idea";
@@ -235,9 +235,9 @@ public class IdeaBean implements Serializable {
      * @return
      */
     public String unapplyForIdea(Idea idea, Person theUser) {
-        if (Objects.equals(idea.getAppliedStudent().getId(), theUser.getId())) {
-            idea.setAppliedStudent(null);
-            theUser.setIdea(null);
+        if (Objects.equals(idea.getImplementer().getId(), theUser.getId())) {
+            idea.setImplementer(null);
+            theUser.setImplementingIdea(null);
             getPersonBean().getPersonService().updatePerson(theUser);
             this.idea = ideaService.editIdea(idea);
             return "Idea";
@@ -253,10 +253,10 @@ public class IdeaBean implements Serializable {
      */
     public String editIdea(Idea idea, Person theUser) {
         if (isUserSubmitter() || isUserStaff()) {
-            if (apply && isUserStudent() && this.idea.getAppliedStudent() == null) {
-                idea.setAppliedStudent(theUser);
-            } else if (this.idea.getAppliedStudent() == theUser && !apply) {
-                idea.setAppliedStudent(null);
+            if (apply && isUserStudent() && this.idea.getImplementer() == null) {
+                idea.setImplementer(theUser);
+            } else if (this.idea.getImplementer() == theUser && !apply) {
+                idea.setImplementer(null);
             }
             this.idea = ideaService.editIdea(idea);
         }
@@ -313,7 +313,7 @@ public class IdeaBean implements Serializable {
                 break;
             default:
                 if (!"".equals(search)) {
-                    ideasList = ideaService.findByStatusAndSearch(search, filter);
+                    ideasList = ideaService.findByStatusAndSearch(filter, search);
                 } else {
                     ideasList = ideaService.findByStatus(filter);
                 }

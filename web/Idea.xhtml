@@ -31,7 +31,7 @@
 
                 <h:outputLabel value="Student whose undertaking project:" />
                 <h:form>
-                    <h:commandLink id="view" value="#{ideaBean.idea.appliedStudent}" action="#{personBean.viewPerson(ideaBean.idea.appliedStudent)}"/>
+                    <h:commandLink id="view" value="#{ideaBean.idea.implementer}" action="#{personBean.viewPerson(ideaBean.idea.implementer)}"/>
                 </h:form>   
 
                 <h:outputLabel value="Submitter:" />
@@ -45,8 +45,8 @@
                 <h:outputLabel value="Actions:" />
 
                 <h:form>
-                    <h:commandButton rendered="#{personBean.isUserStudent() and ideaBean.idea.appliedStudent == null}" value="Apply" action="#{ideaBean.applyForIdea(ideaBean.idea, personBean.theUser)}" class="btn btn-success"/>
-                    <h:commandButton rendered="#{ideaBean.idea.appliedStudent == personBean.theUser}" value="Unapply" action="#{ideaBean.unapplyForIdea(ideaBean.idea, personBean.theUser)}" class="btn btn-success"/>
+                    <h:commandButton rendered="#{personBean.isUserStudent() and ideaBean.idea.implementer == null}" value="Apply" action="#{ideaBean.applyForIdea(ideaBean.idea, personBean.theUser)}" class="btn btn-success"/>
+                    <h:commandButton rendered="#{ideaBean.idea.implementer == personBean.theUser}" value="Unapply" action="#{ideaBean.unapplyForIdea(ideaBean.idea, personBean.theUser)}" class="btn btn-success"/>
                     <h:commandButton rendered="#{ideaBean.userSubmitter or ideaBean.userStaff}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(ideaBean.idea)}" class="btn btn-primary" />
                     <h:commandButton rendered="#{ideaBean.userSubmitter or ideaBean.userStaff}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" class="btn btn-danger" />
                 </h:form>

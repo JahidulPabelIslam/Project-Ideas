@@ -55,7 +55,7 @@ public class Idea implements Serializable {
     private Date dateUpdated;
 
     @OneToOne
-    private Person appliedStudent;
+    private Person implementer;
 
     @ManyToOne
     @NotNull
@@ -185,22 +185,12 @@ public class Idea implements Serializable {
         this.dateUpdated = dateUpdated;
     }
 
-    /**
-     * Get the value of appliedStudent
-     *
-     * @return the value of appliedStudent
-     */
-    public Person getAppliedStudent() {
-        return appliedStudent;
+    public Person getImplementer() {
+        return implementer;
     }
 
-    /**
-     * Set the value of appliedStudent
-     *
-     * @param appliedStudent new value of appliedStudent
-     */
-    public void setAppliedStudent(Person appliedStudent) {
-        this.appliedStudent = appliedStudent;
+    public void setImplementer(Person implementer) {
+        this.implementer = implementer;
     }
 
     /**
