@@ -27,7 +27,7 @@
                     <h:outputLabel value="View:" for="filter" class="col-sm-1 control-label"/>
                     <div class="col-sm-5">
                         <h:selectOneMenu id="filter" label="filter" value="#{ideaBean.filter}" class="form-control" >
-                            <c:if test="${personBean.isUserStaff()}">
+                            <c:if test="${personBean.userStaff}">
                                 <f:selectItem itemValue="All" itemLabel="All"/>
                                 <f:selectItem itemValue="Provisional" itemLabel="Provisional"/>
                                 <f:selectItem itemValue="Rejected" itemLabel="Rejected"/>

@@ -41,20 +41,20 @@
                                  value="#{ideaBean.idea.deliverables}" class="form-control" requiredMessage="Please enter the deliverables."/>
                     <h:message for="deliverables" class="error"/>
 
-                    <h:outputLabel rendered="#{personBean.isUserStaff()}" value="Status:" for="status"/>
-                    <h:selectOneMenu rendered="#{personBean.isUserStaff()}" id="status" label="status" required="true" value="#{ideaBean.idea.status}" class="form-control">
+                    <h:outputLabel rendered="#{personBean.userStaff}" value="Status:" for="status"/>
+                    <h:selectOneMenu rendered="#{personBean.userStaff}" id="status" label="status" required="true" value="#{ideaBean.idea.status}" class="form-control">
                         <f:selectItem itemValue="Provisional" itemLabel="Provisional" />
                         <f:selectItem itemValue="Approved" itemLabel="Approved" />
                         <f:selectItem itemValue="Rejected" itemLabel="Rejected"/>
                     </h:selectOneMenu>
-                    <h:message rendered="#{personBean.isUserStaff()}" for="status" class="error"/>
+                    <h:message rendered="#{personBean.userStaff}" for="status" class="error"/>
 
-                    <h:outputLabel rendered="#{personBean.isUserStudent()}" value="Apply for Idea:" />
-                    <h:selectBooleanCheckbox rendered="#{personBean.isUserStudent()}" id="apply" value="#{ideaBean.apply}"/>
-                    <h:message rendered="#{personBean.isUserStudent()}" for="apply" class="error"/>
+                    <h:outputLabel rendered="#{personBean.userStudent}" value="Apply for Idea:" />
+                    <h:selectBooleanCheckbox rendered="#{personBean.userStudent}" id="apply" value="#{ideaBean.apply}"/>
+                    <h:message rendered="#{personBean.userStudent}" for="apply" class="error"/>
 
-                    <h:outputLabel rendered="#{personBean.isUserApprovedOrganisation() or personBean.isUserStaff()}" value="Applied Student:" for="appliedStudent"/>
-                    <h:selectOneMenu rendered="#{personBean.isUserApprovedOrganisation() or personBean.isUserStaff()}" 
+                    <h:outputLabel rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" value="Applied Student:" for="appliedStudent"/>
+                    <h:selectOneMenu rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" 
                                      value="#{ideaBean.idea.appliedStudent}" id="appliedStudent" label="appliedStudent" class="form-control">
                         <f:selectItem itemValue="" itemLabel="Select The Student That Will Undertake This:" />
                         <f:selectItems value="#{personBean.personsList}"
@@ -62,13 +62,13 @@
                                        itemLabel="#{person.firstName}"
                                        itemValue="#{person.id}" /> 
                     </h:selectOneMenu>
-                    <h:message rendered="#{personBean.isUserApprovedOrganisation() or personBean.isUserStaff()}" for="appliedStudent" />
+                    <h:message rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" for="appliedStudent" />
 
                 </h:panelGrid>
 
                 <h:commandButton rendered="#{ideaBean.idea.id == null}" id="add" value="Add" action="#{ideaBean.addIdea(personBean.theUser)}" class="btn btn-success"/>
-                <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.isUserTheSubmitter() or personBean.isUserStaff())}" id="edit" value="Update" action="#{ideaBean.editIdea(ideaBean.idea, personBean.theUser)}" class="btn btn-primary" />
-                <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.isUserTheSubmitter() or personBean.isUserStaff())}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" class="btn btn-danger"/>
+                <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.userSubmitter or personBean.userStaff)}" id="edit" value="Update" action="#{ideaBean.editIdea(ideaBean.idea, personBean.theUser)}" class="btn btn-primary" />
+                <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.userSubmitter or personBean.userStaff)}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" class="btn btn-danger"/>
             </h:form>
         </ui:define>
     </ui:composition>

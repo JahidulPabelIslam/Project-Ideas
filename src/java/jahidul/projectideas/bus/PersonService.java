@@ -21,6 +21,14 @@ public class PersonService {
     @EJB
     private PersonFacade personFacade;
 
+    public PersonFacade getPersonFacade() {
+        return personFacade;
+    }
+
+    public void setPersonFacade(PersonFacade personFacade) {
+        this.personFacade = personFacade;
+    }
+
     /**
      *
      * @return
@@ -69,6 +77,11 @@ public class PersonService {
         return personFacade.findPersonByUsernamePassword(username, password);
     }
     
+    /**
+     *
+     * @param username
+     * @return
+     */
     public List<Person> findPersonByUsername(String username) {
         return personFacade.findPersonByUsername(username);
     }

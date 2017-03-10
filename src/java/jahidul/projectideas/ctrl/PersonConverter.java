@@ -23,12 +23,26 @@ public class PersonConverter implements Converter {
     @EJB
     private PersonFacade personFacade;
 
+    /**
+     *
+     * @param context
+     * @param component
+     * @param value
+     * @return
+     */
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         Long idLong = Long.decode(value);
         return personFacade.find(idLong);
     }
 
+    /**
+     *
+     * @param context
+     * @param component
+     * @param value
+     * @return
+     */
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         return value.toString();

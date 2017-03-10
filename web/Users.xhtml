@@ -33,7 +33,7 @@
                             <f:selectItem itemValue="Students" itemLabel="Students" />
                             <f:selectItem itemValue="Staff" itemLabel="Staff" />
                             <f:selectItem itemValue="Organisations" itemLabel="Organisations" />
-                            <c:if test="${personBean.isUserStaff()}">
+                            <c:if test="${personBean.userStaff}">
                                 <f:selectItem itemValue="Unapproved Organisations" itemLabel="Unapproved Organisations" />
                             </c:if>
                             <f:ajax event="change" listener="#{personBean.updatePersonsList()}" render="users"/>

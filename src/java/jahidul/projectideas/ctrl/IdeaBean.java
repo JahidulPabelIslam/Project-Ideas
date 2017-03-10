@@ -222,6 +222,7 @@ public class IdeaBean implements Serializable {
         if (this.idea.getAppliedStudent() == null && (isUserStudent())) {
             idea.setAppliedStudent(theUser);
             this.idea = ideaService.editIdea(idea);
+            getPersonBean().setTheUser(getPersonBean().getPersonService().getPersonFacade().find(theUser.getId()));
             return "Idea";
         }
         return null;
@@ -234,8 +235,10 @@ public class IdeaBean implements Serializable {
      * @return
      */
     public String unapplyForIdea(Idea idea, Person theUser) {
-        if (Objects.equals(this.idea.getAppliedStudent().getId(), theUser.getId())) {
+        if (Objects.equals(idea.getAppliedStudent().getId(), theUser.getId())) {
             idea.setAppliedStudent(null);
+            theUser.setIdea(null);
+            getPersonBean().getPersonService().updatePerson(theUser);
             this.idea = ideaService.editIdea(idea);
             return "Idea";
         }
@@ -252,7 +255,7 @@ public class IdeaBean implements Serializable {
         if (isUserSubmitter() || isUserStaff()) {
             if (apply && isUserStudent() && this.idea.getAppliedStudent() == null) {
                 idea.setAppliedStudent(theUser);
-            } else if (this.idea.getAppliedStudent() == theUser && !apply){
+            } else if (this.idea.getAppliedStudent() == theUser && !apply) {
                 idea.setAppliedStudent(null);
             }
             this.idea = ideaService.editIdea(idea);
@@ -317,7 +320,7 @@ public class IdeaBean implements Serializable {
                 break;
         }
     }
-    
+
     /**
      *
      * @return
@@ -332,7 +335,11 @@ public class IdeaBean implements Serializable {
         updateIdeasList();
         return "index";
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public PersonBean getPersonBean() {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         return (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");

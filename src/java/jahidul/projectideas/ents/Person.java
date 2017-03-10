@@ -331,18 +331,34 @@ public class Person implements Serializable {
         this.staffRole = staffRole;
     }
 
+    /**
+     *
+     * @return
+     */
     public Idea getIdea() {
         return idea;
     }
 
+    /**
+     *
+     * @param idea
+     */
     public void setIdea(Idea idea) {
         this.idea = idea;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Idea> getIdeas() {
         return ideas;
     }
 
+    /**
+     *
+     * @param ideas
+     */
     public void setIdeas(List<Idea> ideas) {
         this.ideas = ideas;
     }
