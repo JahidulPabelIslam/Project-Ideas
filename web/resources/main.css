@@ -4,6 +4,11 @@ body {
 
 table {
     width: 100%;
+    text-align: center;
+}
+
+.table {
+    background: white;
 }
 
 .formSignin {
@@ -12,22 +17,17 @@ table {
     margin: 0 auto;
     text-align: center;
 }
+
 .formSignin .formSigninHeading {
     margin-bottom: 10px;
 }
 
 .formSignin .form-control {
-    position: relative;
     height: auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     padding: 10px;
     font-size: 16px;
 }
-.formSignin .form-control:focus {
-    z-index: 2;
-}
+
 .formSignin .username {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
@@ -53,10 +53,11 @@ table {
     display: inline-block;
 }
 
-table {
-    text-align: center;
-}
-
 .noneFound {
     display: inline-block;
+}
+
+.error {
+    color: #e52525;
+    font-weight: bold;
 }

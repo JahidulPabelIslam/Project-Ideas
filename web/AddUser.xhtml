@@ -24,19 +24,19 @@
                         <f:selectItem itemValue="Unapproved Organisation" itemLabel="Unapproved Organisation" />
                         <f:ajax render="staffOptions stuOptions orgOptions" />
                     </h:selectOneMenu>
-                    <h:message rendered="#{personBean.isUserStaff()}" for="type" />
+                    <h:message rendered="#{personBean.isUserStaff()}" for="type" class="error"/>
 
                     <h:outputLabel value="Username:" for="username"/>
                     <h:inputText id="username" label="username"
                                  required="true"
                                  value="#{personBean.person.username}" class="form-control" requiredMessage="Please enter chosen username."/>
-                    <h:message for="username" />
+                    <h:message for="username" class="error"/>
 
                     <h:outputLabel value="Password:" for="password"/>
                     <h:inputSecret id="password" label="password"
                                    required="true"
                                    value="#{personBean.person.password}" class="form-control" requiredMessage="Please enter chosen pasword."/>
-                    <h:message for="password" />
+                    <h:message for="password" class="error"/>
 
                     <h:outputLabel value="Email Address" for="email"/>
                     <h:inputText id="email" label="email"
@@ -44,14 +44,13 @@
                                  value="#{personBean.person.email}" class="form-control" requiredMessage="Please enter an email."
                                  validatorMessage="Please enter a valid email format.">
                         <f:validateRegex pattern="[\w._-]+@[\w-]+.[\w]{2,}"/>  </h:inputText>
-
-                    <h:message for="email" />
+                    <h:message for="email" class="error"/>
 
                     <h:outputLabel value="Phone Number:" for="phoneNumber"/>
                     <h:inputText id="phoneNumber" label="phoneNumber"
                                  required="true"
                                  value="#{personBean.person.phoneNumber}" class="form-control" requiredMessage="Please enter an email." />
-                    <h:message for="phoneNumber" />
+                    <h:message for="phoneNumber" class="error"/>
 
                     <h:outputLabel value="First Name:" for="firstName" />
                     <h:inputText id="firstName" label="firstName"
@@ -59,12 +58,12 @@
                                  value="#{personBean.person.firstName}" class="form-control" requiredMessage="Please enter an name."
                                  validatorMessage="Please give a valid name.">
                         <f:validateRegex pattern="[a-zA-Z]{1,}"/>  </h:inputText>
-                    <h:message for="firstName" />
+                    <h:message for="firstName" class="error"/>
 
                     <h:outputLabel value="Middle Name:" for="middleName"/>
                     <h:inputText id="middleName" label="middleName"
                                  value="#{personBean.person.middleName}" class="form-control" />
-                    <h:message for="middleName"/>
+                    <h:message for="middleName" class="error"/>
 
                     <h:outputLabel value="Surname:" for="surname"/>
                     <h:inputText id="surname" label="surname"
@@ -72,7 +71,7 @@
                                  value="#{personBean.person.surname}" class="form-control" requiredMessage="Please enter an name."
                                  validatorMessage="Please enter a valid name.">
                         <f:validateRegex pattern="[a-zA-Z]{1,}"/>  </h:inputText>
-                    <h:message for="surname"/>
+                    <h:message for="surname" class="error"/>
 
                 </h:panelGrid>
 
@@ -85,7 +84,7 @@
                         <h:inputText id="role" label="role"
                                      required="true"
                                      value="#{personBean.person.staffRole}" class="form-control" requiredMessage="Please enter a role."/>
-                        <h:message for="role" />
+                        <h:message for="role" class="error"/>
 
                     </h:panelGrid>
                 </h:panelGroup>
@@ -99,7 +98,7 @@
                         <h:inputText id="studentID" label="studentID"
                                      required="true"
                                      value="#{personBean.person.studentID}" class="form-control" requiredMessage="Please enter a student ID."/>
-                        <h:message for="studentID" />
+                        <h:message for="studentID" class="error"/>
 
                     </h:panelGrid>
                 </h:panelGroup>
@@ -113,19 +112,19 @@
                         <h:inputText id="organisationName" label="organisationName"
                                      required="true"
                                      value="#{personBean.person.organisationName}" class="form-control" requiredMessage="Please enter the name of the organisation."/>
-                        <h:message for="organisationName" />
+                        <h:message for="organisationName" class="error"/>
 
                         <h:outputLabel value="Outline of the Organisation:" for="organisationOutline"/>
                         <h:inputText  id="organisationOutline" label="organisationOutline"
                                       required="true"
                                       value="#{personBean.person.organisationOutline}" class="form-control" requiredMessage="Please enter the outline of the organisation."/>
-                        <h:message for="organisationOutline" />
+                        <h:message for="organisationOutline" class="error" />
 
                         <h:outputLabel value="Address of the Organisation:" for="organisationAddress"/>
                         <h:inputText id="organisationAddress" label="organisationAddress"
                                      required="true"
                                      value="#{personBean.person.organisationAddress}" class="form-control" requiredMessage="Please enter an address."/>
-                        <h:message for="organisationAddress" />
+                        <h:message for="organisationAddress" class="error"/>
                     </h:panelGrid>
                 </h:panelGroup>
 

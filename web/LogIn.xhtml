@@ -20,14 +20,14 @@
                     <h:outputLabel value="Username:" for="username"/>
                     <h:inputText id="username" label="username"
                                  required="true"
-                                 value="#{personBean.theUser.username}" class="form-control username"/>
-                    <h:message for="username" />
+                                 value="#{personBean.theUser.username}" class="form-control username" requiredMessage="Please enter your username."/>
+                    <h:message for="username" class="error" />
 
                     <h:outputLabel value="Password:" for="password"/>
                     <h:inputSecret id="password" label="password"
                                    required="true"
-                                   value="#{personBean.theUser.password}" class="form-control password"/>
-                    <h:message for="password" />
+                                   value="#{personBean.theUser.password}" class="form-control password" requiredMessage="Please enter your password."/>
+                    <h:message for="password" class="error" />
 
                 </h:panelGrid>
                 <h:commandButton id="logIn" value="Log In" action="#{personBean.logIn()}" class="btn btn-success"/>
@@ -38,7 +38,7 @@
                 <h:commandButton value="Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
             </h:form>
             
-            <h:messages class="feedback" errorClass="alert alert-danger"></h:messages>
+            <h:messages  globalOnly="true" class="feedback" errorClass="alert alert-danger"></h:messages>
             
         </ui:define>
     </ui:composition>
