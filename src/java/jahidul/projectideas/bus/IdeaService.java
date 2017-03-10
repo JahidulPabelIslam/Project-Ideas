@@ -23,10 +23,19 @@ public class IdeaService {
     @EJB
     private IdeaFacade ideaFacade;
 
+    /**
+     *
+     * @return
+     */
     public List<Idea> findAllIdeas() {
-        return ideaFacade.findAll();
+        return ideaFacade.findAllIdeas();
     }
     
+    /**
+     *
+     * @param i
+     * @param p
+     */
     public void addIdea(Idea i, Person p) {
         i.setSubmitter(p);
         Date date = new Date();
@@ -34,48 +43,98 @@ public class IdeaService {
         ideaFacade.create(i);
     }
 
+    /**
+     *
+     * @param i
+     * @return
+     */
     public Idea editIdea(Idea i) {
         Date date = new Date();
         i.setDateUpdated(date);
         return ideaFacade.edit(i);
     }
 
+    /**
+     *
+     * @param i
+     */
     public void deleteIdea(Idea i) {
         ideaFacade.remove(i);
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Idea> findApprovedButUnallocatedIdeas() {
         return ideaFacade.findApprovedButUnallocatedIdeas();
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Idea> findProvisionalIdeas() {
         return ideaFacade.findProvisionalIdeas();
     }
     
+    /**
+     *
+     * @param search
+     * @return
+     */
     public List<Idea> findIdeasBySearch(String search) {
         return ideaFacade.findIdeasBySearch(search);
     }
     
+    /**
+     *
+     * @param search
+     * @return
+     */
     public List<Idea> findApprovedButUnallocatedIdeasBySearch(String search) {
         return ideaFacade.findApprovedButUnallocatedIdeasBySearch(search);
     }
     
+    /**
+     *
+     * @param search
+     * @return
+     */
     public List<Idea> findProvisionalIdeasBySearch(String search) {
         return ideaFacade.findProvisionalIdeasBySearch(search);
     }
     
+    /**
+     *
+     * @param search
+     * @return
+     */
     public List<Idea> findApprovedIdeasBySearch(String search) {
         return ideaFacade.findApprovedIdeasBySearch(search);
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Idea> findApprovedIdeas() {
         return ideaFacade.findApprovedIdeas();
     }
     
+    /**
+     *
+     * @param search
+     * @return
+     */
     public List<Idea> findRejectedIdeasBySearch(String search) {
         return ideaFacade.findRejectedIdeasBySearch(search);
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Idea> findRejectedIdeas() {
         return ideaFacade.findRejectedIdeas();
     }
