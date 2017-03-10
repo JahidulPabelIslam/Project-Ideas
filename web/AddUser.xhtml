@@ -127,18 +127,20 @@
                         <h:message for="organisationAddress" class="error"/>
                     </h:panelGrid>
                 </h:panelGroup>
-
-                <h:commandButton rendered="#{personBean.person.id == null and personBean.isUserStaff()}" id="add" value="Add" action="#{personBean.addUser()}" class="btn btn-success"/>
-                <h:commandButton rendered="#{personBean.theUser.id == null}" id="signUp" value="Sign Up" action="#{personBean.addUser()}" class="btn btn-success"/>
-                <h:commandButton rendered="#{personBean.person.id != null and (personBean.isPersonTheUser() or personBean.isUserStaff())}" id="edit" value="Update" action="#{personBean.updatePerson(personBean.person)}" class="btn btn-primary"/>
-                <h:commandButton rendered="#{personBean.person.id != null and (personBean.isPersonTheUser() or personBean.isUserStaff())}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
+                
+                <h:messages globalOnly="true" class="feedback" infoClass="alert alert-success" errorClass="alert alert-danger"></h:messages>
+                
+                <h:commandButton rendered="#{personBean.person.id == null and personBean.isUserStaff()}" value="Add" action="#{personBean.addUser()}" class="btn btn-success"/>
+                <h:commandButton rendered="#{personBean.theUser.id == null}" value="Register" action="#{personBean.addUser()}" class="btn btn-success"/>
+                <h:commandButton rendered="#{personBean.person.id != null and (personBean.isPersonTheUser() or personBean.isUserStaff())}" value="Update" action="#{personBean.updatePerson(personBean.person)}" class="btn btn-primary"/>
+                <h:commandButton rendered="#{personBean.person.id != null and (personBean.isPersonTheUser() or personBean.isUserStaff())}" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>
             </h:form>
 
             <h:form rendered="#{personBean.theUser.id == null}">
                 <h:outputText value="Already have a account?" />
                 <h:commandLink  value="Log In" action="LogIn" class="btn btn-primary"/>
             </h:form>
-
+            
         </ui:define>
     </ui:composition>
 </html>

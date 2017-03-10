@@ -27,22 +27,43 @@ import javax.inject.Named;
 @SessionScoped
 public class IdeaBean implements Serializable {
 
+    /**
+     *
+     */
     public IdeaBean() {
     }
 
     @EJB
     private IdeaService ideaService;
 
+    /**
+     *
+     */
     protected Idea idea = new Idea();
 
+    /**
+     *
+     */
     protected List<Idea> ideasList = new ArrayList<Idea>();
 
+    /**
+     *
+     */
     protected boolean apply = false;
 
+    /**
+     *
+     */
     protected String search = "";
 
+    /**
+     *
+     */
     protected String filter = "Approved";
 
+    /**
+     *
+     */
     @PostConstruct
     public void init() {
         if (isUserStaff()) {
@@ -51,71 +72,134 @@ public class IdeaBean implements Serializable {
         updateIdeasList();
     }
 
+    /**
+     *
+     * @return
+     */
     public IdeaService getIdeaService() {
         return ideaService;
     }
 
+    /**
+     *
+     * @param ideaService
+     */
     public void setIdeaService(IdeaService ideaService) {
         this.ideaService = ideaService;
     }
 
+    /**
+     *
+     * @return
+     */
     public Idea getIdea() {
         return idea;
     }
 
+    /**
+     *
+     * @param idea
+     */
     public void setIdea(Idea idea) {
         this.idea = idea;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Idea> getIdeasList() {
         return ideasList;
     }
 
+    /**
+     *
+     * @param ideasList
+     */
     public void setIdeasList(List<Idea> ideasList) {
         this.ideasList = ideasList;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isApply() {
         return apply;
     }
 
+    /**
+     *
+     * @param apply
+     */
     public void setApply(boolean apply) {
         this.apply = apply;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSearch() {
         return search;
     }
 
+    /**
+     *
+     * @param search
+     */
     public void setSearch(String search) {
         this.search = search;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFilter() {
         return filter;
     }
 
+    /**
+     *
+     * @param filter
+     */
     public void setFilter(String filter) {
         this.filter = filter;
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     */
     public String addIdea(Person p) {
-        if (isTheUserApprovedOrganisation() || isUserStaff() || isUserStudent()) {
+        if (isUserApprovedOrganisation() || isUserStaff() || isUserStudent()) {
             if (apply && isUserStudent()) {
                 idea.setAppliedStudent(p);
             }
             ideaService.addIdea(idea, p);
-            ideasList = ideaService.findAllIdeas();
+            ideasList = ideaService.findAll();
             return "Idea.xhtml";
         }
         return null;
     }
 
+    /**
+     *
+     * @param idea
+     * @return
+     */
     public String viewIdea(Idea idea) {
         this.idea = idea;
         return "Idea";
     }
 
+    /**
+     *
+     * @param idea
+     * @return
+     */
     public String setUpEditIdea(Idea idea) {
         this.idea = idea;
         if (isUserSubmitter() || isUserStaff()) {
@@ -128,6 +212,12 @@ public class IdeaBean implements Serializable {
 
     }
 
+    /**
+     *
+     * @param idea
+     * @param theUser
+     * @return
+     */
     public String applyForIdea(Idea idea, Person theUser) {
         if (this.idea.getAppliedStudent() == null && (isUserStudent())) {
             idea.setAppliedStudent(theUser);
@@ -137,6 +227,12 @@ public class IdeaBean implements Serializable {
         return null;
     }
 
+    /**
+     *
+     * @param idea
+     * @param theUser
+     * @return
+     */
     public String unapplyForIdea(Idea idea, Person theUser) {
         if (Objects.equals(this.idea.getAppliedStudent().getId(), theUser.getId())) {
             idea.setAppliedStudent(null);
@@ -146,6 +242,12 @@ public class IdeaBean implements Serializable {
         return "index";
     }
 
+    /**
+     *
+     * @param idea
+     * @param theUser
+     * @return
+     */
     public String editIdea(Idea idea, Person theUser) {
         if (isUserSubmitter() || isUserStaff()) {
             if (apply && isUserStudent() && this.idea.getAppliedStudent() == null) {
@@ -158,18 +260,27 @@ public class IdeaBean implements Serializable {
         return "Idea";
     }
 
+    /**
+     *
+     * @param idea
+     * @return
+     */
     public String deleteIdea(Idea idea) {
         this.idea = idea;
         if (isUserSubmitter() || isUserStaff()) {
             ideaService.deleteIdea(idea);
-            ideasList = ideaService.findAllIdeas();
+            ideasList = ideaService.findAll();
             this.idea = new Idea();
         }
         return "index";
     }
 
+    /**
+     *
+     * @return
+     */
     public String prepareCreate() {
-        if (isTheUserApprovedOrganisation() || isUserStaff() || isUserStudent()) {
+        if (isUserApprovedOrganisation() || isUserStaff() || isUserStudent()) {
             idea = new Idea();
             idea.setStatus("Provisional");
             updatePersonsList();
@@ -178,6 +289,9 @@ public class IdeaBean implements Serializable {
         return null;
     }
 
+    /**
+     *
+     */
     public void updateIdeasList() {
         switch (filter) {
             case "Approved But Unallocated":
@@ -187,43 +301,27 @@ public class IdeaBean implements Serializable {
                     ideasList = ideaService.findApprovedButUnallocatedIdeas();
                 }
                 break;
-            case "Provisional":
+            case "All":
                 if (!"".equals(search)) {
-                    ideasList = ideaService.findProvisionalIdeasBySearch(search);
+                    ideasList = ideaService.findAllBySearch(search);
                 } else {
-                    ideasList = ideaService.findProvisionalIdeas();
-                }
-                break;
-            case "Approved":
-                if (!"".equals(search)) {
-                    ideasList = ideaService.findApprovedIdeasBySearch(search);
-                } else {
-                    ideasList = ideaService.findApprovedIdeas();
-                }
-                break;
-            case "Rejected":
-                if (!"".equals(search)) {
-                    ideasList = ideaService.findRejectedIdeasBySearch(search);
-                } else {
-                    ideasList = ideaService.findRejectedIdeas();
+                    ideasList = ideaService.findAll();
                 }
                 break;
             default:
                 if (!"".equals(search)) {
-                    ideasList = ideaService.findIdeasBySearch(search);
+                    ideasList = ideaService.findByStatusAndSearch(search, filter);
                 } else {
-                    ideasList = ideaService.findAllIdeas();
+                    ideasList = ideaService.findByStatus(filter);
                 }
                 break;
         }
     }
-
-    public void updatePersonsList() {
-        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
-        personBean.personsList = personBean.getStudents();
-    }
-
+    
+    /**
+     *
+     * @return
+     */
     public String viewAllIdeas() {
         if (isUserStaff()) {
             filter = "All";
@@ -234,28 +332,48 @@ public class IdeaBean implements Serializable {
         updateIdeasList();
         return "index";
     }
+    
+    public PersonBean getPersonBean() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        return (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
+    }
 
+    /**
+     *
+     */
+    public void updatePersonsList() {
+        getPersonBean().personsList = getPersonBean().getStudents();
+    }
+
+    /**
+     *
+     * @return
+     */
     public boolean isUserSubmitter() {
-        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
-        return Objects.equals(personBean.theUser.getId(), idea.getSubmitter().getId());
+        return Objects.equals(getPersonBean().theUser.getId(), idea.getSubmitter().getId());
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isUserStaff() {
-        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
-        return personBean.isUserStaff();
+        return getPersonBean().isUserStaff();
     }
 
-    public boolean isTheUserApprovedOrganisation() {
-        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
-        return personBean.isTheUserApprovedOrganisation();
+    /**
+     *
+     * @return
+     */
+    public boolean isUserApprovedOrganisation() {
+        return getPersonBean().isUserApprovedOrganisation();
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isUserStudent() {
-        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        PersonBean personBean = (PersonBean) elContext.getELResolver().getValue(elContext, null, "personBean");
-        return personBean.isUserStudent();
+        return getPersonBean().isUserStudent();
     }
 }

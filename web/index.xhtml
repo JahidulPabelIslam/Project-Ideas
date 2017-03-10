@@ -16,17 +16,16 @@
             <h:form class="form-horizontal">
 
                 <div class="form-group">
+                    
                     <h:outputLabel value="Search:" for="search" class="col-sm-1 control-label"/>
-                    <div class="col-sm-11">
+                    <div class="col-sm-5">
                         <h:inputText id="search" label="search" value="#{ideaBean.search}" class="form-control">
                             <f:ajax event="keyup" listener="#{ideaBean.updateIdeasList()}" render="ideas" />
                         </h:inputText> 
                     </div>
-                </div>
-                
-                <div class="form-group">
+               
                     <h:outputLabel value="View:" for="filter" class="col-sm-1 control-label"/>
-                    <div class="col-sm-11">
+                    <div class="col-sm-5">
                         <h:selectOneMenu id="filter" label="filter" value="#{ideaBean.filter}" class="form-control" >
                             <c:if test="${personBean.isUserStaff()}">
                                 <f:selectItem itemValue="All" itemLabel="All"/>

@@ -26,22 +26,43 @@ import javax.inject.Named;
 @SessionScoped
 public class PersonBean implements Serializable {
 
+    /**
+     *
+     */
     public PersonBean() {
     }
 
     @EJB
     private PersonService personService;
 
+    /**
+     *
+     */
     protected Person person = new Person();
 
+    /**
+     *
+     */
     protected Person theUser = new Person();
 
+    /**
+     *
+     */
     protected List<Person> personsList = new ArrayList<Person>();
 
+    /**
+     *
+     */
     protected String search = "";
 
+    /**
+     *
+     */
     protected String filter = "All";
 
+    /**
+     *
+     */
     @PostConstruct
     public void init() {
         if (isUserStaff()) {
@@ -51,54 +72,106 @@ public class PersonBean implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public PersonService getPersonService() {
         return personService;
     }
 
+    /**
+     *
+     * @param personService
+     */
     public void setPersonService(PersonService personService) {
         this.personService = personService;
     }
 
+    /**
+     *
+     * @return
+     */
     public Person getPerson() {
         return person;
     }
 
+    /**
+     *
+     * @param person
+     */
     public void setPerson(Person person) {
         this.person = person;
     }
 
+    /**
+     *
+     * @return
+     */
     public Person getTheUser() {
         return theUser;
     }
 
+    /**
+     *
+     * @param theUser
+     */
     public void setTheUser(Person theUser) {
         this.theUser = theUser;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Person> getPersonsList() {
         return personsList;
     }
 
+    /**
+     *
+     * @param personsList
+     */
     public void setPersonsList(List<Person> personsList) {
         this.personsList = personsList;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSearch() {
         return search;
     }
 
+    /**
+     *
+     * @param search
+     */
     public void setSearch(String search) {
         this.search = search;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFilter() {
         return filter;
     }
 
+    /**
+     *
+     * @param filter
+     */
     public void setFilter(String filter) {
         this.filter = filter;
     }
 
+    /**
+     *
+     * @return
+     */
     public String logIn() {
         List<Person> results = personService.logIn(theUser.getUsername(), theUser.getPassword());
         if (!results.isEmpty()) {
@@ -112,19 +185,46 @@ public class PersonBean implements Serializable {
         return "LogIn";
     }
 
+    /**
+     *
+     * @return
+     */
     public String logOut() {
         theUser = new Person();
         return "index";
     }
 
+    /**
+     *
+     * @return
+     */
+    public String prepareCreate() {
+        person = new Person();
+        person.setType("Unapproved Organisation");
+        return "AddUser";
+    }
+
+    /**
+     *
+     * @return
+     */
     public String addUser() {
         personService.addPerson(person);
         if (!isUserStaff()) {
-            return "registrationConfirmation";
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "An administrator will review your details and enable\n"
+                    + "                           your account soon, come back later and try to log in.", "Sign In Error");
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+            person = new Person();
+            return null;
         }
         return "User";
     }
 
+    /**
+     *
+     * @param person
+     * @return
+     */
     public String setUpEditPerson(Person person) {
         this.person = person;
         if (isUserStaff() || isPersonTheUser()) {
@@ -133,6 +233,11 @@ public class PersonBean implements Serializable {
         return "";
     }
 
+    /**
+     *
+     * @param person
+     * @return
+     */
     public String updatePerson(Person person) {
         this.person = person;
         if (isUserStaff() || isPersonTheUser()) {
@@ -141,21 +246,26 @@ public class PersonBean implements Serializable {
         return "User";
     }
 
+    /**
+     *
+     * @param person
+     * @return
+     */
     public String viewPerson(Person person) {
         this.person = person;
         return "User";
     }
 
+    /**
+     *
+     * @param person
+     * @return
+     */
     public String deletePerson(Person person) {
         this.person = person;
         if (isUserStaff() && !isPersonTheUser()) {
             personService.deletePerson(this.person);
             personsList = personService.findAllPersons();
-            return "Users";
-        } else if (isUserStaff() && isPersonTheUser()) {
-            personService.deletePerson(this.person);
-            personsList = personService.findAllPersons();
-            theUser = new Person();
             return "Users";
         } else if (isPersonTheUser()) {
             personService.deletePerson(this.person);
@@ -166,6 +276,11 @@ public class PersonBean implements Serializable {
         return null;
     }
 
+    /**
+     *
+     * @param person
+     * @return
+     */
     public String approveOrganisation(Person person) {
         this.person = person;
         if (isUserStaff()) {
@@ -175,6 +290,11 @@ public class PersonBean implements Serializable {
         return "User";
     }
 
+    /**
+     *
+     * @param person
+     * @return
+     */
     public String unapproveOrganisation(Person person) {
         this.person = person;
         if (isUserStaff()) {
@@ -184,12 +304,10 @@ public class PersonBean implements Serializable {
         return "User";
     }
 
-    public String prepareCreate() {
-        person = new Person();
-        person.setType("Unapproved Organisation");
-        return "AddUser";
-    }
-
+    /**
+     *
+     * @return
+     */
     public String viewAllPersons() {
         if (isUserStaff()) {
             personsList = personService.findAllPersons();
@@ -201,10 +319,17 @@ public class PersonBean implements Serializable {
         return "Users";
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Person> getStudents() {
         return personService.findStudents();
     }
 
+    /**
+     *
+     */
     public void updatePersonsList() {
         switch (filter) {
             case "Students":
@@ -252,38 +377,74 @@ public class PersonBean implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isUserStaff() {
         return "Staff".equals(theUser.getType());
     }
 
-    public boolean isPersonStaff() {
-        return "Staff".equals(person.getType());
-    }
-
+    /**
+     *
+     * @return
+     */
     public boolean isUserStudent() {
         return "Student".equals(theUser.getType());
     }
 
+    /**
+     *
+     * @return
+     */
+    public boolean isUserApprovedOrganisation() {
+        return "Organisation".equals(theUser.getType());
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isPersonStaff() {
+        return "Staff".equals(person.getType());
+    }
+
+    /**
+     *
+     * @return
+     */
     public boolean isPersonStudent() {
         return "Student".equals(person.getType());
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isPersonAnyOrganisation() {
         return "Organisation".equals(person.getType()) || "Unapproved Organisation".equals(person.getType());
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isPersonApprovedOrganisation() {
         return "Organisation".equals(person.getType());
     }
 
-    public boolean isTheUserApprovedOrganisation() {
-        return "Organisation".equals(theUser.getType());
-    }
-
+    /**
+     *
+     * @return
+     */
     public boolean isPersonUnapprovedOrganisation() {
         return "Unapproved Organisation".equals(person.getType());
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isPersonTheUser() {
         return Objects.equals(theUser.getId(), person.getId());
     }

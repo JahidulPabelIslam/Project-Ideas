@@ -27,8 +27,8 @@ public class IdeaService {
      *
      * @return
      */
-    public List<Idea> findAllIdeas() {
-        return ideaFacade.findAllIdeas();
+    public List<Idea> findAll() {
+        return ideaFacade.findAll();
     }
     
     /**
@@ -72,10 +72,11 @@ public class IdeaService {
     
     /**
      *
+     * @param status
      * @return
      */
-    public List<Idea> findProvisionalIdeas() {
-        return ideaFacade.findProvisionalIdeas();
+    public List<Idea> findByStatus(String status) {
+        return ideaFacade.findByStatus(status);
     }
     
     /**
@@ -83,8 +84,17 @@ public class IdeaService {
      * @param search
      * @return
      */
-    public List<Idea> findIdeasBySearch(String search) {
-        return ideaFacade.findIdeasBySearch(search);
+    public List<Idea> findByStatusAndSearch(String status, String search) {
+        return ideaFacade.findByStatusAndSearch(status, search);
+    }
+    
+    /**
+     *
+     * @param search
+     * @return
+     */
+    public List<Idea> findAllBySearch(String search) {
+        return ideaFacade.findAllBySearch(search);
     }
     
     /**
@@ -96,46 +106,4 @@ public class IdeaService {
         return ideaFacade.findApprovedButUnallocatedIdeasBySearch(search);
     }
     
-    /**
-     *
-     * @param search
-     * @return
-     */
-    public List<Idea> findProvisionalIdeasBySearch(String search) {
-        return ideaFacade.findProvisionalIdeasBySearch(search);
-    }
-    
-    /**
-     *
-     * @param search
-     * @return
-     */
-    public List<Idea> findApprovedIdeasBySearch(String search) {
-        return ideaFacade.findApprovedIdeasBySearch(search);
-    }
-    
-    /**
-     *
-     * @return
-     */
-    public List<Idea> findApprovedIdeas() {
-        return ideaFacade.findApprovedIdeas();
-    }
-    
-    /**
-     *
-     * @param search
-     * @return
-     */
-    public List<Idea> findRejectedIdeasBySearch(String search) {
-        return ideaFacade.findRejectedIdeasBySearch(search);
-    }
-    
-    /**
-     *
-     * @return
-     */
-    public List<Idea> findRejectedIdeas() {
-        return ideaFacade.findRejectedIdeas();
-    }
 }

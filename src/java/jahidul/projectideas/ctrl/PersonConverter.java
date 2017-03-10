@@ -5,8 +5,8 @@
  */
 package jahidul.projectideas.ctrl;
 
-import jahidul.projectideas.bus.PersonService;
 import jahidul.projectideas.ents.Person;
+import jahidul.projectideas.pers.PersonFacade;
 import javax.ejb.EJB;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -21,12 +21,12 @@ import javax.faces.convert.FacesConverter;
 public class PersonConverter implements Converter {
 
     @EJB
-    private PersonService personService;
+    private PersonFacade personFacade;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         Long idLong = Long.decode(value);
-        return personService.find(idLong);
+        return personFacade.find(idLong);
     }
 
     @Override

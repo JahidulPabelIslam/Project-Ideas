@@ -37,22 +37,63 @@ public class IdeaFacade extends AbstractFacade<Idea> {
     public IdeaFacade() {
         super(Idea.class);
     }
-    
+
     /**
      *
      * @return
      */
-    public List<Idea> findAllIdeas() {
+    @Override
+    public List<Idea> findAll() {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i ORDER BY i.dateUpdated DESC", Idea.class);
         return query.getResultList();
     }
-    
+
     /**
      *
+     * @param search
      * @return
      */
-    public List<Idea> findProvisionalIdeas() {
-        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Provisional' ORDER BY i.dateUpdated DESC", Idea.class);
+    public List<Idea> findAllBySearch(String search) {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search) ORDER BY i.dateUpdated DESC", Idea.class);
+        
+        String finalSearch = "%";
+        String[] strings = search.split(" ");
+        for (String string : strings) {
+            finalSearch += string + "%";
+        }
+        query.setParameter("search", finalSearch);
+        
+        return query.getResultList();
+    }
+
+    /**
+     *
+     * @param status
+     * @return
+     */
+    public List<Idea> findByStatus(String status) {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = :status ORDER BY i.dateUpdated DESC", Idea.class);
+        query.setParameter("status", status);
+        return query.getResultList();
+    }
+
+    /**
+     *
+     * @param status
+     * @param search
+     * @return
+     */
+    public List<Idea> findByStatusAndSearch(String status, String search) {
+        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = :status AND (lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search)) ORDER BY i.dateUpdated DESC", Idea.class);
+        query.setParameter("status", status);
+
+        String finalSearch = "%";
+        String[] strings = search.split(" ");
+        for (String string : strings) {
+            finalSearch += string + "%";
+        }
+        query.setParameter("search", finalSearch);
+
         return query.getResultList();
     }
 
@@ -70,96 +111,16 @@ public class IdeaFacade extends AbstractFacade<Idea> {
      * @param search
      * @return
      */
-    public List<Idea> findIdeasBySearch(String search) {
-        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search) ORDER BY i.dateUpdated DESC", Idea.class);
-        String finalSearch = "%";
-        String[] strings = search.split(" ");
-        for (String string : strings) {
-            finalSearch += string + "%";
-        }
-        query.setParameter("search", finalSearch);
-        return query.getResultList();
-    }
-
-    /**
-     *
-     * @param search
-     * @return
-     */
-    public List<Idea> findProvisionalIdeasBySearch(String search) {
-        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Provisional' AND (lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search)) ORDER BY i.dateUpdated DESC", Idea.class);
-         String finalSearch = "%";
-        String[] strings = search.split(" ");
-        for (String string : strings) {
-            finalSearch += string + "%";
-        }
-        query.setParameter("search", finalSearch);
-        return query.getResultList();
-    }
-
-    /**
-     *
-     * @param search
-     * @return
-     */
     public List<Idea> findApprovedButUnallocatedIdeasBySearch(String search) {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.appliedStudent IS NULL AND (lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search)) ORDER BY i.dateUpdated DESC", Idea.class);
-         String finalSearch = "%";
-        String[] strings = search.split(" ");
-        for (String string : strings) {
-            finalSearch += string + "%";
-        }
-        query.setParameter("search", finalSearch);
-        return query.getResultList();
-    }
-
-    /**
-     *
-     * @param search
-     * @return
-     */
-    public List<Idea> findApprovedIdeasBySearch(String search) {
-        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND (lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search)) ORDER BY i.dateUpdated DESC", Idea.class);
-         String finalSearch = "%";
-        String[] strings = search.split(" ");
-        for (String string : strings) {
-            finalSearch += string + "%";
-        }
-        query.setParameter("search", finalSearch);
-        return query.getResultList();
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Idea> findApprovedIdeas() {
-        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' ORDER BY i.dateUpdated DESC", Idea.class);
-        return query.getResultList();
-    }
-
-    /**
-     *
-     * @param search
-     * @return
-     */
-    public List<Idea> findRejectedIdeasBySearch(String search) {
-        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Rejected' AND (lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search)) ORDER BY i.dateUpdated DESC", Idea.class);
+        
         String finalSearch = "%";
         String[] strings = search.split(" ");
         for (String string : strings) {
             finalSearch += string + "%";
         }
         query.setParameter("search", finalSearch);
-        return query.getResultList();
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Idea> findRejectedIdeas() {
-        TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Rejected' ORDER BY i.dateUpdated DESC", Idea.class);
+        
         return query.getResultList();
     }
 }

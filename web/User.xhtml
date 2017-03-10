@@ -25,7 +25,7 @@
                     <h:outputText rendered="#{personBean.isPersonStudent()}" value="#{personBean.person.studentID}" />
 
                     <h:outputLabel value="Name:" rendered="#{!personBean.isPersonAnyOrganisation()}"/>
-                    <h:outputText value="Contact Name:" rendered="#{personBean.isPersonAnyOrganisation()}"/>
+                    <h:outputLabel value="Contact Name:" rendered="#{personBean.isPersonAnyOrganisation()}"/>
                     <h:outputText value="#{personBean.person.firstName} #{personBean.person.middleName} #{personBean.person.surname}" />
 
                     <h:outputLabel rendered="#{personBean.isPersonAnyOrganisation()}" value="Organisation Name:" />
@@ -48,7 +48,7 @@
 
                     <h:outputLabel value="Actions:" />
                     <h:form>
-                        <h:commandButton rendered="#{personBean.isUserStaff() and personBean.isPersonUnapprovedOrganisation()}" id="approveOrganisation" value="Approve Organisation" action="#{personBean.approveOrganisation(personBean.person)}" class="btn btn-primary"/>
+                        <h:commandButton rendered="#{personBean.isUserStaff() and personBean.isPersonUnapprovedOrganisation()}" id="approveOrganisation" value="Approve Organisation" action="#{personBean.approveOrganisation(personBean.person)}" class="btn btn-success"/>
                         <h:commandButton rendered="#{personBean.isUserStaff() and personBean.isPersonApprovedOrganisation()}" id="unauthoriseOrganisation" value="Unapprove Organisation" action="#{personBean.unapproveOrganisation(personBean.person)}" class="btn btn-danger"/>
                         <h:commandButton rendered="#{personBean.isPersonTheUser() or personBean.isUserStaff()}" id="edit" value="Edit" action="#{personBean.setUpEditPerson(personBean.person)}" class="btn btn-primary"/>
                         <h:commandButton rendered="#{personBean.isPersonTheUser() or personBean.isUserStaff()}" id="delete" value="Delete" action="#{personBean.deletePerson(personBean.person)}" class="btn btn-danger"/>

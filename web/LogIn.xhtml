@@ -14,32 +14,31 @@
 
                 <h2 class="formSigninHeading">Please sign in</h2>
 
-                <h:panelGrid columns="3"
-                             columnClasses="rightalign,leftalign,leftalign">
+                <h:panelGrid columns="2"
+                             columnClasses="rightalign,leftalign">
 
                     <h:outputLabel value="Username:" for="username"/>
-                    <h:inputText id="username" label="username"
+                    <h:inputText label="username"
                                  required="true"
                                  value="#{personBean.theUser.username}" class="form-control username" requiredMessage="Please enter your username."/>
-                    <h:message for="username" class="error" />
 
                     <h:outputLabel value="Password:" for="password"/>
-                    <h:inputSecret id="password" label="password"
+                    <h:inputSecret label="password"
                                    required="true"
                                    value="#{personBean.theUser.password}" class="form-control password" requiredMessage="Please enter your password."/>
-                    <h:message for="password" class="error" />
 
                 </h:panelGrid>
-                <h:commandButton id="logIn" value="Log In" action="#{personBean.logIn()}" class="btn btn-success"/>
+
+                <h:commandButton value="Log In" action="#{personBean.logIn()}" class="btn btn-success"/>
             </h:form>
 
             <h:form class="formSignin" rendered="#{personBean.theUser.id == null}">
                 <h:outputText value="Haven't Got a Account? " />
                 <h:commandButton value="Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
             </h:form>
-            
-            <h:messages  globalOnly="true" class="feedback" errorClass="alert alert-danger"></h:messages>
-            
+
+            <h:messages class="feedback" infoClass="alert alert-success" errorClass="alert alert-danger"></h:messages>
+
         </ui:define>
     </ui:composition>
 
