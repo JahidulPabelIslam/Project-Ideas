@@ -357,7 +357,7 @@ public class IdeaBean implements Serializable {
      * @return
      */
     public boolean isUserSubmitter() {
-        return Objects.equals(getPersonBean().theUser.getId(), idea.getSubmitter().getId());
+        return Objects.equals(getPersonBean().theUser, idea.getSubmitter());
     }
 
     /**
