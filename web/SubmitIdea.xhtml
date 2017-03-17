@@ -53,16 +53,15 @@
                     <h:selectBooleanCheckbox rendered="#{personBean.userStudent}" id="apply" value="#{ideaBean.apply}"/>
                     <h:message rendered="#{personBean.userStudent}" for="apply" class="error"/>
 
-                    <h:outputLabel rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" value="Applied Student:" for="appliedStudent"/>
+                    <h:outputLabel rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" value="Implementer (Student):" for="implementer"/>
                     <h:selectOneMenu rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" 
-                                     value="#{ideaBean.idea.implementer}" id="appliedStudent" label="appliedStudent" class="form-control">
+                                     value="#{ideaBean.idea.implementer}" id="implementer" label="implementer" class="form-control">
                         <f:selectItem itemValue="" itemLabel="Select The Student That Will Undertake This:" />
-                        <f:selectItems value="#{personBean.personsList}"
-                                       var="person"
-                                       itemLabel="#{person.firstName}"
-                                       itemValue="#{person.id}" /> 
+                        <f:selectItems value="#{personBean.personsList}"/> 
                     </h:selectOneMenu>
-                    <h:message rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" for="appliedStudent" />
+                    <h:message rendered="#{personBean.userApprovedOrganisation or personBean.userStaff}" for="implementer" />
+                    
+                    #{ideaBean.idea.implementer}
 
                 </h:panelGrid>
 

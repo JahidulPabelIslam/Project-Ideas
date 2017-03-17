@@ -5,9 +5,9 @@
  */
 package jahidul.projectideas.ctrl;
 
+import jahidul.projectideas.bus.PersonService;
 import jahidul.projectideas.ents.Person;
 import jahidul.projectideas.pers.PersonFacade;
-import javax.ejb.EJB;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,9 +20,6 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(forClass = Person.class)
 public class PersonConverter implements Converter {
 
-    @EJB
-    private PersonFacade personFacade;
-
     /**
      *
      * @param context
@@ -32,8 +29,14 @@ public class PersonConverter implements Converter {
      */
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        Long idLong = Long.decode(value);
-        return personFacade.find(idLong);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        PersonBean personBean = (PersonBean) facesContext.getApplication().getELResolver().
+                getValue(facesContext.getELContext(), null, "personBean");
+        PersonService ps = (PersonService) personBean.getPersonService();
+        PersonFacade pf = (PersonFacade) ps.getPersonFacade();
+        Long id = Long.decode(value);
+        Person p = pf.find(id);
+        return p;
     }
 
     /**
@@ -45,8 +48,10 @@ public class PersonConverter implements Converter {
      */
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return value.toString();
-
+        if (value instanceof Person) {
+            return ((Person) value).getId().toString();
+        } else {
+            throw new Error("object is not of type Address");
+        }
     }
-
 }
