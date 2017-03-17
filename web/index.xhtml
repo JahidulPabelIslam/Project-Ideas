@@ -16,16 +16,18 @@
             <h:form class="form-horizontal">
 
                 <div class="form-group">
-                    
+
                     <h:outputLabel value="Search:" for="search" class="col-sm-1 control-label"/>
-                    <div class="col-sm-5">
+                    <div class="col-sm-11">
                         <h:inputText id="search" label="search" value="#{ideaBean.search}" class="form-control">
                             <f:ajax event="keyup" listener="#{ideaBean.updateIdeasList()}" render="ideas" />
                         </h:inputText> 
                     </div>
-               
+                </div>
+
+                <div class="form-group">
                     <h:outputLabel value="View:" for="filter" class="col-sm-1 control-label"/>
-                    <div class="col-sm-5">
+                    <div class="col-sm-11">
                         <h:selectOneMenu id="filter" label="filter" value="#{ideaBean.filter}" class="form-control" >
                             <c:if test="${personBean.userStaff}">
                                 <f:selectItem itemValue="All" itemLabel="All"/>
@@ -38,39 +40,39 @@
                         </h:selectOneMenu>
                     </div>
                 </div>
-            </h:form>
 
-            <h:panelGrid columns="1" id="ideas">
-                
-                <h:outputText rendered="#{ideaBean.ideasList.size() == 0}" value="No Ideas Found" class="alert alert-danger noneFound"/>
 
-                <h:dataTable rendered="#{ideaBean.ideasList.size() > 0}" value="#{ideaBean.ideasList}" var="idea" border="0" cellpadding="2" cellspacing="0" class="table table-striped table-bordered">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Title" />
-                        </f:facet>
-                        <h:form>
+                <h:panelGrid columns="1" id="ideas">
+
+                    <h:outputText rendered="#{ideaBean.ideasList.size() == 0}" value="No Ideas Found" class="alert alert-danger noneFound"/>
+
+                    <h:dataTable rendered="#{ideaBean.ideasList.size() > 0}" value="#{ideaBean.ideasList}" var="idea" border="0" cellpadding="2" cellspacing="0" class="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Title" />
+                            </f:facet>
+
                             <h:commandLink id="view" value="#{idea.title}" action="#{ideaBean.viewIdea(idea)}"/>
-                        </h:form>
-                    </h:column>
 
-                    <h:column rendered="#{ideaBean.filter == 'All'}" >
-                        <f:facet name="header">
-                            <h:outputText value="Status" />
-                        </f:facet>
+                        </h:column>
 
-                        <h:outputText value="#{idea.status}" />
-                    </h:column>
+                        <h:column rendered="#{ideaBean.filter == 'All'}" >
+                            <f:facet name="header">
+                                <h:outputText value="Status" />
+                            </f:facet>
 
+                            <h:outputText value="#{idea.status}" />
+                        </h:column>
 
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Aims &amp; Objectives" />
-                        </f:facet>
-                        <h:outputText value="#{idea.aimsObjectives}" />
-                    </h:column>
-                </h:dataTable>
-            </h:panelGrid>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Aims &amp; Objectives" />
+                            </f:facet>
+                            <h:outputText value="#{idea.aimsObjectives}" />
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGrid>
+            </h:form>
         </ui:define>
     </ui:composition>
 

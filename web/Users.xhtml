@@ -24,7 +24,7 @@
                         </h:inputText>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <h:outputLabel value="View:" for="filter" class="col-sm-1 control-label"/>
                     <div class="col-sm-11">
@@ -41,29 +41,28 @@
                     </div>
                 </div>
 
-            </h:form>
-            
-            <h:panelGrid columns="1" id="users">
-   
-                <h:outputText rendered="#{personBean.personsList.size() == 0}" value="No Users Found" class="alert alert-danger noneFound"/>
+                <h:panelGrid columns="1" id="users">
 
-                <h:dataTable rendered="#{personBean.personsList.size() > 0}" value="#{personBean.personsList}" var="person" border="0" cellpadding="2" cellspacing="0" class="table table-striped table-bordered">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Name" />
-                        </f:facet>
-                        <h:form>
+                    <h:outputText rendered="#{personBean.personsList.size() == 0}" value="No Users Found" class="alert alert-danger noneFound"/>
+
+                    <h:dataTable rendered="#{personBean.personsList.size() > 0}" value="#{personBean.personsList}" var="person" border="0" cellpadding="2" cellspacing="0" class="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name" />
+                            </f:facet>
                             <h:commandLink id="view" value="#{person}" action="#{personBean.viewPerson(person)}"/>
-                        </h:form>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Type" />
-                        </f:facet>
-                        <h:outputText value="#{person.type}" />
-                    </h:column>
-                </h:dataTable>
-            </h:panelGrid>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Type" />
+                            </f:facet>
+                            <h:outputText value="#{person.type}" />
+                        </h:column>
+                    </h:dataTable>
+
+                </h:panelGrid>
+
+            </h:form>
         </ui:define>
     </ui:composition>
 
