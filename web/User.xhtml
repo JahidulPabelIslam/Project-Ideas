@@ -92,6 +92,8 @@
                         <h:commandButton rendered="#{ideaBean.userSubmitter or personBean.userStaff}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(personBean.person.implementingIdea)}" class="btn btn-danger" />
                     </h:form>
                 </h:panelGrid>
+                
+                <h:messages globalOnly="true" class="feedback" errorClass="alert alert-danger"></h:messages>
 
                 <h:outputText value="Submitted Ideas." class="alert alert-success noneFound"/>
                 

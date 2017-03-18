@@ -68,6 +68,8 @@
                 <h:commandButton rendered="#{ideaBean.idea.id == null}" id="add" value="Add" action="#{ideaBean.addIdea(personBean.theUser)}" class="btn btn-success"/>
                 <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.userSubmitter or personBean.userStaff)}" id="edit" value="Update" action="#{ideaBean.editIdea(ideaBean.idea, personBean.theUser)}" class="btn btn-primary" />
                 <h:commandButton rendered="#{ideaBean.idea.id != null and (ideaBean.userSubmitter or personBean.userStaff)}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(ideaBean.idea)}" class="btn btn-danger"/>
+            
+                <h:messages globalOnly="true" class="feedback" errorClass="alert alert-danger"></h:messages>
             </h:form>
         </ui:define>
     </ui:composition>

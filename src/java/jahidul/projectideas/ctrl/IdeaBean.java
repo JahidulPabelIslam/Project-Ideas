@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -182,6 +183,8 @@ public class IdeaBean implements Serializable {
             ideasList = ideaService.findAll();
             return "Idea.xhtml";
         }
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to add a idea.", "Not Authorized.");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
     }
 
@@ -208,6 +211,8 @@ public class IdeaBean implements Serializable {
             }
             return "SubmitIdea";
         }
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to edit the idea.", "Not Authorized.");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
 
     }
@@ -219,12 +224,15 @@ public class IdeaBean implements Serializable {
      * @return
      */
     public String applyForIdea(Idea idea, Person theUser) {
-        if (this.idea.getImplementer() == null && (isUserStudent())) {
+        if (this.idea.getImplementer() == null && isUserStudent()) {
             idea.setImplementer(theUser);
+            theUser.setImplementingIdea(idea);
+            getPersonBean().getPersonService().updatePerson(theUser);
             this.idea = ideaService.editIdea(idea);
-            getPersonBean().setTheUser(getPersonBean().getPersonService().getPersonFacade().find(theUser.getId()));
             return "Idea";
         }
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to apply for the idea.", "Not Authorized.");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
     }
 
@@ -235,14 +243,16 @@ public class IdeaBean implements Serializable {
      * @return
      */
     public String unapplyForIdea(Idea idea, Person theUser) {
-        if (Objects.equals(idea.getImplementer().getId(), theUser.getId())) {
+        if (idea.getImplementer() == theUser) {
             idea.setImplementer(null);
             theUser.setImplementingIdea(null);
             getPersonBean().getPersonService().updatePerson(theUser);
             this.idea = ideaService.editIdea(idea);
             return "Idea";
         }
-        return "index";
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to unapply for the idea.", "Not Authorized.");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+        return null;
     }
 
     /**
@@ -259,8 +269,11 @@ public class IdeaBean implements Serializable {
                 idea.setImplementer(null);
             }
             this.idea = ideaService.editIdea(idea);
+            return "Idea";
         }
-        return "Idea";
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to edit the idea.", "Not Authorized.");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+        return null;
     }
 
     /**
@@ -274,8 +287,11 @@ public class IdeaBean implements Serializable {
             ideaService.deleteIdea(idea);
             ideasList = ideaService.findAll();
             this.idea = new Idea();
+            return "index";
         }
-        return "index";
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to delete the idea.", "Not Authorized.");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+        return null;
     }
 
     /**
@@ -289,6 +305,8 @@ public class IdeaBean implements Serializable {
             updatePersonsList();
             return "SubmitIdea";
         }
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to add a idea.", "Not Authorized.");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
     }
 
@@ -357,7 +375,7 @@ public class IdeaBean implements Serializable {
      * @return
      */
     public boolean isUserSubmitter() {
-        return Objects.equals(getPersonBean().theUser, idea.getSubmitter());
+        return getPersonBean().theUser == idea.getSubmitter();
     }
 
     /**
