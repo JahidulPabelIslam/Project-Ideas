@@ -84,7 +84,7 @@ public class PersonFacade extends AbstractFacade<Person> {
      * @return a list of users that are students, ordered by their surname
      */
     public List<Person> findStudents() {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student' ORDER BY p.surname DESC", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student' ORDER BY p.firstName ASC", Person.class);
         return query.getResultList();
     }
 
@@ -93,7 +93,7 @@ public class PersonFacade extends AbstractFacade<Person> {
      * @return a list of users that are staff, ordered by their surname
      */
     public List<Person> findStaff() {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff' ORDER BY p.surname DESC", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff' ORDER BY p.firstName ASC", Person.class);
         return query.getResultList();
     }
 
@@ -103,7 +103,7 @@ public class PersonFacade extends AbstractFacade<Person> {
      * Organisation name
      */
     public List<Person> findOrganisations() {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation' ORDER BY p.organisationName DESC", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation' ORDER BY p.organisationName ASC", Person.class);
         return query.getResultList();
     }
 
@@ -113,7 +113,7 @@ public class PersonFacade extends AbstractFacade<Person> {
      * their Organisation name
      */
     public List<Person> findUnapprovedOrganisations() {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation' ORDER BY p.organisationName DESC", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation' ORDER BY p.organisationName ASC", Person.class);
         return query.getResultList();
     }
 
@@ -140,7 +140,7 @@ public class PersonFacade extends AbstractFacade<Person> {
      * provided, ordered by their surname
      */
     public List<Person> findStudentsBySearch(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student' AND ( lower(p.firstName) LIKE lower(:search) OR lower(p.surname) LIKE lower(:search) ) ORDER BY p.surname DESC", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Student' AND ( lower(p.firstName) LIKE lower(:search) OR lower(p.surname) LIKE lower(:search) ) ORDER BY p.firstName ASC", Person.class);
         String finalSearch = "%";
         String[] strings = search.split(" ");
         for (String string : strings) {
@@ -157,7 +157,7 @@ public class PersonFacade extends AbstractFacade<Person> {
      * provided, ordered by their surname
      */
     public List<Person> findStaffBySearch(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff' AND ( lower(p.firstName) LIKE lower(:search) OR lower(p.surname) LIKE lower(:search) OR lower(p.staffRole) LIKE lower(:search) ) ORDER BY p.surname DESC", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Staff' AND ( lower(p.firstName) LIKE lower(:search) OR lower(p.surname) LIKE lower(:search) OR lower(p.staffRole) LIKE lower(:search) ) ORDER BY p.firstName ASC", Person.class);
         String finalSearch = "%";
         String[] strings = search.split(" ");
         for (String string : strings) {
@@ -174,7 +174,7 @@ public class PersonFacade extends AbstractFacade<Person> {
      * string provided, ordered by their Organisation name
      */
     public List<Person> findOrganisationsBySearch(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation' AND ( lower(p.organisationName) LIKE lower(:search) ) ORDER BY p.organisationName DESC", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Organisation' AND ( lower(p.organisationName) LIKE lower(:search) ) ORDER BY p.organisationName ASC", Person.class);
         query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }
@@ -186,7 +186,7 @@ public class PersonFacade extends AbstractFacade<Person> {
      * search string provided, ordered by their Organisation name
      */
     public List<Person> findUnapprovedOrganisationsBySearch(String search) {
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation' AND ( lower(p.organisationName) LIKE lower(:search) ) ORDER BY p.organisationName DESC", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.type = 'Unapproved Organisation' AND ( lower(p.organisationName) LIKE lower(:search) ) ORDER BY p.organisationName ASC", Person.class);
         query.setParameter("search", "%" + search + "%");
         return query.getResultList();
     }
