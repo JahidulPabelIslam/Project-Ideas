@@ -24,7 +24,23 @@ public class IdeaFacade extends AbstractFacade<Idea> {
 
     /**
      *
-     * @return
+     * @return the current EntityManager
+     */
+    public EntityManager getEm() {
+        return em;
+    }
+
+    /**
+     *
+     * @param em the EntityManager to set as the current EntityManager
+     */
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    /**
+     *
+     * @return the entity manager
      */
     @Override
     protected EntityManager getEntityManager() {
@@ -32,7 +48,7 @@ public class IdeaFacade extends AbstractFacade<Idea> {
     }
 
     /**
-     *
+     * Constructor for the Idea Facade
      */
     public IdeaFacade() {
         super(Idea.class);
@@ -40,7 +56,7 @@ public class IdeaFacade extends AbstractFacade<Idea> {
 
     /**
      *
-     * @return
+     * @return a list of all ideas ordered by the date the ideas were updated
      */
     @Override
     public List<Idea> findAll() {
@@ -50,8 +66,9 @@ public class IdeaFacade extends AbstractFacade<Idea> {
 
     /**
      *
-     * @param search
-     * @return
+     * @param search the text to look for in ideas
+     * @return a list of ideas that contain the search string, ordered by the
+     * date the ideas were updated
      */
     public List<Idea> findAllBySearch(String search) {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search) ORDER BY i.dateUpdated DESC", Idea.class);
@@ -68,8 +85,9 @@ public class IdeaFacade extends AbstractFacade<Idea> {
 
     /**
      *
-     * @param status
-     * @return
+     * @param status the status of ideas to look for
+     * @return a list of ideas that are of the status provided, ordered by the
+     * date the ideas were updated
      */
     public List<Idea> findByStatus(String status) {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = :status ORDER BY i.dateUpdated DESC", Idea.class);
@@ -79,9 +97,10 @@ public class IdeaFacade extends AbstractFacade<Idea> {
 
     /**
      *
-     * @param status
-     * @param search
-     * @return
+     * @param status the status of ideas to look for
+     * @param search the text to look for in ideas
+     * @return a list of ideas that are of the status provided and contain the
+     * search string, ordered by the date the ideas were updated
      */
     public List<Idea> findByStatusAndSearch(String status, String search) {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = :status AND (lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search)) ORDER BY i.dateUpdated DESC", Idea.class);
@@ -99,7 +118,8 @@ public class IdeaFacade extends AbstractFacade<Idea> {
 
     /**
      *
-     * @return
+     * @return a list of ideas that have the status as 'Approved' and doesn't
+     * have a implementer, ordered by the date the ideas were updated
      */
     public List<Idea> findApprovedButUnallocatedIdeas() {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.implementer IS NULL ORDER BY i.dateUpdated DESC", Idea.class);
@@ -108,8 +128,10 @@ public class IdeaFacade extends AbstractFacade<Idea> {
 
     /**
      *
-     * @param search
-     * @return
+     * @param search the text to look for in ideas
+     * @return a list of ideas that have the status as 'Approved' and doesn't
+     * have a implementer and contain the search string, ordered by the date the
+     * ideas were updated
      */
     public List<Idea> findApprovedButUnallocatedIdeasBySearch(String search) {
         TypedQuery<Idea> query = em.createQuery("SELECT i FROM Idea i WHERE i.status = 'Approved' AND i.implementer IS NULL AND (lower(i.title) LIKE lower(:search) OR lower(i.aimsObjectives) LIKE lower(:search) OR lower(i.question) LIKE lower(:search) OR lower(i.deliverables) LIKE lower(:search)) ORDER BY i.dateUpdated DESC", Idea.class);

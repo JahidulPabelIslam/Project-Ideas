@@ -10,7 +10,6 @@ import jahidul.projectideas.ents.Person;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -36,27 +35,29 @@ public class PersonBean implements Serializable {
     private PersonService personService;
 
     /**
-     *
+     * the current person
      */
     protected Person person = new Person();
 
     /**
-     *
+     * the current logged in user
      */
     protected Person theUser = new Person();
 
     /**
-     *
+     * a list of ideas used to display
      */
     protected List<Person> personsList = new ArrayList<Person>();
 
     /**
-     *
+     * a search string which will be changed to users search input to get list
+     * of persons via Ajax
      */
     protected String search = "";
 
     /**
-     *
+     * a string of what types of persons to show which will be changed to users
+     * drop down input which is used to get list of persons via Ajax
      */
     protected String filter = "All";
 
@@ -65,7 +66,7 @@ public class PersonBean implements Serializable {
      */
     @PostConstruct
     public void init() {
-        if (theUser != null && isUserStaff()) {
+        if (isUserStaff()) {
             personsList = personService.findAllPersons();
         } else {
             personsList = personService.findAllPersonsForNonStaff();
@@ -74,7 +75,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return personService
      */
     public PersonService getPersonService() {
         return personService;
@@ -82,7 +83,8 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @param personService
+     * @param personService the personService to set as the current
+     * personService
      */
     public void setPersonService(PersonService personService) {
         this.personService = personService;
@@ -90,7 +92,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return the current person
      */
     public Person getPerson() {
         return person;
@@ -98,7 +100,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @param person
+     * @param person the person to set as the current person
      */
     public void setPerson(Person person) {
         this.person = person;
@@ -106,7 +108,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return the current logged in user
      */
     public Person getTheUser() {
         return theUser;
@@ -114,7 +116,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @param theUser
+     * @param theUser the person to set as the current logged in user
      */
     public void setTheUser(Person theUser) {
         this.theUser = theUser;
@@ -122,7 +124,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return the current persons List
      */
     public List<Person> getPersonsList() {
         return personsList;
@@ -130,7 +132,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @param personsList
+     * @param personsList the persons List to set as the current persons List
      */
     public void setPersonsList(List<Person> personsList) {
         this.personsList = personsList;
@@ -138,7 +140,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return the current search string
      */
     public String getSearch() {
         return search;
@@ -146,7 +148,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @param search
+     * @param search the search string to set as the current search string
      */
     public void setSearch(String search) {
         this.search = search;
@@ -154,7 +156,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return the current filter
      */
     public String getFilter() {
         return filter;
@@ -162,15 +164,17 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @param filter
+     * @param filter the filter to set as the current filter
      */
     public void setFilter(String filter) {
         this.filter = filter;
     }
 
     /**
+     * try to log in using users provided credentials
      *
-     * @return
+     * @return the view to display, index page is correct credentials, same page
+     * if failed
      */
     public String logIn() {
         List<Person> results = personService.findPersonByUsernamePassword(theUser.getUsername(), theUser.getPassword());
@@ -182,12 +186,13 @@ public class PersonBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         theUser = new Person();
 
-        return "LogIn";
+        return null;
     }
 
     /**
+     * set the current user to a null/new person
      *
-     * @return
+     * @return the index view
      */
     public String logOut() {
         theUser = new Person();
@@ -195,8 +200,9 @@ public class PersonBean implements Serializable {
     }
 
     /**
+     * used to prepare the variables to allow the user to create a new person
      *
-     * @return
+     * @return the AddUser view
      */
     public String prepareCreate() {
         person = new Person();
@@ -205,8 +211,10 @@ public class PersonBean implements Serializable {
     }
 
     /**
+     * try to add a new user
      *
-     * @return
+     * @return the view to display, User details view if the user is staff and
+     * successful or same page if correct successful or failed
      */
     public String addUser() {
         try {
@@ -227,24 +235,28 @@ public class PersonBean implements Serializable {
     }
 
     /**
+     * set if variables to try and edit the person details
      *
-     * @param person
-     * @return
+     * @param person the person to try to edit
+     * @return the view to display, AddUser page if authorised, the same page if
+     * not
      */
     public String setUpEditPerson(Person person) {
         this.person = person;
         if (isUserStaff() || isPersonTheUser()) {
             return "AddUser";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to edit the user.", "Not Authorized.");
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to edit the user.", "Not authorised.");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
     }
 
     /**
+     * update the details of the person
      *
-     * @param person
-     * @return
+     * @param person the person to update
+     * @return the view to display, User details page if authorised, the same
+     * page if not
      */
     public String updatePerson(Person person) {
         this.person = person;
@@ -252,15 +264,16 @@ public class PersonBean implements Serializable {
             this.person = personService.updatePerson(person);
             return "User";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to edit the user.", "Not Authorized.");
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to edit the user.", "Not authorised.");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
     }
 
     /**
+     * set up variables to view a person's details
      *
-     * @param person
-     * @return
+     * @param person the person to view details of
+     * @return the User details view
      */
     public String viewPerson(Person person) {
         this.person = person;
@@ -268,31 +281,37 @@ public class PersonBean implements Serializable {
     }
 
     /**
+     * try to delete a person
      *
-     * @param person
-     * @return
+     * @param person the person to delete
+     * @return the view to display, Users List view if authorised, the same page
+     * if not
      */
     public String deletePerson(Person person) {
         this.person = person;
+        //if the user is staff but isn't the person, just delete
         if (isUserStaff() && !isPersonTheUser()) {
             personService.deletePerson(this.person);
             personsList = personService.findAllPersons();
             return "Users";
-        } else if (isPersonTheUser()) {
+        } //else if the user if the person, log out and delete
+        else if (isPersonTheUser()) {
             personService.deletePerson(this.person);
             personsList = personService.findAllPersons();
             theUser = new Person();
             return "Users";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to delete the user.", "Not Authorized.");
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to delete the user.", "Not authorised.");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
     }
 
     /**
+     * try to approve a organisation
      *
-     * @param person
-     * @return
+     * @param person the person(organisation) to approve
+     * @return the view to display, User details view if authorised, the same
+     * page if not
      */
     public String approveOrganisation(Person person) {
         this.person = person;
@@ -301,15 +320,17 @@ public class PersonBean implements Serializable {
             this.person = personService.updatePerson(person);
             return "User";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to approve the organisation.", "Not Authorized.");
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to approve the organisation.", "Not authorised.");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
     }
 
     /**
+     * try to unapprove a organisation
      *
-     * @param person
-     * @return
+     * @param person the person(organisation) to unapprove
+     * @return the view to display, User details view if authorised, the same
+     * page if not
      */
     public String unapproveOrganisation(Person person) {
         this.person = person;
@@ -318,15 +339,17 @@ public class PersonBean implements Serializable {
             this.person = personService.updatePerson(person);
             return "User";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorized to unapprove the organisation.", "Not Authorized.");
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to unapprove the organisation.", "Not authorised.");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
-        
+
     }
 
     /**
+     * updates list to get appropriate list of persons and return the Users List
+     * page
      *
-     * @return
+     * @return Users list view page which displays a list of persons
      */
     public String viewAllPersons() {
         if (isUserStaff()) {
@@ -340,15 +363,16 @@ public class PersonBean implements Serializable {
     }
 
     /**
+     * gets a list of students
      *
-     * @return
+     * @return a list of just students
      */
     public List<Person> getStudents() {
         return personService.findStudents();
     }
 
     /**
-     *
+     * updates the personsList based on the current filter and search string
      */
     public void updatePersonsList() {
         switch (filter) {
@@ -399,7 +423,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return whether or not the user is Staff
      */
     public boolean isUserStaff() {
         return "Staff".equals(theUser.getType());
@@ -407,7 +431,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return whether or not the user is a Student
      */
     public boolean isUserStudent() {
         return "Student".equals(theUser.getType());
@@ -415,7 +439,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return whether or not the user is a Approved Organisation
      */
     public boolean isUserApprovedOrganisation() {
         return "Organisation".equals(theUser.getType());
@@ -423,7 +447,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return whether or not the current person is staff
      */
     public boolean isPersonStaff() {
         return "Staff".equals(person.getType());
@@ -431,7 +455,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return whether or not the current person is a student
      */
     public boolean isPersonStudent() {
         return "Student".equals(person.getType());
@@ -439,15 +463,16 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return whether or not the current person is any type of Organisation
+     * (Approved Organisation or Unapproved Organisation)
      */
     public boolean isPersonAnyOrganisation() {
-        return "Organisation".equals(person.getType()) || "Unapproved Organisation".equals(person.getType());
+        return isPersonUnapprovedOrganisation() || isPersonApprovedOrganisation();
     }
 
     /**
      *
-     * @return
+     * @return whether or not the current person is a Approved Organisation
      */
     public boolean isPersonApprovedOrganisation() {
         return "Organisation".equals(person.getType());
@@ -455,7 +480,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return whether or not the current person is a Unapproved Organisation
      */
     public boolean isPersonUnapprovedOrganisation() {
         return "Unapproved Organisation".equals(person.getType());
@@ -463,7 +488,7 @@ public class PersonBean implements Serializable {
 
     /**
      *
-     * @return
+     * @return whether or not the logged in user is the current person
      */
     public boolean isPersonTheUser() {
         return theUser == person;

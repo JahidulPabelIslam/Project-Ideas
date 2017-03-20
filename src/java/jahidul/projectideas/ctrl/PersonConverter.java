@@ -43,15 +43,15 @@ public class PersonConverter implements Converter {
      *
      * @param context
      * @param component
-     * @param value
+     * @param object
      * @return
      */
     @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value instanceof Person) {
-            return ((Person) value).getId().toString();
+    public String getAsString(FacesContext context, UIComponent component, Object object) {
+        if (object instanceof Person) {
+            return ((Person) object).getId().toString();
         } else {
-            throw new Error("object is not of type Address");
+            throw new Error("object is not of type Person");
         }
     }
 }
