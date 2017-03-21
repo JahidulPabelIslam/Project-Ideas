@@ -29,6 +29,11 @@ public class PersonConverter implements Converter {
      */
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
+
+        if (value == null || value.isEmpty()) {
+            return null;
+        }
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         PersonBean personBean = (PersonBean) facesContext.getApplication().getELResolver().
                 getValue(facesContext.getELContext(), null, "personBean");
@@ -48,6 +53,11 @@ public class PersonConverter implements Converter {
      */
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object object) {
+
+        if (object == null) {
+            return "";
+        }
+
         if (object instanceof Person) {
             return ((Person) object).getId().toString();
         } else {

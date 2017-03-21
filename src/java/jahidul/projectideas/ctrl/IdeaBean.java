@@ -181,14 +181,27 @@ public class IdeaBean implements Serializable {
      * @param p the person that is adding the idea
      * @return the page to go to, Idea if adding successful, same page if failed
      */
-    public String addIdea(Person p) {
+    public String addIdea(Person theUser) {
         if (isUserApprovedOrganisation() || isUserStaff() || isUserStudent()) {
-            if (apply && isUserStudent()) {
-                idea.setImplementer(p);
+            if (apply && isUserStudent() && theUser.getImplementingIdea() != null && !theUser.getImplementingIdea().equals(idea)) {
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You can't apply for more than one idea, unapply from other idea first.", "Error.");
+                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                return null;
+            } else if (isUserStaff() && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null) {
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Student selected can't apply for more than one idea, Student needs to unapply from other idea first.", "Error.");
+                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                return null;
+            } else {
+                if (apply && isUserStudent() && theUser.getImplementingIdea() == null) {
+                    idea.setImplementer(theUser);
+                    theUser.setImplementingIdea(idea);
+                    getPersonBean().getPersonService().updatePerson(theUser);
+                }
+                ideaService.addIdea(idea, theUser);
+                ideasList = ideaService.findAll();
+                return "Idea";
             }
-            ideaService.addIdea(idea, p);
-            ideasList = ideaService.findAll();
-            return "Idea";
+
         }
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to add a idea.", "Not authorised.");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
@@ -217,7 +230,10 @@ public class IdeaBean implements Serializable {
         if (isUserSubmitter() || isUserStaff()) {
             if (this.idea.getImplementer() != null) {
                 apply = true;
+            } else {
+                apply = false;
             }
+            updatePersonsListToStudents();
             return "SubmitIdea";
         }
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to edit the idea.", "Not authorised.");
@@ -235,11 +251,16 @@ public class IdeaBean implements Serializable {
      */
     public String applyForIdea(Idea idea, Person theUser) {
         if (this.idea.getImplementer() == null && isUserStudent()) {
-            idea.setImplementer(theUser);
-            theUser.setImplementingIdea(idea);
-            getPersonBean().getPersonService().updatePerson(theUser);
-            this.idea = ideaService.updateIdea(idea);
-            return "Idea";
+            if (theUser.getImplementingIdea() == null) {
+                idea.setImplementer(theUser);
+                theUser.setImplementingIdea(idea);
+                getPersonBean().getPersonService().updatePerson(theUser);
+                this.idea = ideaService.updateIdea(idea);
+                return "Idea";
+            }
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are can't apply for more than one idea, unapply from other idea first.", "Error.");
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+            return null;
         }
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to apply for the idea.", "Not authorised.");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
@@ -254,7 +275,7 @@ public class IdeaBean implements Serializable {
      * @return the page to go to, Idea if authorised, same page if failed
      */
     public String unapplyForIdea(Idea idea, Person theUser) {
-        if (idea.getImplementer() == theUser) {
+        if (idea.getImplementer().equals(theUser)) {
             idea.setImplementer(null);
             theUser.setImplementingIdea(null);
             getPersonBean().getPersonService().updatePerson(theUser);
@@ -269,19 +290,34 @@ public class IdeaBean implements Serializable {
     /**
      * update the current idea with the new details
      *
-     * @param idea the idea to update
      * @param theUser the user trying to update the idea
      * @return the page to go to, Idea if authorised, same page if failed
      */
-    public String updateIdea(Idea idea, Person theUser) {
+    public String updateIdea(Person theUser) {
         if (isUserSubmitter() || isUserStaff()) {
-            if (apply && isUserStudent() && this.idea.getImplementer() == null) {
-                idea.setImplementer(theUser);
-            } else if (this.idea.getImplementer() == theUser && !apply) {
-                idea.setImplementer(null);
+            if (apply && isUserStudent() && theUser.getImplementingIdea() != null && !theUser.getImplementingIdea().equals(idea)) {
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You can't apply for more than one idea, unapply from other idea first.", "Error.");
+                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                return null;
+            } else if (isUserStaff() && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null) {
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Student selected can't apply for more than one idea, Student needs to unapply from other idea first.", "Error.");
+                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+                return null;
+            } else {
+                if (apply && isUserStudent() && theUser.getImplementingIdea() == null) {
+                    idea.setImplementer(theUser);
+                    theUser.setImplementingIdea(idea);
+                    getPersonBean().getPersonService().updatePerson(theUser);
+                } else if (idea.getImplementer() != null && idea.getImplementer().equals(theUser)) {
+                    if (!apply) {
+                        idea.setImplementer(null);
+                        theUser.setImplementingIdea(null);
+                        getPersonBean().getPersonService().updatePerson(theUser);
+                    }
+                }
+                idea = ideaService.updateIdea(idea);
+                return "Idea";
             }
-            this.idea = ideaService.updateIdea(idea);
-            return "Idea";
         }
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to edit the idea.", "Not authorised.");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
@@ -390,7 +426,7 @@ public class IdeaBean implements Serializable {
      * @return whether or not the user is the submitter of a idea
      */
     public boolean isUserSubmitter() {
-        return getPersonBean().theUser == idea.getSubmitter();
+        return getPersonBean().theUser.equals(idea.getSubmitter());
     }
 
     /**

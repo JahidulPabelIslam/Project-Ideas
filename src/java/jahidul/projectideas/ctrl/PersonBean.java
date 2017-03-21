@@ -491,7 +491,7 @@ public class PersonBean implements Serializable {
      * @return whether or not the logged in user is the current person
      */
     public boolean isPersonTheUser() {
-        return theUser == person;
+        return theUser.equals(person);
     }
 
 }
