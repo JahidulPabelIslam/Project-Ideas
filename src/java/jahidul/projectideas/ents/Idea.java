@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -50,6 +49,7 @@ public class Idea implements Serializable {
     @Column(nullable = false)
     private String status;
 
+    //use calender instead
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(nullable = false)
     private Date dateUpdated;
@@ -185,10 +185,18 @@ public class Idea implements Serializable {
         this.dateUpdated = dateUpdated;
     }
 
+    /**
+     *
+     * @return
+     */
     public Person getImplementer() {
         return implementer;
     }
 
+    /**
+     *
+     * @param implementer
+     */
     public void setImplementer(Person implementer) {
         this.implementer = implementer;
     }

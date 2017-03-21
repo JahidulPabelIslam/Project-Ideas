@@ -330,10 +330,18 @@ public class Person implements Serializable {
         this.staffRole = staffRole;
     }
 
+    /**
+     *
+     * @return
+     */
     public Idea getImplementingIdea() {
         return implementingIdea;
     }
 
+    /**
+     *
+     * @param implementingIdea
+     */
     public void setImplementingIdea(Idea implementingIdea) {
         this.implementingIdea = implementingIdea;
     }
