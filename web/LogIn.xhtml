@@ -20,19 +20,19 @@
                     <h:outputLabel value="Username:" for="username"/>
                     <h:inputText label="username"
                                  required="true"
-                                 value="#{personBean.theUser.username}" class="form-control username" requiredMessage="Please enter your username."/>
+                                 value="#{personBean.user.username}" class="form-control username" requiredMessage="Please enter your username."/>
 
                     <h:outputLabel value="Password:" for="password"/>
                     <h:inputSecret label="password"
                                    required="true"
-                                   value="#{personBean.theUser.password}" class="form-control password" requiredMessage="Please enter your password."/>
+                                   value="#{personBean.user.password}" class="form-control password" requiredMessage="Please enter your password."/>
 
                 </h:panelGrid>
 
                 <h:commandButton value="Log In" action="#{personBean.logIn()}" class="btn btn-success"/>
             </h:form>
 
-            <h:form class="formLogIn" rendered="#{personBean.theUser.id == null}">
+            <h:form class="formLogIn" rendered="#{personBean.user.id == null}">
                 <h:outputText value="Haven't Got a Account? " />
                 <h:commandButton value="Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
             </h:form>

@@ -13,9 +13,9 @@
 
         <ui:define name="content">
             <h:panelGrid columns="1" >
-                
+
                 <h:outputText value="User Details." class="alert alert-success noneFound"/>
-                
+
                 <h:panelGrid columns="2" class="table table-striped table-bordered">
 
                     <h:outputLabel value="User Type:" />
@@ -56,7 +56,7 @@
                 </h:panelGrid>
 
                 <h:outputText rendered="#{personBean.personStudent}" value="Choosen Idea." class="alert alert-success noneFound"/>
-                
+
                 <h:outputText rendered="#{personBean.personStudent and personBean.person.implementingIdea == null}" value="No Idea Choosen." class="alert alert-danger noneFound"/>
 
                 <h:panelGrid rendered="#{personBean.personStudent and personBean.person.implementingIdea != null}" columns="2" class="table table-striped table-bordered">
@@ -78,7 +78,7 @@
 
                     <h:outputLabel value="Submitter:" />
                     <h:form>
-                        <h:commandLink id="view" value="#{personBean.person.implementingIdea.submitter}" action="#{personBean.viewPerson(personBean.theUser.implementingIdea.submitter)}"/>
+                        <h:commandLink id="view" value="#{personBean.person.implementingIdea.submitter}" action="#{personBean.viewPerson(personBean.person.implementingIdea.submitter)}"/>
                     </h:form> 
 
                     <h:outputLabel value="Date submitted/last updated:" />
@@ -86,17 +86,16 @@
 
                     <h:outputLabel value="Actions:" />
                     <h:form>
-                        <h:commandButton rendered="#{personBean.userStudent and personBean.person.implementingIdea.implementer == null}" value="Apply" id="apply" action="#{ideaBean.applyForIdea(personBean.person.implementingIdea, personBean.theUser)}" class="btn btn-success"/>
-                        <h:commandButton rendered="#{personBean.person.implementingIdea.implementer == personBean.theUser}" value="Unapply" action="#{ideaBean.unapplyForIdea(personBean.person.implementingIdea, personBean.theUser)}" class="btn btn-success"/>
+                        <h:commandButton rendered="#{personBean.person.implementingIdea.implementer == personBean.user}" value="Unapply" action="#{ideaBean.unapplyForIdea(personBean.person.implementingIdea, personBean.user)}" class="btn btn-success"/>
                         <h:commandButton rendered="#{ideaBean.userSubmitter or personBean.userStaff}" id="edit" value="Edit" action="#{ideaBean.setUpEditIdea(personBean.person.implementingIdea)}" class="btn btn-primary" />
                         <h:commandButton rendered="#{ideaBean.userSubmitter or personBean.userStaff}" id="delete" value="Delete" action="#{ideaBean.deleteIdea(personBean.person.implementingIdea)}" class="btn btn-danger" />
                     </h:form>
                 </h:panelGrid>
-                
+
                 <h:messages globalOnly="true" class="feedback" errorClass="alert alert-danger"></h:messages>
 
                 <h:outputText value="Submitted Ideas." class="alert alert-success noneFound"/>
-                
+
                 <h:panelGrid columns="1" >
 
                     <h:outputText rendered="#{personBean.person.ideas.size() == 0}" value="No Ideas Found" class="alert alert-danger noneFound"/>

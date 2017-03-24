@@ -42,7 +42,7 @@ public class PersonBean implements Serializable {
     /**
      * the current logged in user
      */
-    protected Person theUser = new Person();
+    protected Person user = new Person();
 
     /**
      * a list of ideas used to display
@@ -66,7 +66,7 @@ public class PersonBean implements Serializable {
      */
     @PostConstruct
     public void init() {
-        if (theUser != null && isUserStaff()) {
+        if (user != null && isUserStaff()) {
             personsList = personService.findAllPersons();
         } else {
             personsList = personService.findAllPersonsForNonStaff();
@@ -110,16 +110,16 @@ public class PersonBean implements Serializable {
      *
      * @return the current logged in user
      */
-    public Person getTheUser() {
-        return theUser;
+    public Person getUser() {
+        return user;
     }
 
     /**
      *
-     * @param theUser the person to set as the current logged in user
+     * @param user the person to set as the current logged in user
      */
-    public void setTheUser(Person theUser) {
-        this.theUser = theUser;
+    public void setUser(Person user) {
+        this.user = user;
     }
 
     /**
@@ -177,14 +177,14 @@ public class PersonBean implements Serializable {
      * if failed
      */
     public String logIn() {
-        List<Person> results = personService.findPersonByUsernamePassword(theUser.getUsername(), theUser.getPassword());
+        List<Person> results = personService.findPersonByUsernamePassword(user.getUsername(), user.getPassword());
         if (!results.isEmpty()) {
-            theUser = results.get(0);
+            user = results.get(0);
             return "index";
         }
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username and/or password not recognised.", "Sign In Error");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        theUser = new Person();
+        user = new Person();
 
         return null;
     }
@@ -195,7 +195,7 @@ public class PersonBean implements Serializable {
      * @return the index view
      */
     public String logOut() {
-        theUser = new Person();
+        user = new Person();
         return "index";
     }
 
@@ -298,7 +298,7 @@ public class PersonBean implements Serializable {
         else if (isPersonTheUser()) {
             personService.deletePerson(this.person);
             personsList = personService.findAllPersons();
-            theUser = new Person();
+            user = new Person();
             return "Users";
         }
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to delete the user.", "Not authorised.");
@@ -426,7 +426,7 @@ public class PersonBean implements Serializable {
      * @return whether or not the user is Staff
      */
     public boolean isUserStaff() {
-        return "Staff".equals(theUser.getType());
+        return "Staff".equals(user.getType());
     }
 
     /**
@@ -434,7 +434,7 @@ public class PersonBean implements Serializable {
      * @return whether or not the user is a Student
      */
     public boolean isUserStudent() {
-        return "Student".equals(theUser.getType());
+        return "Student".equals(user.getType());
     }
 
     /**
@@ -442,7 +442,7 @@ public class PersonBean implements Serializable {
      * @return whether or not the user is a Approved Organisation
      */
     public boolean isUserApprovedOrganisation() {
-        return "Organisation".equals(theUser.getType());
+        return "Organisation".equals(user.getType());
     }
 
     /**
@@ -491,7 +491,7 @@ public class PersonBean implements Serializable {
      * @return whether or not the logged in user is the current person
      */
     public boolean isPersonTheUser() {
-        return theUser.equals(person);
+        return user.equals(person);
     }
 
 }
