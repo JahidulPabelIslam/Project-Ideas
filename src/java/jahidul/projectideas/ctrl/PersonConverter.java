@@ -15,7 +15,7 @@ import javax.faces.convert.FacesConverter;
 
 /**
  *
- * @author up733474
+ * @author Jahidul Pabel Islam, 733474
  */
 @FacesConverter(forClass = Person.class)
 public class PersonConverter implements Converter {

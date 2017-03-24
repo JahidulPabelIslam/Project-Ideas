@@ -15,7 +15,7 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author up733474
+ * @author Jahidul Pabel Islam, 733474
  */
 @Stateless
 public class IdeaService {

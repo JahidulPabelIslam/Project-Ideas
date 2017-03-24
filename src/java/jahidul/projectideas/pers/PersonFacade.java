@@ -14,7 +14,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author up733474
+ * @author Jahidul Pabel Islam, 733474
  */
 @Stateless
 public class PersonFacade extends AbstractFacade<Person> {

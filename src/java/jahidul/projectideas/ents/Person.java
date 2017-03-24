@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author up733474
+ * @author Jahidul Pabel Islam, 733474
  */
 @Entity
 public class Person implements Serializable {

@@ -21,7 +21,7 @@ import javax.inject.Named;
 
 /**
  *
- * @author up733474
+ * @author Jahidul Pabel Islam, 733474
  */
 @Named(value = "ideaBean")
 @SessionScoped
