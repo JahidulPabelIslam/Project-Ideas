@@ -14,6 +14,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 /**
+ * Converter for the Person Entity, used for drop down menu.
  *
  * @author Jahidul Pabel Islam, 733474
  */
@@ -25,7 +26,7 @@ public class PersonConverter implements Converter {
      * @param context
      * @param component
      * @param value
-     * @return
+     * @return the string provided as a Person object
      */
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -54,7 +55,7 @@ public class PersonConverter implements Converter {
      * @param context
      * @param component
      * @param object
-     * @return
+     * @return the Person Object as a string
      */
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object object) {

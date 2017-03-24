@@ -177,6 +177,7 @@ public class PersonBean implements Serializable {
      * if failed
      */
     public String logIn() {
+        //try to validate credentials
         List<Person> results = personService.findPersonByUsernamePassword(user.getUsername(), user.getPassword());
         if (!results.isEmpty()) {
             user = results.get(0);

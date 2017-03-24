@@ -235,13 +235,14 @@ public class IdeaBean implements Serializable {
      */
     public String setUpEditIdea(Idea idea) {
         this.idea = idea;
-
+        //check if user is the submitter or is staff
         if (isUserSubmitter() || isUserStaff()) {
-            if (this.idea.getImplementer() != null) {
-                apply = true;
-            } else {
-                apply = false;
-            }
+
+            //display the correct apply checkbox
+            apply = this.idea.getImplementer() != null;
+
+            //update the persons list to only display student user, for purpose 
+            //of dropdown for Staff/Organisation  to select a student as implementer
             updatePersonsListToStudents();
             return "SubmitIdea";
         }
@@ -311,22 +312,27 @@ public class IdeaBean implements Serializable {
      * @return the page to go to, Idea if authorised, same page if failed
      */
     public String updateIdea(Person theUser) {
+        //check if user is the submitter or is staff
         if (isUserSubmitter() || isUserStaff()) {
+            //check that user is trying to apply for a second idea
             if (apply && isUserStudent() && theUser.getImplementingIdea() != null && !theUser.getImplementingIdea().equals(idea)) {
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You can't apply for more than one idea, unapply from other idea first.", "Error.");
                 FacesContext.getCurrentInstance().addMessage(null, facesMsg);
                 return null;
-            } else if (isUserStaff() && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null) {
+            } //check the user hasn't select a student that already has a idea selected
+            else if ((isUserStaff() || isUserApprovedOrganisation()) && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null) {
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Student selected can't apply for more than one idea, Student needs to unapply from other idea first.", "Error.");
                 FacesContext.getCurrentInstance().addMessage(null, facesMsg);
                 return null;
-            } else {
-
+            } //else everything is okay 
+            else {
+                //check if user has applied for the idea, therefore update the idea and user information
                 if (apply && isUserStudent() && theUser.getImplementingIdea() == null) {
                     idea.setImplementer(theUser);
                     theUser.setImplementingIdea(idea);
                     getPersonBean().getPersonService().updatePerson(theUser);
-                } else if (idea.getImplementer() != null && idea.getImplementer().equals(theUser)) {
+                } //if user has unapplied for the idea, update the idea and user information
+                else if (idea.getImplementer() != null && idea.getImplementer().equals(theUser)) {
                     if (!apply) {
                         idea.setImplementer(null);
                         theUser.setImplementingIdea(null);
@@ -352,6 +358,7 @@ public class IdeaBean implements Serializable {
      */
     public String deleteIdea(Idea idea) {
         this.idea = idea;
+        //check if user is authorised (is submitter or staff)
         if (isUserSubmitter() || isUserStaff()) {
             ideaService.deleteIdea(idea);
             Person theUser = getPersonBean().getUser();

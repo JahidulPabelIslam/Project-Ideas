@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
+ * Facade to manage the persistence of any Idea objects
  *
  * @author Jahidul Pabel Islam, 733474
  */

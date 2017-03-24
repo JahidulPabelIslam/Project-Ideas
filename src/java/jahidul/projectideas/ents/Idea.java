@@ -49,7 +49,6 @@ public class Idea implements Serializable {
     @Column(nullable = false)
     private String status;
 
-    //use calender instead
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(nullable = false)
     private Date dateUpdated;

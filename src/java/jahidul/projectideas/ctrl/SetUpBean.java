@@ -12,6 +12,8 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
 /**
+ * Set up bean, used to set up any initial data to allow user to test
+ * application
  *
  * @author Jahidul Pabel Islam, 733474
  */
@@ -38,11 +40,11 @@ public class SetUpBean {
         person.setSurname("Briggs");
         person.setType("Staff");
         person.setUsername("JB");
-        
+
         try {
             personService.addPerson(person);
         } catch (Exception be) {
-            
+
         }
 
         return "/start.xhtml";

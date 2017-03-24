@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
+ * Holds all the business logic for the Idea entity
  *
  * @author Jahidul Pabel Islam, 733474
  */
