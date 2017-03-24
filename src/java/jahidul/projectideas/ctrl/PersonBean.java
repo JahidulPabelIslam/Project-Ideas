@@ -235,7 +235,7 @@ public class PersonBean implements Serializable {
     }
 
     /**
-     * set if variables to try and edit the person details
+     * set up variables to try and edit the person details
      *
      * @param person the person to try to edit
      * @return the view to display, AddUser page if authorised, the same page if

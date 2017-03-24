@@ -35,12 +35,17 @@ public class PersonConverter implements Converter {
         }
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
+
         PersonBean personBean = (PersonBean) facesContext.getApplication().getELResolver().
                 getValue(facesContext.getELContext(), null, "personBean");
+
         PersonService ps = (PersonService) personBean.getPersonService();
+
         PersonFacade pf = (PersonFacade) ps.getPersonFacade();
+
         Long id = Long.decode(value);
         Person p = pf.find(id);
+
         return p;
     }
 
