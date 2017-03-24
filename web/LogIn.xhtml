@@ -10,9 +10,9 @@
         </ui:define>
 
         <ui:define name="content">
-            <h:form class="formSignin">
+            <h:form class="formLogIn">
 
-                <h2 class="formSigninHeading">Please sign in</h2>
+                <h2 class="formLogInHeading">Please sign in</h2>
 
                 <h:panelGrid columns="2"
                              columnClasses="rightalign,leftalign">
@@ -32,7 +32,7 @@
                 <h:commandButton value="Log In" action="#{personBean.logIn()}" class="btn btn-success"/>
             </h:form>
 
-            <h:form class="formSignin" rendered="#{personBean.theUser.id == null}">
+            <h:form class="formLogIn" rendered="#{personBean.theUser.id == null}">
                 <h:outputText value="Haven't Got a Account? " />
                 <h:commandButton value="Sign Up" action="#{personBean.prepareCreate()}" class="btn btn-primary"/>
             </h:form>

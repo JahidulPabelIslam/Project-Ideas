@@ -11,32 +11,38 @@ table {
     background: white;
 }
 
-.formSignin {
+.formLogIn {
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
     text-align: center;
 }
 
-.formSignin .formSigninHeading {
+.formLogIn .formLogInHeading {
     margin-bottom: 10px;
 }
 
-.formSignin .form-control {
+.formLogIn .form-control {
+    position: relative;
     height: auto;
     padding: 10px;
     font-size: 16px;
 }
 
-.formSignin .username {
+.formLogIn .username {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
-.formSignin .password {
+
+.formLogIn .password {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.formLogIn .form-control:focus {
+    z-index: 2;
 }
 
 .btn {
