@@ -61,8 +61,9 @@ public class Idea implements Serializable {
     private Person submitter;
 
     /**
+     * Get the value of id
      *
-     * @return
+     * @return the value of id
      */
     public Long getId() {
         return id;
@@ -70,7 +71,7 @@ public class Idea implements Serializable {
 
     /**
      *
-     * @param id
+     * @param id new value of id
      */
     public void setId(Long id) {
         this.id = id;
@@ -167,34 +168,36 @@ public class Idea implements Serializable {
     }
 
     /**
-     * Get the value of date
+     * Get the value of dateUpdated
      *
-     * @return the value of date
+     * @return the value of dateUpdated
      */
     public Date getDateUpdated() {
         return dateUpdated;
     }
 
     /**
-     * Set the value of date
+     * Set the value of dateUpdated
      *
-     * @param dateUpdated new value of date
+     * @param dateUpdated new value of dateUpdated
      */
     public void setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
 
     /**
+     * Get the value of implementer
      *
-     * @return
+     * @return the value of implementer
      */
     public Person getImplementer() {
         return implementer;
     }
 
     /**
+     * Set the value of implementer
      *
-     * @param implementer
+     * @param implementer new value of implementer
      */
     public void setImplementer(Person implementer) {
         this.implementer = implementer;

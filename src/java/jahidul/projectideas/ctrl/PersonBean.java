@@ -23,7 +23,7 @@ import javax.inject.Named;
  */
 @Named(value = "personBean")
 @SessionScoped
-public class PersonBean implements Serializable {
+public class PersonBean extends AbstractBean implements Serializable {
 
     /**
      *
@@ -183,11 +183,9 @@ public class PersonBean implements Serializable {
             user = results.get(0);
             return "index";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username and/or password not recognised.", "Sign In Error");
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        user = new Person();
 
-        return null;
+        user = new Person();
+        return AddErrorMessage("Username and/or password not recognised.");
     }
 
     /**
@@ -219,19 +217,19 @@ public class PersonBean implements Serializable {
      */
     public String addUser() {
         try {
+            
             personService.addPerson(person);
+            
             if (!isUserStaff()) {
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully registered, An administrator will review your details and enable\n"
-                        + "                           your account soon, come back later and try to log in.", "Successfully registered.");
-                FacesContext.getCurrentInstance().addMessage(null, facesMsg);
                 person = new Person();
-                return null;
+                return AddSuccessMessage("Successfully registered, An administrator will review your details and enable\n"
+                        + "your account soon, come back later and try to log in.");
             }
+            
             return "User";
+            
         } catch (Exception be) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, be.getMessage(), be.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-            return null;
+            return AddErrorMessage(be.getMessage());
         }
     }
 
@@ -244,12 +242,12 @@ public class PersonBean implements Serializable {
      */
     public String setUpEditPerson(Person person) {
         this.person = person;
+        
         if (isUserStaff() || isPersonTheUser()) {
             return "SubmitUser";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to edit the user.", "Not authorised.");
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        return null;
+        
+        return AddErrorMessage("You are not authorised to edit the user.");
     }
 
     /**
@@ -261,13 +259,13 @@ public class PersonBean implements Serializable {
      */
     public String updatePerson(Person person) {
         this.person = person;
+        
         if (isUserStaff() || isPersonTheUser()) {
             this.person = personService.updatePerson(person);
             return "User";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to edit the user.", "Not authorised.");
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        return null;
+        
+        return AddErrorMessage("You are not authorised to edit the user.");
     }
 
     /**
@@ -290,21 +288,23 @@ public class PersonBean implements Serializable {
      */
     public String deletePerson(Person person) {
         this.person = person;
+        
         //if the user is staff but isn't the person, just delete
         if (isUserStaff() && !isPersonTheUser()) {
             personService.deletePerson(this.person);
             personsList = personService.findAllPersons();
             return "Users";
-        } //else if the user if the person, log out and delete
+        } 
+
+        //else if the user if the person, log out and delete
         else if (isPersonTheUser()) {
             personService.deletePerson(this.person);
             personsList = personService.findAllPersons();
             user = new Person();
             return "Users";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to delete the user.", "Not authorised.");
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        return null;
+        
+        return AddErrorMessage("You are not authorised to delete the user.");
     }
 
     /**
@@ -316,14 +316,14 @@ public class PersonBean implements Serializable {
      */
     public String approveOrganisation(Person person) {
         this.person = person;
+        
         if (isUserStaff() && isPersonUnapprovedOrganisation()) {
             this.person.setType("Organisation");
             this.person = personService.updatePerson(person);
             return "User";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to approve the organisation.", "Not authorised.");
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        return null;
+        
+        return AddErrorMessage("You are not authorised to approve the organisation.");
     }
 
     /**
@@ -335,15 +335,14 @@ public class PersonBean implements Serializable {
      */
     public String unapproveOrganisation(Person person) {
         this.person = person;
+        
         if (isUserStaff() && isPersonUnapprovedOrganisation()) {
             this.person.setType("Unapproved Organisation");
             this.person = personService.updatePerson(person);
             return "User";
         }
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to unapprove the organisation.", "Not authorised.");
-        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        return null;
-
+        
+        return AddErrorMessage("You are not authorised to unapprove the organisation.");
     }
 
     /**

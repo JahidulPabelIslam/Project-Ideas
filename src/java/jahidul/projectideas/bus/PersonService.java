@@ -12,7 +12,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
- * * Holds all the business logic for the Person entity
+ * Holds all the business logic for the Person entity
  *
  * @author Jahidul Pabel Islam, 733474
  */

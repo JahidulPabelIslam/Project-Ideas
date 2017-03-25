@@ -53,7 +53,6 @@ public class IdeaService {
      * creates a new idea
      *
      * @param i the idea to add
-     * @param p the person that is adding the idea
      */
     public void addIdea(Idea i) {
         Date date = new Date();

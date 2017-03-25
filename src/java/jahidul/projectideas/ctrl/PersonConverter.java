@@ -25,7 +25,7 @@ public class PersonConverter implements Converter {
      *
      * @param context
      * @param component
-     * @param value
+     * @param value the string value of a object
      * @return the string provided as a Person object
      */
     @Override
