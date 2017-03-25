@@ -66,7 +66,7 @@ public class PersonBean implements Serializable {
      */
     @PostConstruct
     public void init() {
-        if (user != null && isUserStaff()) {
+        if (user.getId() != null && isUserStaff()) {
             personsList = personService.findAllPersons();
         } else {
             personsList = personService.findAllPersonsForNonStaff();
