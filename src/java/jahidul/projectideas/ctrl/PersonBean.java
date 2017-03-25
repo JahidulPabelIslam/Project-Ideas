@@ -13,8 +13,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -48,18 +46,6 @@ public class PersonBean extends AbstractBean implements Serializable {
      * a list of ideas used to display
      */
     protected List<Person> personsList = new ArrayList<Person>();
-
-    /**
-     * a search string which will be changed to users search input to get list
-     * of persons via Ajax
-     */
-    protected String search = "";
-
-    /**
-     * a string of what types of persons to show which will be changed to users
-     * drop down input which is used to get list of persons via Ajax
-     */
-    protected String filter = "All";
 
     /**
      *
@@ -136,38 +122,6 @@ public class PersonBean extends AbstractBean implements Serializable {
      */
     public void setPersonsList(List<Person> personsList) {
         this.personsList = personsList;
-    }
-
-    /**
-     *
-     * @return the current search string
-     */
-    public String getSearch() {
-        return search;
-    }
-
-    /**
-     *
-     * @param search the search string to set as the current search string
-     */
-    public void setSearch(String search) {
-        this.search = search;
-    }
-
-    /**
-     *
-     * @return the current filter
-     */
-    public String getFilter() {
-        return filter;
-    }
-
-    /**
-     *
-     * @param filter the filter to set as the current filter
-     */
-    public void setFilter(String filter) {
-        this.filter = filter;
     }
 
     /**
