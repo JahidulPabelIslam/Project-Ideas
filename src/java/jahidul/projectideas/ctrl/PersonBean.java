@@ -208,7 +208,7 @@ public class PersonBean implements Serializable {
     public String prepareCreate() {
         person = new Person();
         person.setType("Unapproved Organisation");
-        return "AddUser";
+        return "SubmitUser";
     }
 
     /**
@@ -245,7 +245,7 @@ public class PersonBean implements Serializable {
     public String setUpEditPerson(Person person) {
         this.person = person;
         if (isUserStaff() || isPersonTheUser()) {
-            return "AddUser";
+            return "SubmitUser";
         }
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "You are not authorised to edit the user.", "Not authorised.");
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
