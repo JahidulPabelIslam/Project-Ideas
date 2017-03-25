@@ -203,10 +203,10 @@ public class IdeaBean implements Serializable {
                     idea.setImplementer(theUser);
                     theUser.setImplementingIdea(idea);
                 }
+                
                 ideaService.addIdea(idea, theUser);
                 theUser.getIdeas().add(idea);
                 getPersonBean().getPersonService().updatePerson(theUser);
-                ideasList = ideaService.findAll();
                 return "Idea";
             }
 
