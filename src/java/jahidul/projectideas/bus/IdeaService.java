@@ -55,8 +55,7 @@ public class IdeaService {
      * @param i the idea to add
      * @param p the person that is adding the idea
      */
-    public void addIdea(Idea i, Person p) {
-        i.setSubmitter(p);
+    public void addIdea(Idea i) {
         Date date = new Date();
         i.setDateUpdated(date);
         ideaFacade.create(i);
