@@ -295,7 +295,7 @@ public class IdeaBean extends AbstractBean implements Serializable {
             }
             
             //check if staff/Organisation user has select a valid Implementer, set the idea to the user
-            else if ((isUserStaff() || isUserApprovedOrganisation()) && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null) {
+            else if ((isUserStaff() || isUserApprovedOrganisation()) && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() == null) {
                 Person implementer = idea.getImplementer();
                 implementer.setImplementingIdea(idea);
                 getPersonBean().getPersonService().updatePerson(implementer);
