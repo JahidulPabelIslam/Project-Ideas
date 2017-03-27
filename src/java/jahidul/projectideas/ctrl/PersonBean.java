@@ -16,7 +16,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
- * Any functions for the need of management of any Person Objects
+ * Any functions needed for the management of any Person Objects
  *
  * @author Jahidul Pabel Islam, 733474
  */

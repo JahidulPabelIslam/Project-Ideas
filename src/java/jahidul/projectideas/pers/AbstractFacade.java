@@ -9,7 +9,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
- * 
+ * A extendable Facade to manage the persistence of any entity objects, hold the
+ * basic needed foe any object
+ *
  * @author Jahidul Pabel Islam, 733474
  * @param <T>
  */
@@ -100,5 +102,5 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
+
 }

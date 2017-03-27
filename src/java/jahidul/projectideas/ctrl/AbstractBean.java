@@ -12,6 +12,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
+ * A extendable controller bean, includes the basics needed for a controller
+ * bean
  *
  * @author Jahidul Pabel Islam!
  */
@@ -37,12 +39,24 @@ public class AbstractBean implements Serializable {
      */
     protected String filter = "All";
 
+    /**
+     * display a error message and refresh the current page
+     *
+     * @param message the message to display
+     * @return null, to refresh the current page
+     */
     public String AddErrorMessage(String message) {
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         return null;
     }
 
+    /**
+     * display a success/confirmation message and refresh the current page
+     *
+     * @param message the message to display
+     * @return null, to refresh the current page
+     */
     public String AddSuccessMessage(String message) {
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, message);
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
@@ -50,6 +64,7 @@ public class AbstractBean implements Serializable {
     }
 
     /**
+     * return the current search string
      *
      * @return the current search string
      */
@@ -58,6 +73,7 @@ public class AbstractBean implements Serializable {
     }
 
     /**
+     * set a new search string
      *
      * @param search the search string to set as the current search string
      */
@@ -66,6 +82,7 @@ public class AbstractBean implements Serializable {
     }
 
     /**
+     * return the current filter
      *
      * @return the current filter
      */
@@ -74,6 +91,7 @@ public class AbstractBean implements Serializable {
     }
 
     /**
+     * set a new filter
      *
      * @param filter the filter to set as the current filter
      */

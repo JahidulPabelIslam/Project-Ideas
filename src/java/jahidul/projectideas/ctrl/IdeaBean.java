@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
+ * Any functions needed for the management of any Idea Objects
  *
  * @author Jahidul Pabel Islam, 733474
  */
@@ -191,7 +192,7 @@ public class IdeaBean extends AbstractBean implements Serializable {
      */
     public String setUpEditIdea(Idea idea) {
         this.idea = idea;
-        
+
         //check if user is the submitter or is staff
         if (isUserSubmitter() || isUserStaff()) {
 
@@ -201,7 +202,7 @@ public class IdeaBean extends AbstractBean implements Serializable {
             //update the persons list to only display student user, for purpose 
             //of dropdown for Staff/Organisation  to select a student as implementer
             updatePersonsListToStudents();
-            
+
             return "SubmitIdea";
         }
 
@@ -270,17 +271,15 @@ public class IdeaBean extends AbstractBean implements Serializable {
                 idea.setImplementer(user);
                 user.setImplementingIdea(idea);
                 getPersonBean().getPersonService().updatePerson(user);
-            } 
-            
-            //check idea is already taken
+            } //check idea is already taken
             else if (apply && isUserStudent() && idea.getImplementer() != null) {
-                
+
                 //and isn't taken by the current user
                 if (user.getImplementingIdea() == null || (user.getImplementingIdea() != null && !user.getImplementingIdea().equals(idea))) {
                     return AddErrorMessage("The idea is already has a Implementer.");
                 }
             }
-                
+
             //check if implementer already has applied for another idea
             if (idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null && !idea.getImplementer().getImplementingIdea().equals(idea)) {
                 return AddErrorMessage("Can't apply for more than one idea, unapply from other idea first.");
@@ -291,9 +290,7 @@ public class IdeaBean extends AbstractBean implements Serializable {
                 idea.setImplementer(null);
                 user.setImplementingIdea(null);
                 getPersonBean().getPersonService().updatePerson(user);
-            }
-            
-            //check if staff/Organisation user has select a valid Implementer, set the idea to the user
+            } //check if staff/Organisation user has select a valid Implementer, set the idea to the user
             else if ((isUserStaff() || isUserApprovedOrganisation()) && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() == null) {
                 Person implementer = idea.getImplementer();
                 implementer.setImplementingIdea(idea);

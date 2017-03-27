@@ -5,7 +5,6 @@
  */
 package jahidul.projectideas.bus;
 
-import jahidul.projectideas.ents.Idea;
 import jahidul.projectideas.ents.Person;
 import jahidul.projectideas.pers.IdeaFacade;
 import jahidul.projectideas.pers.PersonFacade;
@@ -28,6 +27,7 @@ public class PersonService {
     private IdeaFacade ideaFacade;
 
     /**
+     * return the current PersonFacade
      *
      * @return the personFacade
      */
@@ -36,6 +36,7 @@ public class PersonService {
     }
 
     /**
+     * set a new PersonFacade
      *
      * @param personFacade the new personFacade to set as personFacade
      */
@@ -44,6 +45,7 @@ public class PersonService {
     }
 
     /**
+     * get the current IdeaFacade
      *
      * @return the current IdeaFacade
      */
@@ -52,6 +54,7 @@ public class PersonService {
     }
 
     /**
+     * set a new IdeaFacade
      *
      * @param ideaFacade the new IdeaFacade to set as the ideaFacade
      */

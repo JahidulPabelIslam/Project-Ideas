@@ -28,6 +28,7 @@ public class IdeaService {
     private PersonFacade personFacade;
 
     /**
+     * return the current IdeaFacade
      *
      * @return the current IdeaFacade
      */
@@ -36,6 +37,7 @@ public class IdeaService {
     }
 
     /**
+     * set a new IdeaFacade
      *
      * @param ideaFacade the new IdeaFacade to set as the ideaFacade
      */
@@ -44,6 +46,7 @@ public class IdeaService {
     }
 
     /**
+     * return the current PersonFacade
      *
      * @return the current PersonFacade
      */
