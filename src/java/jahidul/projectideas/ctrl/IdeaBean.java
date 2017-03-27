@@ -143,40 +143,30 @@ public class IdeaBean extends AbstractBean implements Serializable {
         //check if the user is logged in
         if (isUserApprovedOrganisation() || isUserStaff() || isUserStudent()) {
 
-            //check if the user is student has tried to apply for idea but already has applied for another idea
-            if (apply && isUserStudent() && user.getImplementingIdea() != null && !user.getImplementingIdea().equals(idea)) {
-                return AddErrorMessage("You can't apply for more than one idea, unapply from other idea first.");
-            } 
-
-            //check if user is staff and the student they selected to undertake idea has already applied for another idea
-            else if ((isUserStaff() || isUserApprovedOrganisation()) && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null && !idea.getImplementer().getImplementingIdea().equals(idea)) {
-                return AddErrorMessage("Student selected can't apply for more than one idea, Student needs to unapply from other idea first.");
-            } 
-
-            //else everything is fine
-            else {
-
-                //if the user is student and has selcted to apply for idea, set the idea to the user and vise versa
-                if (apply && isUserStudent() && user.getImplementingIdea() == null) {
-                    idea.setImplementer(user);
-                    user.setImplementingIdea(idea);
-                }
-
-                idea.setSubmitter(user);
-                ideaService.addIdea(idea);
-
-                //check if staff/organisation user has select a valid Implementer, set the idea to the user
-                if ((isUserStaff() || isUserApprovedOrganisation()) && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() == null) {
-                    Person implementer = idea.getImplementer();
-                    implementer.setImplementingIdea(idea);
-                    getPersonBean().getPersonService().updatePerson(implementer);
-                }
-
-                user.getIdeas().add(idea);
-                getPersonBean().getPersonService().updatePerson(user);
-                return "Idea";
+            //if the user is student and has selected to apply for idea, set the user to the idea
+            if (apply && isUserStudent()) {
+                idea.setImplementer(user);
             }
 
+            //check if implementer already has applied for another idea
+            if (idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null && !idea.getImplementer().getImplementingIdea().equals(idea)) {
+                return AddErrorMessage("Can't apply for more than one idea, unapply from other idea first.");
+            }
+
+            idea.setSubmitter(user);
+            ideaService.addIdea(idea);
+
+            //check if there is a implementer, set the idea to the user
+            if (idea.getImplementer() != null) {
+                Person implementer = idea.getImplementer();
+                implementer.setImplementingIdea(idea);
+                getPersonBean().getPersonService().updatePerson(implementer);
+            }
+
+            user.getIdeas().add(idea);
+            getPersonBean().getPersonService().updatePerson(user);
+
+            return "Idea";
         }
 
         return AddErrorMessage("You are not authorised to add a idea.");
@@ -201,6 +191,7 @@ public class IdeaBean extends AbstractBean implements Serializable {
      */
     public String setUpEditIdea(Idea idea) {
         this.idea = idea;
+        
         //check if user is the submitter or is staff
         if (isUserSubmitter() || isUserStaff()) {
 
@@ -210,6 +201,7 @@ public class IdeaBean extends AbstractBean implements Serializable {
             //update the persons list to only display student user, for purpose 
             //of dropdown for Staff/Organisation  to select a student as implementer
             updatePersonsListToStudents();
+            
             return "SubmitIdea";
         }
 
@@ -273,47 +265,45 @@ public class IdeaBean extends AbstractBean implements Serializable {
         //check if user is the submitter or is staff
         if (isUserSubmitter() || isUserStaff()) {
 
-            //check that user is trying to apply for a second idea
-            if (apply && isUserStudent() && user.getImplementingIdea() != null && !user.getImplementingIdea().equals(idea)) {
-                return AddErrorMessage("You can't apply for more than one idea, unapply from other idea first.");
+            //if the user is student and has selected to apply for idea, set the user to the idea
+            if (apply && isUserStudent() && idea.getImplementer() == null) {
+                idea.setImplementer(user);
+                user.setImplementingIdea(idea);
+                getPersonBean().getPersonService().updatePerson(user);
             } 
-
-            //check the user hasn't select a student that already has a idea selected
-            else if ((isUserStaff() || isUserApprovedOrganisation()) && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null && !idea.getImplementer().getImplementingIdea().equals(idea)) {
-                return AddErrorMessage("Student selected can't apply for more than one idea, Student needs to unapply from other idea first.");
-            } 
-
-            //else everything is okay 
-            else {
-
-                //check if user has applied for the idea, therefore update the idea and user information
-                if (apply && isUserStudent() && user.getImplementingIdea() == null) {
-                    idea.setImplementer(user);
-                    user.setImplementingIdea(idea);
-                    getPersonBean().getPersonService().updatePerson(user);
-                } 
-
-                //if user has unapplied for the idea, update the idea and user information
-                else if (idea.getImplementer() != null && idea.getImplementer().equals(user)) {
-
-                    if (!apply) {
-                        idea.setImplementer(null);
-                        user.setImplementingIdea(null);
-                        getPersonBean().getPersonService().updatePerson(user);
-                    }
-
-                } 
-
-                //check if staff/Organisation user has select a valid Implementer, set the idea to the user
-                else if ((isUserStaff() || isUserApprovedOrganisation()) && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null) {
-                    Person implementer = idea.getImplementer();
-                    implementer.setImplementingIdea(idea);
-                    getPersonBean().getPersonService().updatePerson(implementer);
+            
+            //check idea is already taken
+            else if (apply && isUserStudent() && idea.getImplementer() != null) {
+                
+                //and isn't taken by the current user
+                if (user.getImplementingIdea() == null || (user.getImplementingIdea() != null && !user.getImplementingIdea().equals(idea))) {
+                    return AddErrorMessage("The idea is already has a Implementer.");
                 }
-
-                idea = ideaService.updateIdea(idea);
-                return "Idea";
+                
             }
+                
+            //check if implementer already has applied for another idea
+            if (idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null && !idea.getImplementer().getImplementingIdea().equals(idea)) {
+                return AddErrorMessage("Can't apply for more than one idea, unapply from other idea first.");
+            }
+
+            //if user has unapplied for the idea, update the idea and user information
+            if (idea.getImplementer() != null && idea.getImplementer().equals(user) && !apply) {
+                idea.setImplementer(null);
+                user.setImplementingIdea(null);
+                getPersonBean().getPersonService().updatePerson(user);
+            }
+            
+            //check if staff/Organisation user has select a valid Implementer, set the idea to the user
+            else if ((isUserStaff() || isUserApprovedOrganisation()) && idea.getImplementer() != null && idea.getImplementer().getImplementingIdea() != null) {
+                Person implementer = idea.getImplementer();
+                implementer.setImplementingIdea(idea);
+                getPersonBean().getPersonService().updatePerson(implementer);
+            }
+
+            idea = ideaService.updateIdea(idea);
+            return "Idea";
+
         }
 
         return AddErrorMessage("You are not authorised to edit the idea.");
