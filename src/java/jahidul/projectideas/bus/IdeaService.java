@@ -8,6 +8,7 @@ package jahidul.projectideas.bus;
 import jahidul.projectideas.ents.Idea;
 import jahidul.projectideas.ents.Person;
 import jahidul.projectideas.pers.IdeaFacade;
+import jahidul.projectideas.pers.PersonFacade;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -24,9 +25,12 @@ public class IdeaService {
     @EJB
     private IdeaFacade ideaFacade;
 
+    @EJB
+    private PersonFacade personFacade;
+
     /**
      *
-     * @return ideaFacade
+     * @return the current IdeaFacade
      */
     public IdeaFacade getIdeaFacade() {
         return ideaFacade;
@@ -34,10 +38,26 @@ public class IdeaService {
 
     /**
      *
-     * @param ideaFacade the new ideaFacade to set as the ideaFacade
+     * @param ideaFacade the new IdeaFacade to set as the ideaFacade
      */
     public void setIdeaFacade(IdeaFacade ideaFacade) {
         this.ideaFacade = ideaFacade;
+    }
+
+    /**
+     *
+     * @return the current PersonFacade
+     */
+    public PersonFacade getPersonFacade() {
+        return personFacade;
+    }
+
+    /**
+     *
+     * @param personFacade the new PersonFacade to set as the personFacade
+     */
+    public void setPersonFacade(PersonFacade personFacade) {
+        this.personFacade = personFacade;
     }
 
     /**
@@ -69,6 +89,11 @@ public class IdeaService {
     public Idea updateIdea(Idea i) {
         Date date = new Date();
         i.setDateUpdated(date);
+        Idea oldIdea = ideaFacade.find(i.getId());
+        if (oldIdea.getImplementer() != null && oldIdea.getImplementer() != i.getImplementer()) {
+            oldIdea.getImplementer().setImplementingIdea(null);
+            personFacade.edit(oldIdea.getImplementer());
+        }
         return ideaFacade.edit(i);
     }
 
@@ -78,6 +103,12 @@ public class IdeaService {
      * @param i the idea to delete
      */
     public void deleteIdea(Idea i) {
+        if (i.getImplementer() != null) {
+            i.getImplementer().setImplementingIdea(null);
+            personFacade.edit(i.getImplementer());
+        }
+        i.getSubmitter().getIdeas().remove(i);
+        personFacade.edit(i.getSubmitter());
         ideaFacade.remove(i);
     }
 
