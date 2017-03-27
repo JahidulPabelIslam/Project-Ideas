@@ -5,7 +5,9 @@
  */
 package jahidul.projectideas.bus;
 
+import jahidul.projectideas.ents.Idea;
 import jahidul.projectideas.ents.Person;
+import jahidul.projectideas.pers.IdeaFacade;
 import jahidul.projectideas.pers.PersonFacade;
 import java.util.List;
 import javax.ejb.EJB;
@@ -22,6 +24,9 @@ public class PersonService {
     @EJB
     private PersonFacade personFacade;
 
+    @EJB
+    private IdeaFacade ideaFacade;
+
     /**
      *
      * @return the personFacade
@@ -36,6 +41,22 @@ public class PersonService {
      */
     public void setPersonFacade(PersonFacade personFacade) {
         this.personFacade = personFacade;
+    }
+
+    /**
+     *
+     * @return the current IdeaFacade
+     */
+    public IdeaFacade getIdeaFacade() {
+        return ideaFacade;
+    }
+
+    /**
+     *
+     * @param ideaFacade the new IdeaFacade to set as the ideaFacade
+     */
+    public void setIdeaFacade(IdeaFacade ideaFacade) {
+        this.ideaFacade = ideaFacade;
     }
 
     /**
@@ -72,11 +93,16 @@ public class PersonService {
     }
 
     /**
-     * delete a person
+     * deletes a person
      *
      * @param p the person to delete
      */
     public void deletePerson(Person p) {
+        if (p.getImplementingIdea() != null) {
+            p.getImplementingIdea().setImplementer(null);
+            ideaFacade.edit(p.getImplementingIdea());
+        }
+
         personFacade.remove(p);
     }
 

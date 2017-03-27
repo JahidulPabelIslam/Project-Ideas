@@ -6,7 +6,6 @@
 package jahidul.projectideas.bus;
 
 import jahidul.projectideas.ents.Idea;
-import jahidul.projectideas.ents.Person;
 import jahidul.projectideas.pers.IdeaFacade;
 import jahidul.projectideas.pers.PersonFacade;
 import java.util.Date;

@@ -16,6 +16,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
+ * Any functions for the need of management of any Person Objects
  *
  * @author Jahidul Pabel Islam, 733474
  */
@@ -171,17 +172,17 @@ public class PersonBean extends AbstractBean implements Serializable {
      */
     public String addUser() {
         try {
-            
+
             personService.addPerson(person);
-            
+
             if (!isUserStaff()) {
                 person = new Person();
                 return AddSuccessMessage("Successfully registered, An administrator will review your details and enable\n"
                         + "your account soon, come back later and try to log in.");
             }
-            
+
             return "User";
-            
+
         } catch (Exception be) {
             return AddErrorMessage(be.getMessage());
         }
@@ -196,11 +197,11 @@ public class PersonBean extends AbstractBean implements Serializable {
      */
     public String setUpEditPerson(Person person) {
         this.person = person;
-        
+
         if (isUserStaff() || isPersonTheUser()) {
             return "SubmitUser";
         }
-        
+
         return AddErrorMessage("You are not authorised to edit the user.");
     }
 
@@ -213,12 +214,12 @@ public class PersonBean extends AbstractBean implements Serializable {
      */
     public String updatePerson(Person person) {
         this.person = person;
-        
+
         if (isUserStaff() || isPersonTheUser()) {
             this.person = personService.updatePerson(person);
             return "User";
         }
-        
+
         return AddErrorMessage("You are not authorised to edit the user.");
     }
 
@@ -242,22 +243,20 @@ public class PersonBean extends AbstractBean implements Serializable {
      */
     public String deletePerson(Person person) {
         this.person = person;
-        
+
         //if the user is staff but isn't the person, just delete
         if (isUserStaff() && !isPersonTheUser()) {
             personService.deletePerson(this.person);
             personsList = personService.findAllPersons();
             return "Users";
-        } 
-
-        //else if the user if the person, log out and delete
+        } //else if the user if the person, log out and delete
         else if (isPersonTheUser()) {
             personService.deletePerson(this.person);
             personsList = personService.findAllPersons();
             user = new Person();
             return "Users";
         }
-        
+
         return AddErrorMessage("You are not authorised to delete the user.");
     }
 
@@ -270,13 +269,13 @@ public class PersonBean extends AbstractBean implements Serializable {
      */
     public String approveOrganisation(Person person) {
         this.person = person;
-        
+
         if (isUserStaff() && isPersonUnapprovedOrganisation()) {
             this.person.setType("Organisation");
             this.person = personService.updatePerson(person);
             return "User";
         }
-        
+
         return AddErrorMessage("You are not authorised to approve the organisation.");
     }
 
@@ -289,13 +288,13 @@ public class PersonBean extends AbstractBean implements Serializable {
      */
     public String unapproveOrganisation(Person person) {
         this.person = person;
-        
+
         if (isUserStaff() && isPersonUnapprovedOrganisation()) {
             this.person.setType("Unapproved Organisation");
             this.person = personService.updatePerson(person);
             return "User";
         }
-        
+
         return AddErrorMessage("You are not authorised to unapprove the organisation.");
     }
 

@@ -279,7 +279,6 @@ public class IdeaBean extends AbstractBean implements Serializable {
                 if (user.getImplementingIdea() == null || (user.getImplementingIdea() != null && !user.getImplementingIdea().equals(idea))) {
                     return AddErrorMessage("The idea is already has a Implementer.");
                 }
-                
             }
                 
             //check if implementer already has applied for another idea
@@ -303,7 +302,6 @@ public class IdeaBean extends AbstractBean implements Serializable {
 
             idea = ideaService.updateIdea(idea);
             return "Idea";
-
         }
 
         return AddErrorMessage("You are not authorised to edit the idea.");

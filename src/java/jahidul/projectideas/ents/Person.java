@@ -332,7 +332,7 @@ public class Person implements Serializable {
 
     /**
      *
-     * @return
+     * @return the idea the person is implementing
      */
     public Idea getImplementingIdea() {
         return implementingIdea;
@@ -340,7 +340,7 @@ public class Person implements Serializable {
 
     /**
      *
-     * @param implementingIdea
+     * @param implementingIdea the new idea the person is implementing
      */
     public void setImplementingIdea(Idea implementingIdea) {
         this.implementingIdea = implementingIdea;
@@ -348,7 +348,7 @@ public class Person implements Serializable {
 
     /**
      *
-     * @return
+     * @return the idea the person has submitted
      */
     public List<Idea> getIdeas() {
         return ideas;
@@ -356,7 +356,7 @@ public class Person implements Serializable {
 
     /**
      *
-     * @param ideas
+     * @param ideas the new list of ideas the person has submitted
      */
     public void setIdeas(List<Idea> ideas) {
         this.ideas = ideas;
